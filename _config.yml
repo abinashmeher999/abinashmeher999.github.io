@@ -5,18 +5,18 @@ permalink:           pretty
 relative_permalinks: true
 
 # Setup
-title:               Lanyon
-tagline:             'A Jekyll theme'
-description:         'A reserved <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that places the utmost gravity on content with a hidden drawer. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
-url:                 http://lanyon.getpoole.com
+title:               Mind Ramblings
+tagline:             'My Blog'
+description:         'A Blog by my <em>mind</em>. <em>The Mind</em> is truely an intriguing place. It has a mind of its own.'
+url:                 http://abinashmeher999.github.io
 baseurl:             ''
 paginate:            5
 
 # About/contact
 author:
-  name:              Mark Otto
-  url:               https://twitter.com/mdo
-  email:             markdotto@gmail.com
+  name:              Abinash Meher
+  url:               https://github.com/abinashmeher999
+  email:             abinashdakshana999@gmail.com
 
 # Custom vars
 version:             1.0.0
