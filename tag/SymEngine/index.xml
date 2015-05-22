@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
- <title>Mind Ramblings</title>
- <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/atom.xml" rel="self"/>
- <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/"/>
+<title>Mind Ramblings - SymEngine</title>
+<link href="http://abinashmeher999.github.io/tag/SymEngine/index.xml" rel="self"/>
+<link href="http://abinashmeher999.github.io/tag/SymEngine/index.html"/>
  <updated>2015-05-23T01:20:25+05:30</updated>
- <id>http://abinashmeher999.github.io</id>
+ <id>http://abinashmeher999.github.io/tag/SymEngine.html</id>
  <author>
-   <name>Abinash Meher</name>
-   <email>abinashdakshana999@gmail.com</email>
+ <name>Abinash Meher</name>
  </author>
-
  
  <entry>
    <title>Google Summer of Code 2015</title>
    <link href="http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015/"/>
    <updated>2015-05-06T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015</id>
+   <id>http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015</id>
    <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/gsoc/gsoc-2015.png&quot; alt=&quot;GSoC-2015&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Hi there! Yeah, you guessed it. I got selected into Google Summer of Code 2015! I am very excited for the summers. The results have been out and My project &lt;strong&gt;Ruby Bindings for SymEngine C++ symbolic manipulation library&lt;/strong&gt; has been selected. I was selected by The Ruby Science Foundation but luckily I get to work with both SciRuby and SymPy! Isn’t that exciting?&lt;/p&gt;
@@ -33,5 +30,4 @@ My project is to write the Ruby extensions for the C++ SymEngine library that pr
 </content>
  </entry>
  
-
 </feed>
