@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 <title>Mind Ramblings - jekyll</title>
-<link href="/tag/jekyll/index.xml" rel="self"/>
-<link href="/tag/jekyll/index.html"/>
- <updated>2015-05-06T01:50:46+05:30</updated>
- <id>/tag/jekyll.html</id>
+<link href="http://abinashmeher999.github.io/tag/jekyll/index.xml" rel="self"/>
+<link href="http://abinashmeher999.github.io/tag/jekyll/index.html"/>
+ <updated>2015-05-22T08:02:35+05:30</updated>
+ <id>http://abinashmeher999.github.io/tag/jekyll.html</id>
  <author>
  <name>Abinash Meher</name>
  </author>
  
  <entry>
    <title>Hello Everyone!</title>
-   <link href="/2015/05/06/Hi-everyone/"/>
+   <link href="http://abinashmeher999.github.io/2015/05/06/Hi-everyone/"/>
    <updated>2015-05-06T00:00:00+05:30</updated>
-   <id>/2015/05/06/Hi-everyone</id>
+   <id>http://abinashmeher999.github.io/2015/05/06/Hi-everyone</id>
    <content type="html">&lt;p&gt;This maybe my first post here and as you can guess by now, I am very new to jekyll and it has infact baffled me to a great extent. This theme that you see in infact the third theme that I have decided to use after failing miserably with others&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;show&lt;/span&gt;

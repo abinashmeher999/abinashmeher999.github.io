@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-<title>Mind Ramblings - GSoC-2015</title>
-<link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.xml" rel="self"/>
-<link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.html"/>
- <updated>2015-05-22T08:02:35+05:30</updated>
- <id>http://abinashmeher999.github.io/tag/GSoC-2015.html</id>
+<title>Mind Ramblings - jekyll</title>
+<link href="http://abinashmeher999.github.io/tag/jekyll/index.xml" rel="self"/>
+<link href="http://abinashmeher999.github.io/tag/jekyll/index.html"/>
+ <updated>2015-05-22T07:57:14+05:30</updated>
+ <id>http://abinashmeher999.github.io/tag/jekyll.html</id>
  <author>
  <name>Abinash Meher</name>
  </author>
