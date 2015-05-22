@@ -4,13 +4,28 @@
  <title>Mind Ramblings</title>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/atom.xml" rel="self"/>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/"/>
- <updated>2015-05-23T01:20:25+05:30</updated>
+ <updated>2015-05-23T02:07:41+05:30</updated>
  <id>http://abinashmeher999.github.io</id>
  <author>
    <name>Abinash Meher</name>
    <email>abinashdakshana999@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Writing wrappers for Basic class</title>
+   <link href="http://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class/"/>
+   <updated>2015-05-22T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class</id>
+   <content type="html">&lt;p&gt;So, it’s been already a week! The coding period (for me) has started. I am starting early to make up for my absence for a few days.&lt;/p&gt;
+
+&lt;p&gt;I had already setup a minimal gem and automated building of extensions. I read the docs for c wrappers that have already been written in &lt;a href=&quot;https://github.com/sympy/symengine/blob/master/src/cwrapper.h&quot;&gt;&lt;code&gt;cwrapper.h&lt;/code&gt;&lt;/a&gt;. It mostly contains the c wrappers for &lt;code&gt;Basic&lt;/code&gt; class and a few of &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes. At one time I was confident that I could write all the wrappers for &lt;code&gt;Basic&lt;/code&gt; class at one go. How hard could it be? The thing I learnt is you can never be sure of anything, unless you implement it. I had to keep a copy of the documentation for writing extensions &lt;a href=&quot;https://github.com/ruby/ruby/blob/trunk/doc/extension.rdoc&quot;&gt;&lt;code&gt;README.EXT&lt;/code&gt;&lt;/a&gt; open at all times, double checking everything. Still, I got confused.&lt;/p&gt;
+
+&lt;p&gt;Ondrej has advised me to make only a single function work first. That would be a better way, because once we figure out what to do. It’s pretty much the same for the others too. I hope it does. Then I can iteratively add other methods one by one.&lt;/p&gt;
+
+&lt;p&gt;I pushed the commits to the PR &lt;a href=&quot;https://github.com/sympy/symengine/pull/414&quot;&gt;‘[WIP] Ruby wrappers initial file structure and Basic class #414’&lt;/a&gt;. The plan for the next week is to atleast finish this, write the tests in RSpec, and document them. Also if possible, start working on the other classes.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Google Summer of Code 2015</title>

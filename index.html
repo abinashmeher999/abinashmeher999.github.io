@@ -120,6 +120,42 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="http://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class/">
+        Writing wrappers for Basic class
+      </a>
+    </h1>
+
+    <span class="post-date">22 May 2015</span>
+    <small><span class="post-tag">
+      
+        
+          <a href="http://abinashmeher999.github.io/tag/GSoC-2015">
+            GSoC-2015
+          </a>
+          &middot;
+        
+      
+        
+          <a href="http://abinashmeher999.github.io/tag/SymEngine">
+            SymEngine
+          </a>
+
+        
+      
+  </span></small>
+
+    <p>So, it’s been already a week! The coding period (for me) has started. I am starting early to make up for my absence for a few days.</p>
+
+<p>I had already setup a minimal gem and automated building of extensions. I read the docs for c wrappers that have already been written in <a href="https://github.com/sympy/symengine/blob/master/src/cwrapper.h"><code>cwrapper.h</code></a>. It mostly contains the c wrappers for <code>Basic</code> class and a few of <code>Integer</code> and <code>Rational</code> classes. At one time I was confident that I could write all the wrappers for <code>Basic</code> class at one go. How hard could it be? The thing I learnt is you can never be sure of anything, unless you implement it. I had to keep a copy of the documentation for writing extensions <a href="https://github.com/ruby/ruby/blob/trunk/doc/extension.rdoc"><code>README.EXT</code></a> open at all times, double checking everything. Still, I got confused.</p>
+
+<p>Ondrej has advised me to make only a single function work first. That would be a better way, because once we figure out what to do. It’s pretty much the same for the others too. I hope it does. Then I can iteratively add other methods one by one.</p>
+
+<p>I pushed the commits to the PR <a href="https://github.com/sympy/symengine/pull/414">‘[WIP] Ruby wrappers initial file structure and Basic class #414’</a>. The plan for the next week is to atleast finish this, write the tests in RSpec, and document them. Also if possible, start working on the other classes.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015/">
         Google Summer of Code 2015
       </a>

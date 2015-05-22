@@ -11,7 +11,7 @@
 
   <title>
     
-       &middot; Mind Ramblings
+      Writing wrappers for Basic class &middot; Mind Ramblings
     
   </title>
 
@@ -116,17 +116,50 @@
       </div>
 
       <div class="container content">
-        <div class="page">
-  <h2 class="page-title">SymPy</h2>
-  <ul>
-  
-    <li><a href="/2015/05/06/Google-Summer-of-Code-2015/">Google Summer of Code 2015</a> (06 May 2015 | Tags: <a href="/tag/GSoC-2015" rel="tag">GSoC-2015</a>, <a href="/tag/SymPy" rel="tag">SymPy</a>, <a href="/tag/SymEngine" rel="tag">SymEngine</a>, <a href="/tag/SciRuby" rel="tag">SciRuby</a>)</li>
-  
-  </ul>
+        <div class="post">
+  <h1 class="post-title">Writing wrappers for Basic class</h1>
+  <span class="post-date">22 May 2015</span>
+  <small><span class="post-tag">
+      
+        
+          <a href="http://abinashmeher999.github.io/tag/GSoC-2015">
+            GSoC-2015
+          </a>
+          &middot;
+        
+      
+        
+          <a href="http://abinashmeher999.github.io/tag/SymEngine">
+            SymEngine
+          </a>
 
-  <div id="tag-cloud">
-    <a href="/tag/GSoC-2015" class="set-5">GSoC-2015</a> <a href="/tag/SciRuby" class="set-1">SciRuby</a> <a href="/tag/SymEngine" class="set-5">SymEngine</a> <a href="/tag/SymPy" class="set-1">SymPy</a>
-  </div>
+        
+      
+</span></small>
+  <p>So, it’s been already a week! The coding period (for me) has started. I am starting early to make up for my absence for a few days.</p>
+
+<p>I had already setup a minimal gem and automated building of extensions. I read the docs for c wrappers that have already been written in <a href="https://github.com/sympy/symengine/blob/master/src/cwrapper.h"><code>cwrapper.h</code></a>. It mostly contains the c wrappers for <code>Basic</code> class and a few of <code>Integer</code> and <code>Rational</code> classes. At one time I was confident that I could write all the wrappers for <code>Basic</code> class at one go. How hard could it be? The thing I learnt is you can never be sure of anything, unless you implement it. I had to keep a copy of the documentation for writing extensions <a href="https://github.com/ruby/ruby/blob/trunk/doc/extension.rdoc"><code>README.EXT</code></a> open at all times, double checking everything. Still, I got confused.</p>
+
+<p>Ondrej has advised me to make only a single function work first. That would be a better way, because once we figure out what to do. It’s pretty much the same for the others too. I hope it does. Then I can iteratively add other methods one by one.</p>
+
+<p>I pushed the commits to the PR <a href="https://github.com/sympy/symengine/pull/414">‘[WIP] Ruby wrappers initial file structure and Basic class #414’</a>. The plan for the next week is to atleast finish this, write the tests in RSpec, and document them. Also if possible, start working on the other classes.</p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015/">
+            Google Summer of Code 2015
+            <small>06 May 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
 </div>
 
       </div>
