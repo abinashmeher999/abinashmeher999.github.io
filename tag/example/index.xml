@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
- <title>Mind Ramblings</title>
- <link href="http://abinashmeher999.github.io/atom.xml" rel="self"/>
- <link href="http://abinashmeher999.github.io/"/>
+<title>Mind Ramblings - example</title>
+<link href="/tag/example/index.xml" rel="self"/>
+<link href="/tag/example/index.html"/>
  <updated>2015-05-22T14:32:38+05:30</updated>
- <id>http://abinashmeher999.github.io</id>
+ <id>/tag/example.html</id>
  <author>
-   <name>Abinash Meher</name>
-   <email>abinashdakshana999@gmail.com</email>
+ <name>Abinash Meher</name>
  </author>
-
  
  <entry>
    <title>Example content</title>
-   <link href="http://abinashmeher999.github.io/2014/01/01/example-content/"/>
+   <link href="/2014/01/01/example-content/"/>
    <updated>2014-01-01T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2014/01/01/example-content</id>
+   <id>/2014/01/01/example-content</id>
    <content type="html">&lt;div class=&quot;message&quot;&gt;
   Howdy! This is an example blog post that shows several types of HTML content supported in this theme.
 &lt;/div&gt;
@@ -142,5 +139,4 @@
 </content>
  </entry>
  
-
 </feed>
