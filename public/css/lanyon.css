@@ -364,6 +364,14 @@ a.sidebar-nav-item:focus {
   color: inherit;
 }
 
+.hr1 {
+    margin-bottom: 0.2rem;
+}
+
+.hr2 {
+    margin-top: 0.2rem;
+}
+
 
 /*
  * Pagination
