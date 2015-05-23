@@ -11,7 +11,7 @@
 
   <title>
     
-      Writing wrappers for Basic class &middot; Mind Ramblings
+      Special semantics for arrow`->` operator and dot`.` operator in C++ &middot; Mind Ramblings
     
   </title>
 
@@ -147,33 +147,58 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">Writing wrappers for Basic class</h1>
-  <span class="post-date">22 May 2015
+  <h1 class="post-title">Special semantics for arrow`->` operator and dot`.` operator in C++</h1>
+  <span class="post-date">20 Apr 2015
   </span>
   <small><span class="post-tag">
       
         
-          <a href="http://abinashmeher999.github.io/tag/GSoC-2015">
-            GSoC-2015
-          </a>
-          &middot;
-        
-      
-        
-          <a href="http://abinashmeher999.github.io/tag/SymEngine">
-            SymEngine
+          <a href="http://abinashmeher999.github.io/tag/C++">
+            C++
           </a>
 
         
       
 </span></small>
-<p>So, it’s been already a week! The coding period (for me) has started. I am starting early to make up for my absence for a few days.</p>
+<p>Ever tried to overload <code>operator-&gt;</code>? If you haven’t, let me tell you this doesn’t work like other overloaded operators.<!--more--></p>
 
-<p>I had already setup a minimal gem and automated building of extensions. I read the docs<!--more--> for c wrappers that have already been written in <a href="https://github.com/sympy/symengine/blob/master/src/cwrapper.h"><code>cwrapper.h</code></a>. It mostly contains the c wrappers for <code>Basic</code> class and a few of <code>Integer</code> and <code>Rational</code> classes. At one time I was confident that I could write all the wrappers for <code>Basic</code> class at one go. How hard could it be? The thing I learnt is you can never be sure of anything, unless you implement it. I had to keep a copy of the documentation for writing extensions <a href="https://github.com/ruby/ruby/blob/trunk/doc/extension.rdoc"><code>README.EXT</code></a> open at all times, double checking everything. Still, I got confused.</p>
+<p>For example let us take an operator like <code>operator*</code>. What do you expect this to return? Lets say we have a pointer to <code>class A</code>, <code>ptr_a</code>. The <code>operator*</code> is already overloaded in <code>class A</code>. What would <code>(*ptr_a).foo();</code> return?</p>
 
-<p>Ondrej has advised me to make only a single function work first. That would be a better way, because once we figure out what to do. It’s pretty much the same for the others too. I hope it does. Then I can iteratively add other methods one by one.</p>
+<p>By simple logic, <code>*ptr_a</code> will return the reference to the object <code>ptr_a</code> points to(say <code>obj_a</code>). And as expected the statement will execute as <code>(obj_a).foo()</code>.</p>
 
-<p>I pushed the commits to the PR <a href="https://github.com/sympy/symengine/pull/414">‘[WIP] Ruby wrappers initial file structure and Basic class #414’</a>. The plan for the next week is to atleast finish this, write the tests in RSpec, and document them. Also if possible, start working on the other classes.</p>
+<p>However, this logic doesn’t apply to the <code>operator-&gt;()</code>. As quoted from stack overflow,</p>
+
+<blockquote>
+The <code>operator-&gt;</code> has special semantics in the language in that, when overloaded, it reapplies itself to the result. While the rest of the operators are applied only once, <code>operator-&gt;</code> will be applied by the compiler as many times as needed to get to a raw pointer and once more to access the memory referred by that pointer.
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="n">A</span> <span class="p">{</span> <span class="kt">void</span> <span class="n">foo</span><span class="p">();</span> <span class="p">};</span>
+<span class="k">struct</span> <span class="n">B</span> <span class="p">{</span> <span class="n">A</span><span class="o">*</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">();</span> <span class="p">};</span>
+<span class="k">struct</span> <span class="n">C</span> <span class="p">{</span> <span class="n">B</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">();</span> <span class="p">};</span>
+<span class="k">struct</span> <span class="n">D</span> <span class="p">{</span> <span class="n">C</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">();</span> <span class="p">};</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+<span class="n">D</span> <span class="n">d</span><span class="p">;</span>
+<span class="n">d</span><span class="o">-&gt;</span><span class="n">foo</span><span class="p">();</span>
+<span class="p">}</span></code></pre></div>
+
+In the previous example, in the expression <code>d-&gt;foo()</code> the compiler will take the object <code>d</code> and apply <code>operator-&gt;</code> to it, which yields an object of type <code>C</code>, it will then reapply the operator to get an instance of <code>B</code>, reapply and get to <code>A*</code>, after which it will dereference the object and get to the pointed data.
+
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="n">d</span><span class="o">-&gt;</span><span class="n">foo</span><span class="p">();</span>
+<span class="c1">// expands to:</span>
+<span class="c1">// (*d.operator-&gt;().operator-&gt;().operator-&gt;()).foo();</span>
+<span class="c1">//   D            C            B           A*</span></code></pre></div>
+
+</blockquote>
+
+<p>And guess what? You can’t overload operator.(). I would like to quote Bjarne Stroustrup here from <a href="http://www.google.com/search?q=The+Design+and+Evolution+of+C%2B%2B">The Design and Evolution of C++</a>, page 242, section 11.5.2 Smart References.</p>
+<blockquote><em>
+<p>When I decided to allow overloading of operator -&gt;, I naturally considered whether operator . could be similarly overloaded.</p>
+
+<p>At the time, I considered the following arguments conclusive: If obj is a class object then obj.m has a meaning for every member m of that object’s class. We try not to make the language mutable by redefining built-in operations (though that rule is violated for = out of dire need, and for unary &amp;).</p>
+
+<p>If we allowed overloading of . for a class X, we would be unable to access members of X by normal means; we would have to use a pointer and -&gt;, but -&gt; and &amp; might also have been re-defined. I wanted an extensible language, not a mutable one.</p>
+
+<p>These arguments are weighty, but not conclusive. In particular, in 1990 Jim Adcock proposed to allow overloading of operator . exactly the way operator -&gt; is.</p>
+</em></blockquote>
 
   <hr>
   <!-- Add Disqus comments. -->
@@ -199,18 +224,18 @@
     
       <li>
         <h3>
-          <a href="http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015/">
-            Google Summer of Code 2015
-            <small>06 May 2015</small>
+          <a href="http://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class/">
+            Writing wrappers for Basic class
+            <small>22 May 2015</small>
           </a>
         </h3>
       </li>
     
       <li>
         <h3>
-          <a href="http://abinashmeher999.github.io/2015/04/20/special-semantics-for-arrow-and-dot-operator-in-cpp/">
-            Special semantics for arrow`->` operator and dot`.` operator in C++
-            <small>20 Apr 2015</small>
+          <a href="http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015/">
+            Google Summer of Code 2015
+            <small>06 May 2015</small>
           </a>
         </h3>
       </li>

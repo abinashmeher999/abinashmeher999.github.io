@@ -3,7 +3,7 @@
 <title>Mind Ramblings - GSoC-2015</title>
 <link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.xml" rel="self"/>
 <link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.html"/>
- <updated>2015-05-23T02:43:21+05:30</updated>
+ <updated>2015-05-23T05:31:40+05:30</updated>
  <id>http://abinashmeher999.github.io/tag/GSoC-2015.html</id>
  <author>
  <name>Abinash Meher</name>
@@ -16,7 +16,7 @@
    <id>http://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class</id>
    <content type="html">&lt;p&gt;So, it’s been already a week! The coding period (for me) has started. I am starting early to make up for my absence for a few days.&lt;/p&gt;
 
-&lt;p&gt;I had already setup a minimal gem and automated building of extensions. I read the docs for c wrappers that have already been written in &lt;a href=&quot;https://github.com/sympy/symengine/blob/master/src/cwrapper.h&quot;&gt;&lt;code&gt;cwrapper.h&lt;/code&gt;&lt;/a&gt;. It mostly contains the c wrappers for &lt;code&gt;Basic&lt;/code&gt; class and a few of &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes. At one time I was confident that I could write all the wrappers for &lt;code&gt;Basic&lt;/code&gt; class at one go. How hard could it be? The thing I learnt is you can never be sure of anything, unless you implement it. I had to keep a copy of the documentation for writing extensions &lt;a href=&quot;https://github.com/ruby/ruby/blob/trunk/doc/extension.rdoc&quot;&gt;&lt;code&gt;README.EXT&lt;/code&gt;&lt;/a&gt; open at all times, double checking everything. Still, I got confused.&lt;/p&gt;
+&lt;p&gt;I had already setup a minimal gem and automated building of extensions. I read the docs&lt;!--more--&gt; for c wrappers that have already been written in &lt;a href=&quot;https://github.com/sympy/symengine/blob/master/src/cwrapper.h&quot;&gt;&lt;code&gt;cwrapper.h&lt;/code&gt;&lt;/a&gt;. It mostly contains the c wrappers for &lt;code&gt;Basic&lt;/code&gt; class and a few of &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes. At one time I was confident that I could write all the wrappers for &lt;code&gt;Basic&lt;/code&gt; class at one go. How hard could it be? The thing I learnt is you can never be sure of anything, unless you implement it. I had to keep a copy of the documentation for writing extensions &lt;a href=&quot;https://github.com/ruby/ruby/blob/trunk/doc/extension.rdoc&quot;&gt;&lt;code&gt;README.EXT&lt;/code&gt;&lt;/a&gt; open at all times, double checking everything. Still, I got confused.&lt;/p&gt;
 
 &lt;p&gt;Ondrej has advised me to make only a single function work first. That would be a better way, because once we figure out what to do. It’s pretty much the same for the others too. I hope it does. Then I can iteratively add other methods one by one.&lt;/p&gt;
 
@@ -31,7 +31,7 @@
    <id>http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015</id>
    <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/gsoc/gsoc-2015.png&quot; alt=&quot;GSoC-2015&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Hi there! Yeah, you guessed it. I got selected into Google Summer of Code 2015! I am very excited for the summers. The results have been out and My project &lt;strong&gt;Ruby Bindings for SymEngine C++ symbolic manipulation library&lt;/strong&gt; has been selected. I was selected by The Ruby Science Foundation but luckily I get to work with both SciRuby and SymPy! Isn’t that exciting?&lt;/p&gt;
+&lt;p&gt;Hi there! Yeah, you guessed it. I got selected into Google Summer of Code 2015! I am very excited for the summers. The results have been out and My project &lt;strong&gt;Ruby Bindings for SymEngine C++ symbolic manipulation library&lt;/strong&gt; has been selected.&lt;!--more--&gt; I was selected by The Ruby Science Foundation but luckily I get to work with both SciRuby and SymPy! Isn’t that exciting?&lt;/p&gt;
 
 &lt;p&gt;My mentor is Mr. Ondřej Čertík himslef, who is the founder of SymPy and I am lucky to be mentored by him. I would like to thank him and the Ruby Science Foundation and all the folks there to give me such an opportunity. John Woods and Carlos Agarie helped me a lot during the application period. I would also like to thank Harsh Gupta and Shivam Vats for introducing me to the community.&lt;/p&gt;
 

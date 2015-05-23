@@ -3,7 +3,7 @@
 <title>Mind Ramblings - SciRuby</title>
 <link href="http://abinashmeher999.github.io/tag/SciRuby/index.xml" rel="self"/>
 <link href="http://abinashmeher999.github.io/tag/SciRuby/index.html"/>
- <updated>2015-05-23T02:43:21+05:30</updated>
+ <updated>2015-05-23T05:31:40+05:30</updated>
  <id>http://abinashmeher999.github.io/tag/SciRuby.html</id>
  <author>
  <name>Abinash Meher</name>
@@ -16,7 +16,7 @@
    <id>http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015</id>
    <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/gsoc/gsoc-2015.png&quot; alt=&quot;GSoC-2015&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Hi there! Yeah, you guessed it. I got selected into Google Summer of Code 2015! I am very excited for the summers. The results have been out and My project &lt;strong&gt;Ruby Bindings for SymEngine C++ symbolic manipulation library&lt;/strong&gt; has been selected. I was selected by The Ruby Science Foundation but luckily I get to work with both SciRuby and SymPy! Isn’t that exciting?&lt;/p&gt;
+&lt;p&gt;Hi there! Yeah, you guessed it. I got selected into Google Summer of Code 2015! I am very excited for the summers. The results have been out and My project &lt;strong&gt;Ruby Bindings for SymEngine C++ symbolic manipulation library&lt;/strong&gt; has been selected.&lt;!--more--&gt; I was selected by The Ruby Science Foundation but luckily I get to work with both SciRuby and SymPy! Isn’t that exciting?&lt;/p&gt;
 
 &lt;p&gt;My mentor is Mr. Ondřej Čertík himslef, who is the founder of SymPy and I am lucky to be mentored by him. I would like to thank him and the Ruby Science Foundation and all the folks there to give me such an opportunity. John Woods and Carlos Agarie helped me a lot during the application period. I would also like to thank Harsh Gupta and Shivam Vats for introducing me to the community.&lt;/p&gt;
 

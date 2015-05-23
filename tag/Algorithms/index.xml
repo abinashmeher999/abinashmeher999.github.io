@@ -1,141 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-
- <title>Mind Ramblings</title>
- <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/atom.xml" rel="self"/>
- <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/"/>
+<title>Mind Ramblings - Algorithms</title>
+<link href="http://abinashmeher999.github.io/tag/Algorithms/index.xml" rel="self"/>
+<link href="http://abinashmeher999.github.io/tag/Algorithms/index.html"/>
  <updated>2015-05-23T05:31:40+05:30</updated>
- <id>http://abinashmeher999.github.io</id>
+ <id>http://abinashmeher999.github.io/tag/Algorithms.html</id>
  <author>
-   <name>Abinash Meher</name>
-   <email>abinashdakshana999@gmail.com</email>
+ <name>Abinash Meher</name>
  </author>
-
- 
- <entry>
-   <title>Writing wrappers for Basic class</title>
-   <link href="http://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class/"/>
-   <updated>2015-05-22T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class</id>
-   <content type="html">&lt;p&gt;So, it’s been already a week! The coding period (for me) has started. I am starting early to make up for my absence for a few days.&lt;/p&gt;
-
-&lt;p&gt;I had already setup a minimal gem and automated building of extensions. I read the docs&lt;!--more--&gt; for c wrappers that have already been written in &lt;a href=&quot;https://github.com/sympy/symengine/blob/master/src/cwrapper.h&quot;&gt;&lt;code&gt;cwrapper.h&lt;/code&gt;&lt;/a&gt;. It mostly contains the c wrappers for &lt;code&gt;Basic&lt;/code&gt; class and a few of &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes. At one time I was confident that I could write all the wrappers for &lt;code&gt;Basic&lt;/code&gt; class at one go. How hard could it be? The thing I learnt is you can never be sure of anything, unless you implement it. I had to keep a copy of the documentation for writing extensions &lt;a href=&quot;https://github.com/ruby/ruby/blob/trunk/doc/extension.rdoc&quot;&gt;&lt;code&gt;README.EXT&lt;/code&gt;&lt;/a&gt; open at all times, double checking everything. Still, I got confused.&lt;/p&gt;
-
-&lt;p&gt;Ondrej has advised me to make only a single function work first. That would be a better way, because once we figure out what to do. It’s pretty much the same for the others too. I hope it does. Then I can iteratively add other methods one by one.&lt;/p&gt;
-
-&lt;p&gt;I pushed the commits to the PR &lt;a href=&quot;https://github.com/sympy/symengine/pull/414&quot;&gt;‘[WIP] Ruby wrappers initial file structure and Basic class #414’&lt;/a&gt;. The plan for the next week is to atleast finish this, write the tests in RSpec, and document them. Also if possible, start working on the other classes.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Google Summer of Code 2015</title>
-   <link href="http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015/"/>
-   <updated>2015-05-06T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015</id>
-   <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/gsoc/gsoc-2015.png&quot; alt=&quot;GSoC-2015&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Hi there! Yeah, you guessed it. I got selected into Google Summer of Code 2015! I am very excited for the summers. The results have been out and My project &lt;strong&gt;Ruby Bindings for SymEngine C++ symbolic manipulation library&lt;/strong&gt; has been selected.&lt;!--more--&gt; I was selected by The Ruby Science Foundation but luckily I get to work with both SciRuby and SymPy! Isn’t that exciting?&lt;/p&gt;
-
-&lt;p&gt;My mentor is Mr. Ondřej Čertík himslef, who is the founder of SymPy and I am lucky to be mentored by him. I would like to thank him and the Ruby Science Foundation and all the folks there to give me such an opportunity. John Woods and Carlos Agarie helped me a lot during the application period. I would also like to thank Harsh Gupta and Shivam Vats for introducing me to the community.&lt;/p&gt;
-
-&lt;h2 id=&quot;the-project&quot;&gt;The Project&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;Ruby Bindings for SymEngine a symbolic manipulation library in C++&lt;/em&gt;&lt;/strong&gt;&lt;br /&gt;
-My project is to write the Ruby extensions for the C++ SymEngine library that provides functions for symbolic manipulation. This would also involve making the interface more rubyish than C++.&lt;/p&gt;
-
-&lt;p&gt;This &lt;a href=&quot;https://github.com/abinashmeher999/sciruby/wiki/GSoC-2015-Abinash-Meher:-Ruby-bindings-for-CSymPy&quot;&gt;project&lt;/a&gt; will set up a strong foundation for any symbolic manipulation library or “SymRuby” for that matter, to be built for Ruby in the future. SymEngine is fast and is very apt to start the work with. I have also come across GlucSym, which is an unpublished Ruby-to-GiNaC bridge from 2008.&lt;/p&gt;
-
-&lt;p&gt;But this interface(my project) might be the impulse the Ruby community needed to have a fully functional symbolic manipulation library. After all Ruby is a Very High Level Language! It will soon be needing such libraries. For me, I would be glad if someone uses the library for her/his project!&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Special semantics for arrow`->` operator and dot`.` operator in C++</title>
-   <link href="http://abinashmeher999.github.io/2015/04/20/special-semantics-for-arrow-and-dot-operator-in-cpp/"/>
-   <updated>2015-04-20T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/04/20/special-semantics-for-arrow-and-dot-operator-in-cpp</id>
-   <content type="html">&lt;p&gt;Ever tried to overload &lt;code&gt;operator-&amp;gt;&lt;/code&gt;? If you haven’t, let me tell you this doesn’t work like other overloaded operators.&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;For example let us take an operator like &lt;code&gt;operator*&lt;/code&gt;. What do you expect this to return? Lets say we have a pointer to &lt;code&gt;class A&lt;/code&gt;, &lt;code&gt;ptr_a&lt;/code&gt;. The &lt;code&gt;operator*&lt;/code&gt; is already overloaded in &lt;code&gt;class A&lt;/code&gt;. What would &lt;code&gt;(*ptr_a).foo();&lt;/code&gt; return?&lt;/p&gt;
-
-&lt;p&gt;By simple logic, &lt;code&gt;*ptr_a&lt;/code&gt; will return the reference to the object &lt;code&gt;ptr_a&lt;/code&gt; points to(say &lt;code&gt;obj_a&lt;/code&gt;). And as expected the statement will execute as &lt;code&gt;(obj_a).foo()&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;However, this logic doesn’t apply to the &lt;code&gt;operator-&amp;gt;()&lt;/code&gt;. As quoted from stack overflow,&lt;/p&gt;
-
-&lt;blockquote&gt;
-The &lt;code&gt;operator-&amp;gt;&lt;/code&gt; has special semantics in the language in that, when overloaded, it reapplies itself to the result. While the rest of the operators are applied only once, &lt;code&gt;operator-&amp;gt;&lt;/code&gt; will be applied by the compiler as many times as needed to get to a raw pointer and once more to access the memory referred by that pointer.
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;B&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;D&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;C&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;operator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;D&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-In the previous example, in the expression &lt;code&gt;d-&amp;gt;foo()&lt;/code&gt; the compiler will take the object &lt;code&gt;d&lt;/code&gt; and apply &lt;code&gt;operator-&amp;gt;&lt;/code&gt; to it, which yields an object of type &lt;code&gt;C&lt;/code&gt;, it will then reapply the operator to get an instance of &lt;code&gt;B&lt;/code&gt;, reapply and get to &lt;code&gt;A*&lt;/code&gt;, after which it will dereference the object and get to the pointed data.
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// expands to:&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// (*d.operator-&amp;gt;().operator-&amp;gt;().operator-&amp;gt;()).foo();&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;//   D            C            B           A*&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/blockquote&gt;
-
-&lt;p&gt;And guess what? You can’t overload operator.(). I would like to quote Bjarne Stroustrup here from &lt;a href=&quot;http://www.google.com/search?q=The+Design+and+Evolution+of+C%2B%2B&quot;&gt;The Design and Evolution of C++&lt;/a&gt;, page 242, section 11.5.2 Smart References.&lt;/p&gt;
-&lt;blockquote&gt;&lt;em&gt;
-&lt;p&gt;When I decided to allow overloading of operator -&amp;gt;, I naturally considered whether operator . could be similarly overloaded.&lt;/p&gt;
-
-&lt;p&gt;At the time, I considered the following arguments conclusive: If obj is a class object then obj.m has a meaning for every member m of that object’s class. We try not to make the language mutable by redefining built-in operations (though that rule is violated for = out of dire need, and for unary &amp;amp;).&lt;/p&gt;
-
-&lt;p&gt;If we allowed overloading of . for a class X, we would be unable to access members of X by normal means; we would have to use a pointer and -&amp;gt;, but -&amp;gt; and &amp;amp; might also have been re-defined. I wanted an extensible language, not a mutable one.&lt;/p&gt;
-
-&lt;p&gt;These arguments are weighty, but not conclusive. In particular, in 1990 Jim Adcock proposed to allow overloading of operator . exactly the way operator -&amp;gt; is.&lt;/p&gt;
-&lt;/em&gt;&lt;/blockquote&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Docker! Looks cool,</title>
-   <link href="http://abinashmeher999.github.io/2015/02/01/docker/"/>
-   <updated>2015-02-01T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/02/01/docker</id>
-   <content type="html">&lt;p&gt;&lt;img src=&quot;http://blog.docker.com/wp-content/uploads/2013/08/KuDr42X_ITXghJhSInDZekNEF0jLt3NeVxtRye3tqco.png&quot; alt=&quot;Docker&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I came across this term ‘docker’ while going through the project ‘Shogun-cloud’ and decided to google about it and learn what this does. Turns out it has made building, shipping and running distributed applications hassle free to a great extent.&lt;!--more--&gt; It is promising since it allows isolation of applications without the need of a different VM for each application. It is much more light-weight than a VM (anyone who has worked with a VM knows how heavy a VM can be).  The analogy given by its founder, Solomon Hykes, is very apt. He explains it as a shipping container as used by shipping companies, which standardises the shipping across each transportation vehicle regardless of what’s inside. Many companies like eBay have already changed to docker.&lt;/p&gt;
-
-&lt;p&gt;I would highly recommend going through this short &lt;a href=&quot;https://www.docker.com/whatisdocker/&quot;&gt;introductory video&lt;/a&gt;. It doesn’t involve a lot of technical terms but gives a fairly good idea about docker.&lt;/p&gt;
-
-&lt;p&gt;Will be posting more as I learn more about it.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>The Laws yet to be known</title>
-   <link href="http://abinashmeher999.github.io/2014/12/05/laws-yet-to-be-known/"/>
-   <updated>2014-12-05T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2014/12/05/laws-yet-to-be-known</id>
-   <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/laws-yet-to-be-known.jpeg&quot; alt=&quot;Mysterious-Universe&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;We have continuously been in search for the answer to questions that govern us and our lives and even the whole universe. But can we know the answers that have been forbidden to us, by the same laws that govern us?&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;Like for example :&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;What if there are some particles that do not exist in the part of the universe we know about?&lt;/li&gt;
-  &lt;li&gt;What if there are more general laws that operate in the higher dimensions and we don’t know of them just because of our incapability to navigate in those dimensions?&lt;/li&gt;
-  &lt;li&gt;What if we are a giant experimental culture of &lt;em&gt;Homo Sapiens&lt;/em&gt; where the universe is a giant petri dish for the beings of higher dimensions?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I wonder if the bacteria think of this too. If any of these is true, do the higher beings know we haven’t ruled out the possibility of their existence?&lt;/p&gt;
-</content>
- </entry>
  
  <entry>
    <title>An Easy Linear Time Longest Palindromic Substring finding Algorithm</title>
    <link href="http://abinashmeher999.github.io/2014/02/06/linear-time-longest-palindromic-substring/"/>
    <updated>2014-02-06T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2014/02/06/linear-time-longest-palindromic-substring</id>
+   <id>http://abinashmeher999.github.io/2014/02/06/linear-time-longest-palindromic-substring</id>
    <content type="html">&lt;p&gt;I would like to discuss a simple and easy to understand algorithm for finding longest palindromic substring in linear time. I stumbled upon this during the Algorithms Lab Test. This is very similar to other algorithms but yet different.&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* &lt;/span&gt;
@@ -261,5 +139,4 @@ In the previous example, in the expression &lt;code&gt;d-&amp;gt;foo()&lt;/code&
 </content>
  </entry>
  
-
 </feed>
