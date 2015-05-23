@@ -4,7 +4,7 @@
  <title>Mind Ramblings</title>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/atom.xml" rel="self"/>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/"/>
- <updated>2015-05-23T05:31:40+05:30</updated>
+ <updated>2015-05-23T05:36:47+05:30</updated>
  <id>http://abinashmeher999.github.io</id>
  <author>
    <name>Abinash Meher</name>
@@ -111,31 +111,10 @@ In the previous example, in the expression &lt;code&gt;d-&amp;gt;foo()&lt;/code&
  </entry>
  
  <entry>
-   <title>The Laws yet to be known</title>
-   <link href="http://abinashmeher999.github.io/2014/12/05/laws-yet-to-be-known/"/>
-   <updated>2014-12-05T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2014/12/05/laws-yet-to-be-known</id>
-   <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/laws-yet-to-be-known.jpeg&quot; alt=&quot;Mysterious-Universe&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;We have continuously been in search for the answer to questions that govern us and our lives and even the whole universe. But can we know the answers that have been forbidden to us, by the same laws that govern us?&lt;!--more--&gt;&lt;/p&gt;
-
-&lt;p&gt;Like for example :&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;What if there are some particles that do not exist in the part of the universe we know about?&lt;/li&gt;
-  &lt;li&gt;What if there are more general laws that operate in the higher dimensions and we don’t know of them just because of our incapability to navigate in those dimensions?&lt;/li&gt;
-  &lt;li&gt;What if we are a giant experimental culture of &lt;em&gt;Homo Sapiens&lt;/em&gt; where the universe is a giant petri dish for the beings of higher dimensions?&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I wonder if the bacteria think of this too. If any of these is true, do the higher beings know we haven’t ruled out the possibility of their existence?&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
    <title>An Easy Linear Time Longest Palindromic Substring finding Algorithm</title>
-   <link href="http://abinashmeher999.github.io/2014/02/06/linear-time-longest-palindromic-substring/"/>
-   <updated>2014-02-06T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2014/02/06/linear-time-longest-palindromic-substring</id>
+   <link href="http://abinashmeher999.github.io/2014/12/06/linear-time-longest-palindromic-substring/"/>
+   <updated>2014-12-06T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2014/12/06/linear-time-longest-palindromic-substring</id>
    <content type="html">&lt;p&gt;I would like to discuss a simple and easy to understand algorithm for finding longest palindromic substring in linear time. I stumbled upon this during the Algorithms Lab Test. This is very similar to other algorithms but yet different.&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* &lt;/span&gt;
@@ -258,6 +237,27 @@ In the previous example, in the expression &lt;code&gt;d-&amp;gt;foo()&lt;/code&
     &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+</content>
+ </entry>
+ 
+ <entry>
+   <title>The Laws yet to be known</title>
+   <link href="http://abinashmeher999.github.io/2014/12/05/laws-yet-to-be-known/"/>
+   <updated>2014-12-05T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2014/12/05/laws-yet-to-be-known</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/laws-yet-to-be-known.jpeg&quot; alt=&quot;Mysterious-Universe&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We have continuously been in search for the answer to questions that govern us and our lives and even the whole universe. But can we know the answers that have been forbidden to us, by the same laws that govern us?&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;Like for example :&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;What if there are some particles that do not exist in the part of the universe we know about?&lt;/li&gt;
+  &lt;li&gt;What if there are more general laws that operate in the higher dimensions and we don’t know of them just because of our incapability to navigate in those dimensions?&lt;/li&gt;
+  &lt;li&gt;What if we are a giant experimental culture of &lt;em&gt;Homo Sapiens&lt;/em&gt; where the universe is a giant petri dish for the beings of higher dimensions?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I wonder if the bacteria think of this too. If any of these is true, do the higher beings know we haven’t ruled out the possibility of their existence?&lt;/p&gt;
 </content>
  </entry>
  

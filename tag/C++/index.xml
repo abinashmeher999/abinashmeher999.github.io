@@ -3,7 +3,7 @@
 <title>Mind Ramblings - C++</title>
 <link href="http://abinashmeher999.github.io/tag/C++/index.xml" rel="self"/>
 <link href="http://abinashmeher999.github.io/tag/C++/index.html"/>
- <updated>2015-05-23T05:31:40+05:30</updated>
+ <updated>2015-05-23T05:36:47+05:30</updated>
  <id>http://abinashmeher999.github.io/tag/C++.html</id>
  <author>
  <name>Abinash Meher</name>
@@ -58,9 +58,9 @@ In the previous example, in the expression &lt;code&gt;d-&amp;gt;foo()&lt;/code&
  
  <entry>
    <title>An Easy Linear Time Longest Palindromic Substring finding Algorithm</title>
-   <link href="http://abinashmeher999.github.io/2014/02/06/linear-time-longest-palindromic-substring/"/>
-   <updated>2014-02-06T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2014/02/06/linear-time-longest-palindromic-substring</id>
+   <link href="http://abinashmeher999.github.io/2014/12/06/linear-time-longest-palindromic-substring/"/>
+   <updated>2014-12-06T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.io/2014/12/06/linear-time-longest-palindromic-substring</id>
    <content type="html">&lt;p&gt;I would like to discuss a simple and easy to understand algorithm for finding longest palindromic substring in linear time. I stumbled upon this during the Algorithms Lab Test. This is very similar to other algorithms but yet different.&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* &lt;/span&gt;
