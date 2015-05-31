@@ -3,11 +3,50 @@
 <title>Mind Ramblings - GSoC-2015</title>
 <link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.xml" rel="self"/>
 <link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.html"/>
- <updated>2015-05-23T06:26:43+05:30</updated>
+ <updated>2015-05-31T18:48:07+05:30</updated>
  <id>http://abinashmeher999.github.io/tag/GSoC-2015.html</id>
  <author>
  <name>Abinash Meher</name>
  </author>
+ 
+ <entry>
+   <title>Building the wrappers</title>
+   <link href="http://abinashmeher999.github.io/2015/05/29/Building-the-wrappers/"/>
+   <updated>2015-05-29T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.io/2015/05/29/Building-the-wrappers</id>
+   <content type="html">&lt;p&gt;This week was very engaging and a little hectic at the end for me. I had to rethink many things during the week, like these wrappers. I had to rewrite them, because of a logical error in the allocation of the pointers that pointed to the data. And spent a whole lot of time trying to understand a hack of passing a variable by reference in &lt;code&gt;c&lt;/code&gt; only to conclude that it can’t be used!&lt;!--more--&gt; Anyways, I learnt a new &lt;code&gt;c&lt;/code&gt; hack! You can refer to &lt;a href=&quot;http://stackoverflow.com/questions/30479106/possible-side-effects-of-doing-a-typedef-of-a-struct-to-an-array-of-one-element&quot;&gt;this question&lt;/a&gt; that I asked on stack overflow.&lt;/p&gt;
+
+&lt;p&gt;So, the wrappers for Basic were written. But they didn’t compile because of a missing &lt;code&gt;-fPIC&lt;/code&gt; flag that evidently &lt;code&gt;cmake&lt;/code&gt; puts it on its own and &lt;code&gt;rake&lt;/code&gt; doesn’t. The flag, I guess, was required to enable building of shared libs. The error message was something like this&lt;br /&gt;
+&lt;script src=&quot;https://gist.github.com/abinashmeher999/3997cd256a91ff08edce.js&quot;&gt; &lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;After hours and hours of googling and reading code on github, I figured out a way to add it. It needs to be added to the variable &lt;code&gt;$CFLAGS&lt;/code&gt; which is in &lt;code&gt;extconf.rb&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;c1&quot;&gt;#File: extconf.rb&lt;/span&gt;
+&lt;span class=&quot;vg&quot;&gt;$CFLAGS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39; -Wall&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$CFLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;include?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;-Wall&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;vg&quot;&gt;$CFLAGS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39; -Werror&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$CFLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;include?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;-Werror&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;vg&quot;&gt;$CFLAGS&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39; -fPIC&amp;#39;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;unless&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$CFLAGS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;include?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;-fpic&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And again there was another error&lt;br /&gt;
+&lt;script src=&quot;https://gist.github.com/abinashmeher999/a6964329f4b18948a61d.js&quot;&gt; &lt;/script&gt;
+Which was basically because of the &lt;code&gt;static&lt;/code&gt; qualifier. Apparently it was local only to that file. Removing the static qualifier got rid of the errors. Thanks to &lt;a href=&quot;https://github.com/certik&quot;&gt;Ondrej&lt;/a&gt;, who was there to help with any problem I faced during the whole week.&lt;/p&gt;
+
+&lt;p&gt;And finally… the extension built.&lt;/p&gt;
+
+&lt;p&gt;I built the gem and installed it. But I am not yet able to load the extension. There might be some issue with the library path. I will fix that and update it. That will be fixed hopefully in a day or two. And then I will build on the minimal test that I wrote.&lt;/p&gt;
+
+&lt;p&gt;The next week I will be a little busy with the competition but I can at least fix the errors in loading the extension properly in &lt;code&gt;irb&lt;/code&gt; and add the remaning methods. The plan now for the next coding week is to add wrappers for the &lt;code&gt;Symbol&lt;/code&gt; class and &lt;code&gt;Integer&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Commits:&lt;br /&gt;
+1. &lt;a href=&quot;https://github.com/abinashmeher999/symengine/commit/9d9e9b5370aeaf2a3b2c933433ac5c8eddb8c849&quot;&gt;Rewrote Ruby C wrappers w/o typedefed array basic&lt;/a&gt;&lt;br /&gt;
+2. &lt;a href=&quot;https://github.com/abinashmeher999/symengine/commit/fb73879ef488f7e536b03b2d526f90052a5652ca&quot;&gt;Added bare test file for &lt;code&gt;Basic&lt;/code&gt; class&lt;/a&gt;&lt;br /&gt;
+3. &lt;a href=&quot;https://github.com/abinashmeher999/symengine/commit/4ccf13f496f8f8c0845d8791dcaf3194d762158d&quot;&gt;Fixed an error in &lt;code&gt;Gemfile&lt;/code&gt; and added &lt;code&gt;README&lt;/code&gt;&lt;/a&gt;&lt;br /&gt;
+4. &lt;a href=&quot;https://github.com/abinashmeher999/symengine/commit/0f41bd84d139f885eb260957cccdc338f79929bf&quot;&gt;Added WITH_RUBY flags to CMakeLists.txt&lt;/a&gt;&lt;br /&gt;
+5. &lt;a href=&quot;https://github.com/abinashmeher999/symengine/commit/2c1eb36f86291c30044f635f6c0c068cb4d0864f&quot;&gt;Added flag &lt;code&gt;-fPIC&lt;/code&gt;. Still doesn’t compile&lt;/a&gt;&lt;br /&gt;
+6. &lt;a href=&quot;https://github.com/abinashmeher999/symengine/commit/fb6861ba3795c2c2d0d9a57954da107257e93b1a&quot;&gt;Changes to build the ruby extensions&lt;/a&gt;&lt;br /&gt;
+7. &lt;a href=&quot;https://github.com/abinashmeher999/symengine/commit/d6eabe7e258e5260ea1e3b48853c57e851e13800&quot;&gt;Change in &lt;code&gt;require_path&lt;/code&gt; of gemspec&lt;/a&gt;&lt;br /&gt;
+8. &lt;a href=&quot;https://github.com/abinashmeher999/symengine/commit/6792df9a9cbc3bfd82640fb2580fc8046888e2a1&quot;&gt;Removed the &lt;code&gt;static&lt;/code&gt; qualifier in wrappers&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Writing wrappers for Basic class</title>
