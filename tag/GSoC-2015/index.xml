@@ -3,11 +3,25 @@
 <title>Mind Ramblings - GSoC-2015</title>
 <link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.xml" rel="self"/>
 <link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.html"/>
- <updated>2015-05-31T18:48:07+05:30</updated>
+ <updated>2015-06-07T23:29:22+05:30</updated>
  <id>http://abinashmeher999.github.io/tag/GSoC-2015.html</id>
  <author>
  <name>Abinash Meher</name>
  </author>
+ 
+ <entry>
+   <title>Week 3</title>
+   <link href="http://abinashmeher999.github.io/2015/06/05/Week-3/"/>
+   <updated>2015-06-05T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.io/2015/06/05/Week-3</id>
+   <content type="html">&lt;p&gt;Sorry Guys. I don’t have much to say with this blog post. I am at a competition called &lt;em&gt;Intelligent Ground Vehicle Competition&lt;/em&gt; and didn’t get any time to work on the project. I wish I had time to solve the error. Unresolved errors really bother me. Even now, at the very time I am writing this post, my team-mates are struggling with a really sneaky bug. Arghhh!!&lt;/p&gt;
+
+&lt;p&gt;Soon I will be back to resume my project. And try to figure out more about the error.&lt;br /&gt;
+This is the error&lt;br /&gt;
+&lt;script src=&quot;https://gist.github.com/abinashmeher999/2544b4961f547bf286e7.js&quot;&gt; &lt;/script&gt;
+I will appreciate it if you can share any hint about fixing this error. Looking forward to the next week!&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Building the wrappers</title>
