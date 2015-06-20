@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 <title>Mind Ramblings - C++</title>
-<link href="/tag/C++/index.xml" rel="self"/>
-<link href="/tag/C++/index.html"/>
- <updated>2015-06-20T10:41:45+05:30</updated>
- <id>/tag/C++.html</id>
+<link href="http://abinashmeher999.github.io/tag/C++/index.xml" rel="self"/>
+<link href="http://abinashmeher999.github.io/tag/C++/index.html"/>
+ <updated>2015-06-20T11:56:52+05:30</updated>
+ <id>http://abinashmeher999.github.io/tag/C++.html</id>
  <author>
  <name>Abinash Meher</name>
  </author>
  
  <entry>
    <title>Special semantics for arrow`->` operator and dot`.` operator in C++</title>
-   <link href="/2015/04/20/special-semantics-for-arrow-and-dot-operator-in-cpp/"/>
+   <link href="http://abinashmeher999.github.io/2015/04/20/special-semantics-for-arrow-and-dot-operator-in-cpp/"/>
    <updated>2015-04-20T00:00:00+05:30</updated>
-   <id>/2015/04/20/special-semantics-for-arrow-and-dot-operator-in-cpp</id>
+   <id>http://abinashmeher999.github.io/2015/04/20/special-semantics-for-arrow-and-dot-operator-in-cpp</id>
    <content type="html">&lt;p&gt;Ever tried to overload &lt;code&gt;operator-&amp;gt;&lt;/code&gt;? If you haven’t, let me tell you this doesn’t work like other overloaded operators.&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;For example let us take an operator like &lt;code&gt;operator*&lt;/code&gt;. What do you expect this to return? Lets say we have a pointer to &lt;code&gt;class A&lt;/code&gt;, &lt;code&gt;ptr_a&lt;/code&gt;. The &lt;code&gt;operator*&lt;/code&gt; is already overloaded in &lt;code&gt;class A&lt;/code&gt;. What would &lt;code&gt;(*ptr_a).foo();&lt;/code&gt; return?&lt;/p&gt;
@@ -58,9 +58,9 @@ In the previous example, in the expression &lt;code&gt;d-&amp;gt;foo()&lt;/code&
  
  <entry>
    <title>An Easy Linear Time Longest Palindromic Substring finding Algorithm</title>
-   <link href="/2014/12/06/linear-time-longest-palindromic-substring/"/>
+   <link href="http://abinashmeher999.github.io/2014/12/06/linear-time-longest-palindromic-substring/"/>
    <updated>2014-12-06T00:00:00+05:30</updated>
-   <id>/2014/12/06/linear-time-longest-palindromic-substring</id>
+   <id>http://abinashmeher999.github.io/2014/12/06/linear-time-longest-palindromic-substring</id>
    <content type="html">&lt;p&gt;I would like to discuss a simple and easy to understand algorithm for finding longest palindromic substring in linear time. I stumbled upon this during the Algorithms Lab Test. This is very similar to other algorithms but yet different.&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* &lt;/span&gt;

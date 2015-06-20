@@ -11,7 +11,7 @@
 
   <title>
     
-      Week 3 &middot; Mind Ramblings
+      Reconfiguring building and Travis Setup &middot; Mind Ramblings
     
   </title>
 
@@ -147,8 +147,8 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">Week 3</h1>
-  <span class="post-date">05 Jun 2015
+  <h1 class="post-title">Reconfiguring building and Travis Setup</h1>
+  <span class="post-date">19 Jun 2015
   </span>
   <small><span class="post-tag">
       
@@ -167,12 +167,51 @@
         
       
 </span></small>
-<p>Sorry Guys. I don’t have much to say with this blog post. I am at a competition called <em>Intelligent Ground Vehicle Competition</em> and didn’t get any time to work on the project. I wish I had time to solve the error.<!--more--> Unresolved errors really bother me. Even now, at the very time I am writing this post, my team-mates are struggling with a really sneaky bug. Arghhh!!</p>
+<p>This week was one of the most engaging one up till now, in my opinion.  Not in a way that I generated many lines of code :P, but debugged code in a collaborative way. Many errors pooped up, I discussed them with team-mates and we arrived at a solution(it was more like them telling me the solution :P).</p>
 
-<p>Soon I will be back to resume my project. And try to figure out more about the error.<br />
-This is the error<br />
-<script src="https://gist.github.com/abinashmeher999/2544b4961f547bf286e7.js"> </script>
-I will appreciate it if you can share any hint about fixing this error. Looking forward to the next week!</p>
+<h3 id="commits"><a href="">Commits:</a></h3>
+<ul>
+  <li>Added TEST_IN_TREE=yes in env for builds with Ruby</li>
+  <li>Printing if symengine.so was made</li>
+  <li>Printing files in lib/symengine/ in travis log</li>
+  <li>Replaced ../lib with ../../lib in expand_path</li>
+  <li>Added lib to $LOAD_PATH &amp; removed require_relative</li>
+  <li>Added the LOAD_PATH code in gemspec</li>
+  <li>Added lib/symengine to $LOAD_PATH</li>
+  <li>Added lib to $LOAD_PATH in spec_helper and removed gem install symengine</li>
+  <li>Added rest of the tests with pending statuses</li>
+  <li>[ci skip] untabified gemspec (converted tabs to spaces)</li>
+  <li>Installing the gem while testing Ideally this should not be done. This is just t</li>
+  <li>Changed the version from 0.0.0.pre to 0.0.0</li>
+  <li>Test push to debug travis failures</li>
+  <li>Added sudo: true to .travis.yml to support new container-based infrastructure in</li>
+  <li>Fixed errors in ruby_basic.c</li>
+  <li>Experimental fix with FindRuby.cmake</li>
+  <li>Kept duplicate LICENSE as temporary fix for installation errors</li>
+  <li>Added functions for binary, unary op</li>
+  <li>Changed symengine_BINARY_DIR to symengine_SOURCE_DIR</li>
+  <li>Added FindPackageHandleStandardArgs.cmake</li>
+  <li>Removed installation of new Bundler</li>
+  <li>Added new FindRuby.cmake</li>
+  <li>Moved dependencies from Gemfile to gemspec And rectified error in CMakelists.txt</li>
+  <li>Experimental fix for build errors removed the empty `if[[ “${WITH_RUBY}” != “” ]</li>
+  <li>Attempt at travis integration for building and testing the extensions</li>
+  <li>Updated configuration for rspec</li>
+  <li>Rectified error in CMakeLists and updated README</li>
+  <li>Added test file that makes an object of Basic test passes</li>
+  <li>Used symengine license in gem and updated Manifest</li>
+  <li>Removed rake and rake-compiler from dependencies</li>
+  <li>Removed unnecessary files as discussed LICENSE, Rakefile and extconf.rb</li>
+  <li>Added display messages in CMakeLists.txt for Ruby</li>
+  <li>Updated the docs</li>
+  <li>Added src/ruby/pkg to gitignore</li>
+  <li>Removed bin folder</li>
+  <li>Fix typo</li>
+  <li>Build ruby wrappers with CMake</li>
+  <li>Tried to use <code>g++</code> compiler</li>
+  <li>Updated compile instructions in README</li>
+  <li>Added the option to config dirs</li>
+</ul>
 
   <hr class="hr1">
   <!-- AddToAny BEGIN -->
@@ -210,18 +249,18 @@ I will appreciate it if you can share any hint about fixing this error. Looking 
     
       <li>
         <h3>
-          <a href="http://abinashmeher999.github.io/2015/06/19/Reconfiguring-building-and-Travis-Setup/">
-            Reconfiguring building and Travis Setup
-            <small>19 Jun 2015</small>
+          <a href="http://abinashmeher999.github.io/2015/06/12/The-Load-Error/">
+            The Load Error
+            <small>12 Jun 2015</small>
           </a>
         </h3>
       </li>
     
       <li>
         <h3>
-          <a href="http://abinashmeher999.github.io/2015/06/12/The-Load-Error/">
-            The Load Error
-            <small>12 Jun 2015</small>
+          <a href="http://abinashmeher999.github.io/2015/06/05/Week-3/">
+            Week 3
+            <small>05 Jun 2015</small>
           </a>
         </h3>
       </li>

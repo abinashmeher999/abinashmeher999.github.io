@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 <title>Mind Ramblings - Cloud</title>
-<link href="/tag/Cloud/index.xml" rel="self"/>
-<link href="/tag/Cloud/index.html"/>
- <updated>2015-06-20T10:41:45+05:30</updated>
- <id>/tag/Cloud.html</id>
+<link href="http://abinashmeher999.github.io/tag/Cloud/index.xml" rel="self"/>
+<link href="http://abinashmeher999.github.io/tag/Cloud/index.html"/>
+ <updated>2015-06-20T11:56:52+05:30</updated>
+ <id>http://abinashmeher999.github.io/tag/Cloud.html</id>
  <author>
  <name>Abinash Meher</name>
  </author>
  
  <entry>
    <title>Docker! Looks cool,</title>
-   <link href="/2015/02/01/docker/"/>
+   <link href="http://abinashmeher999.github.io/2015/02/01/docker/"/>
    <updated>2015-02-01T00:00:00+05:30</updated>
-   <id>/2015/02/01/docker</id>
+   <id>http://abinashmeher999.github.io/2015/02/01/docker</id>
    <content type="html">&lt;p&gt;&lt;img src=&quot;http://blog.docker.com/wp-content/uploads/2013/08/KuDr42X_ITXghJhSInDZekNEF0jLt3NeVxtRye3tqco.png&quot; alt=&quot;Docker&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I came across this term ‘docker’ while going through the project ‘Shogun-cloud’ and decided to google about it and learn what this does. Turns out it has made building, shipping and running distributed applications hassle free to a great extent.&lt;!--more--&gt; It is promising since it allows isolation of applications without the need of a different VM for each application. It is much more light-weight than a VM (anyone who has worked with a VM knows how heavy a VM can be).  The analogy given by its founder, Solomon Hykes, is very apt. He explains it as a shipping container as used by shipping companies, which standardises the shipping across each transportation vehicle regardless of what’s inside. Many companies like eBay have already changed to docker.&lt;/p&gt;

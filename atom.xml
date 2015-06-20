@@ -2,9 +2,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
  <title>Mind Ramblings</title>
- <link href="http://abinashmeher999.github.io/atom.xml" rel="self"/>
- <link href="http://abinashmeher999.github.io/"/>
- <updated>2015-06-20T10:41:45+05:30</updated>
+ <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/atom.xml" rel="self"/>
+ <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/"/>
+ <updated>2015-06-20T11:56:52+05:30</updated>
  <id>http://abinashmeher999.github.io</id>
  <author>
    <name>Abinash Meher</name>
@@ -13,10 +13,63 @@
 
  
  <entry>
+   <title>Reconfiguring building and Travis Setup</title>
+   <link href="http://abinashmeher999.github.io/2015/06/19/Reconfiguring-building-and-Travis-Setup/"/>
+   <updated>2015-06-19T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/06/19/Reconfiguring-building-and-Travis-Setup</id>
+   <content type="html">&lt;p&gt;This week was one of the most engaging one up till now, in my opinion.  Not in a way that I generated many lines of code :P, but debugged code in a collaborative way. Many errors pooped up, I discussed them with team-mates and we arrived at a solution(it was more like them telling me the solution :P).&lt;/p&gt;
+
+&lt;h3 id=&quot;commits&quot;&gt;&lt;a href=&quot;&quot;&gt;Commits:&lt;/a&gt;&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Added TEST_IN_TREE=yes in env for builds with Ruby&lt;/li&gt;
+  &lt;li&gt;Printing if symengine.so was made&lt;/li&gt;
+  &lt;li&gt;Printing files in lib/symengine/ in travis log&lt;/li&gt;
+  &lt;li&gt;Replaced ../lib with ../../lib in expand_path&lt;/li&gt;
+  &lt;li&gt;Added lib to $LOAD_PATH &amp;amp; removed require_relative&lt;/li&gt;
+  &lt;li&gt;Added the LOAD_PATH code in gemspec&lt;/li&gt;
+  &lt;li&gt;Added lib/symengine to $LOAD_PATH&lt;/li&gt;
+  &lt;li&gt;Added lib to $LOAD_PATH in spec_helper and removed gem install symengine&lt;/li&gt;
+  &lt;li&gt;Added rest of the tests with pending statuses&lt;/li&gt;
+  &lt;li&gt;[ci skip] untabified gemspec (converted tabs to spaces)&lt;/li&gt;
+  &lt;li&gt;Installing the gem while testing Ideally this should not be done. This is just t&lt;/li&gt;
+  &lt;li&gt;Changed the version from 0.0.0.pre to 0.0.0&lt;/li&gt;
+  &lt;li&gt;Test push to debug travis failures&lt;/li&gt;
+  &lt;li&gt;Added sudo: true to .travis.yml to support new container-based infrastructure in&lt;/li&gt;
+  &lt;li&gt;Fixed errors in ruby_basic.c&lt;/li&gt;
+  &lt;li&gt;Experimental fix with FindRuby.cmake&lt;/li&gt;
+  &lt;li&gt;Kept duplicate LICENSE as temporary fix for installation errors&lt;/li&gt;
+  &lt;li&gt;Added functions for binary, unary op&lt;/li&gt;
+  &lt;li&gt;Changed symengine_BINARY_DIR to symengine_SOURCE_DIR&lt;/li&gt;
+  &lt;li&gt;Added FindPackageHandleStandardArgs.cmake&lt;/li&gt;
+  &lt;li&gt;Removed installation of new Bundler&lt;/li&gt;
+  &lt;li&gt;Added new FindRuby.cmake&lt;/li&gt;
+  &lt;li&gt;Moved dependencies from Gemfile to gemspec And rectified error in CMakelists.txt&lt;/li&gt;
+  &lt;li&gt;Experimental fix for build errors removed the empty `if[[ “${WITH_RUBY}” != “” ]&lt;/li&gt;
+  &lt;li&gt;Attempt at travis integration for building and testing the extensions&lt;/li&gt;
+  &lt;li&gt;Updated configuration for rspec&lt;/li&gt;
+  &lt;li&gt;Rectified error in CMakeLists and updated README&lt;/li&gt;
+  &lt;li&gt;Added test file that makes an object of Basic test passes&lt;/li&gt;
+  &lt;li&gt;Used symengine license in gem and updated Manifest&lt;/li&gt;
+  &lt;li&gt;Removed rake and rake-compiler from dependencies&lt;/li&gt;
+  &lt;li&gt;Removed unnecessary files as discussed LICENSE, Rakefile and extconf.rb&lt;/li&gt;
+  &lt;li&gt;Added display messages in CMakeLists.txt for Ruby&lt;/li&gt;
+  &lt;li&gt;Updated the docs&lt;/li&gt;
+  &lt;li&gt;Added src/ruby/pkg to gitignore&lt;/li&gt;
+  &lt;li&gt;Removed bin folder&lt;/li&gt;
+  &lt;li&gt;Fix typo&lt;/li&gt;
+  &lt;li&gt;Build ruby wrappers with CMake&lt;/li&gt;
+  &lt;li&gt;Tried to use &lt;code&gt;g++&lt;/code&gt; compiler&lt;/li&gt;
+  &lt;li&gt;Updated compile instructions in README&lt;/li&gt;
+  &lt;li&gt;Added the option to config dirs&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>The Load Error</title>
    <link href="http://abinashmeher999.github.io/2015/06/12/The-Load-Error/"/>
    <updated>2015-06-12T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2015/06/12/The-Load-Error</id>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/06/12/The-Load-Error</id>
    <content type="html">&lt;p&gt;I hope you remember the &lt;code&gt;LoadError&lt;/code&gt; that I shared with you last week. The one which I was stuck for many days, and well frankly I couldn’t devote much time too, at the beginning of this week as there was the competition and the travel back home. It was only these one or two days at the end when I could search for the error.&lt;!--more--&gt;&lt;br /&gt;
 For convenience, I am adding the gist again&lt;br /&gt;
 &lt;script src=&quot;https://gist.github.com/abinashmeher999/2544b4961f547bf286e7.js&quot;&gt; &lt;/script&gt;&lt;br /&gt;
@@ -33,6 +86,9 @@ I was very close to finding out the error. I was certain that the directory, or 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;lib/**/*&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;bin/*&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;LICENSE&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;*.md&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;I could finally resolve the load error.&lt;/p&gt;
+
+&lt;p&gt;Commits:&lt;br /&gt;
+1. &lt;a href=&quot;https://github.com/abinashmeher999/symengine/commit/bcab97852b9b5350bb15eee6e3619291b7ff4aa0&quot;&gt;Load error fixed, added symengine.so to gem.files&lt;/a&gt;&lt;/p&gt;
 </content>
  </entry>
  
@@ -40,7 +96,7 @@ I was very close to finding out the error. I was certain that the directory, or 
    <title>Week 3</title>
    <link href="http://abinashmeher999.github.io/2015/06/05/Week-3/"/>
    <updated>2015-06-05T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2015/06/05/Week-3</id>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/06/05/Week-3</id>
    <content type="html">&lt;p&gt;Sorry Guys. I don’t have much to say with this blog post. I am at a competition called &lt;em&gt;Intelligent Ground Vehicle Competition&lt;/em&gt; and didn’t get any time to work on the project. I wish I had time to solve the error.&lt;!--more--&gt; Unresolved errors really bother me. Even now, at the very time I am writing this post, my team-mates are struggling with a really sneaky bug. Arghhh!!&lt;/p&gt;
 
 &lt;p&gt;Soon I will be back to resume my project. And try to figure out more about the error.&lt;br /&gt;
@@ -54,7 +110,7 @@ I will appreciate it if you can share any hint about fixing this error. Looking 
    <title>Building the wrappers</title>
    <link href="http://abinashmeher999.github.io/2015/05/29/Building-the-wrappers/"/>
    <updated>2015-05-29T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2015/05/29/Building-the-wrappers</id>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/05/29/Building-the-wrappers</id>
    <content type="html">&lt;p&gt;This week was very engaging and a little hectic at the end for me. I had to rethink many things during the week, like these wrappers. I had to rewrite them, because of a logical error in the allocation of the pointers that pointed to the data. And spent a whole lot of time trying to understand a hack of passing a variable by reference in &lt;code&gt;c&lt;/code&gt; only to conclude that it can’t be used!&lt;!--more--&gt; Anyways, I learnt a new &lt;code&gt;c&lt;/code&gt; hack! You can refer to &lt;a href=&quot;http://stackoverflow.com/questions/30479106/possible-side-effects-of-doing-a-typedef-of-a-struct-to-an-array-of-one-element&quot;&gt;this question&lt;/a&gt; that I asked on stack overflow.&lt;/p&gt;
 
 &lt;p&gt;So, the wrappers for Basic were written. But they didn’t compile because of a missing &lt;code&gt;-fPIC&lt;/code&gt; flag that evidently &lt;code&gt;cmake&lt;/code&gt; puts it on its own and &lt;code&gt;rake&lt;/code&gt; doesn’t. The flag, I guess, was required to enable building of shared libs. The error message was something like this&lt;br /&gt;
@@ -93,7 +149,7 @@ Which was basically because of the &lt;code&gt;static&lt;/code&gt; qualifier. Ap
    <title>Writing wrappers for Basic class</title>
    <link href="http://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class/"/>
    <updated>2015-05-22T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class</id>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class</id>
    <content type="html">&lt;p&gt;So, it’s been already a week! The coding period (for me) has started. I am starting early to make up for my absence for a few days.&lt;/p&gt;
 
 &lt;p&gt;I had already setup a minimal gem and automated building of extensions. I read the docs&lt;!--more--&gt; for c wrappers that have already been written in &lt;a href=&quot;https://github.com/sympy/symengine/blob/master/src/cwrapper.h&quot;&gt;&lt;code&gt;cwrapper.h&lt;/code&gt;&lt;/a&gt;. It mostly contains the c wrappers for &lt;code&gt;Basic&lt;/code&gt; class and a few of &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes. At one time I was confident that I could write all the wrappers for &lt;code&gt;Basic&lt;/code&gt; class at one go. How hard could it be? The thing I learnt is you can never be sure of anything, unless you implement it. I had to keep a copy of the documentation for writing extensions &lt;a href=&quot;https://github.com/ruby/ruby/blob/trunk/doc/extension.rdoc&quot;&gt;&lt;code&gt;README.EXT&lt;/code&gt;&lt;/a&gt; open at all times, double checking everything. Still, I got confused.&lt;/p&gt;
@@ -108,7 +164,7 @@ Which was basically because of the &lt;code&gt;static&lt;/code&gt; qualifier. Ap
    <title>Google Summer of Code 2015</title>
    <link href="http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015/"/>
    <updated>2015-05-06T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015</id>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015</id>
    <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/gsoc/gsoc-2015.png&quot; alt=&quot;GSoC-2015&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Hi there! Yeah, you guessed it. I got selected into Google Summer of Code 2015! I am very excited for the summers. The results have been out and My project &lt;strong&gt;Ruby Bindings for SymEngine C++ symbolic manipulation library&lt;/strong&gt; has been selected.&lt;!--more--&gt; I was selected by The Ruby Science Foundation but luckily I get to work with both SciRuby and SymPy! Isn’t that exciting?&lt;/p&gt;
@@ -129,7 +185,7 @@ My project is to write the Ruby extensions for the C++ SymEngine library that pr
    <title>Special semantics for arrow`->` operator and dot`.` operator in C++</title>
    <link href="http://abinashmeher999.github.io/2015/04/20/special-semantics-for-arrow-and-dot-operator-in-cpp/"/>
    <updated>2015-04-20T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2015/04/20/special-semantics-for-arrow-and-dot-operator-in-cpp</id>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/04/20/special-semantics-for-arrow-and-dot-operator-in-cpp</id>
    <content type="html">&lt;p&gt;Ever tried to overload &lt;code&gt;operator-&amp;gt;&lt;/code&gt;? If you haven’t, let me tell you this doesn’t work like other overloaded operators.&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;p&gt;For example let us take an operator like &lt;code&gt;operator*&lt;/code&gt;. What do you expect this to return? Lets say we have a pointer to &lt;code&gt;class A&lt;/code&gt;, &lt;code&gt;ptr_a&lt;/code&gt;. The &lt;code&gt;operator*&lt;/code&gt; is already overloaded in &lt;code&gt;class A&lt;/code&gt;. What would &lt;code&gt;(*ptr_a).foo();&lt;/code&gt; return?&lt;/p&gt;
@@ -176,7 +232,7 @@ In the previous example, in the expression &lt;code&gt;d-&amp;gt;foo()&lt;/code&
    <title>Docker! Looks cool,</title>
    <link href="http://abinashmeher999.github.io/2015/02/01/docker/"/>
    <updated>2015-02-01T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2015/02/01/docker</id>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/02/01/docker</id>
    <content type="html">&lt;p&gt;&lt;img src=&quot;http://blog.docker.com/wp-content/uploads/2013/08/KuDr42X_ITXghJhSInDZekNEF0jLt3NeVxtRye3tqco.png&quot; alt=&quot;Docker&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I came across this term ‘docker’ while going through the project ‘Shogun-cloud’ and decided to google about it and learn what this does. Turns out it has made building, shipping and running distributed applications hassle free to a great extent.&lt;!--more--&gt; It is promising since it allows isolation of applications without the need of a different VM for each application. It is much more light-weight than a VM (anyone who has worked with a VM knows how heavy a VM can be).  The analogy given by its founder, Solomon Hykes, is very apt. He explains it as a shipping container as used by shipping companies, which standardises the shipping across each transportation vehicle regardless of what’s inside. Many companies like eBay have already changed to docker.&lt;/p&gt;
@@ -191,7 +247,7 @@ In the previous example, in the expression &lt;code&gt;d-&amp;gt;foo()&lt;/code&
    <title>An Easy Linear Time Longest Palindromic Substring finding Algorithm</title>
    <link href="http://abinashmeher999.github.io/2014/12/06/linear-time-longest-palindromic-substring/"/>
    <updated>2014-12-06T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2014/12/06/linear-time-longest-palindromic-substring</id>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2014/12/06/linear-time-longest-palindromic-substring</id>
    <content type="html">&lt;p&gt;I would like to discuss a simple and easy to understand algorithm for finding longest palindromic substring in linear time. I stumbled upon this during the Algorithms Lab Test. This is very similar to other algorithms but yet different.&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* &lt;/span&gt;
@@ -321,7 +377,7 @@ In the previous example, in the expression &lt;code&gt;d-&amp;gt;foo()&lt;/code&
    <title>The Laws yet to be known</title>
    <link href="http://abinashmeher999.github.io/2014/12/05/laws-yet-to-be-known/"/>
    <updated>2014-12-05T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2014/12/05/laws-yet-to-be-known</id>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2014/12/05/laws-yet-to-be-known</id>
    <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/laws-yet-to-be-known.jpeg&quot; alt=&quot;Mysterious-Universe&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;We have continuously been in search for the answer to questions that govern us and our lives and even the whole universe. But can we know the answers that have been forbidden to us, by the same laws that govern us?&lt;!--more--&gt;&lt;/p&gt;

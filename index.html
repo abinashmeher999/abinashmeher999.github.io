@@ -16,14 +16,14 @@
   </title>
 
   <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css">
-  <link rel="stylesheet" href="/public/css/syntax.css">
-  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://abinashmeher999.github.io/public/css/poole.css">
+  <link rel="stylesheet" href="http://abinashmeher999.github.io/public/css/syntax.css">
+  <link rel="stylesheet" href="http://abinashmeher999.github.io/public/css/lanyon.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
 
   <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-precomposed.png">
-  <link rel="shortcut icon" href="/public/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://abinashmeher999.github.io/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="http://abinashmeher999.github.io/public/favicon.ico">
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
@@ -43,7 +43,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="/">Home</a>
+    <a class="sidebar-nav-item" href="http://abinashmeher999.github.io/">Home</a>
 
     
 
@@ -139,7 +139,7 @@
       <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
-            <a href="/" title="Home">Mind Ramblings</a>
+            <a href="http://abinashmeher999.github.io/" title="Home">Mind Ramblings</a>
             <small>My Blog</small>
           </h3>
         </div>
@@ -150,12 +150,12 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/2015/06/12/The-Load-Error/">
-        The Load Error
+      <a href="http://abinashmeher999.github.io/2015/06/19/Reconfiguring-building-and-Travis-Setup/">
+        Reconfiguring building and Travis Setup
       </a>
     </h1>
 
-    <span class="post-date">12 Jun 2015
+    <span class="post-date">19 Jun 2015
       -
       <span><span class="reading-time" title="Estimated read time">
   
@@ -168,14 +168,99 @@
     <small><span class="post-tag">
       
         
-          <a href="/tag/GSoC-2015">
+          <a href="http://abinashmeher999.github.io/tag/GSoC-2015">
             GSoC-2015
           </a>
           &middot;
         
       
         
-          <a href="/tag/SymEngine">
+          <a href="http://abinashmeher999.github.io/tag/SymEngine">
+            SymEngine
+          </a>
+
+        
+      
+  </span></small>
+
+  <p>This week was one of the most engaging one up till now, in my opinion.  Not in a way that I generated many lines of code :P, but debugged code in a collaborative way. Many errors pooped up, I discussed them with team-mates and we arrived at a solution(it was more like them telling me the solution :P).</p>
+
+<h3 id="commits"><a href="">Commits:</a></h3>
+<ul>
+  <li>Added TEST_IN_TREE=yes in env for builds with Ruby</li>
+  <li>Printing if symengine.so was made</li>
+  <li>Printing files in lib/symengine/ in travis log</li>
+  <li>Replaced ../lib with ../../lib in expand_path</li>
+  <li>Added lib to $LOAD_PATH &amp; removed require_relative</li>
+  <li>Added the LOAD_PATH code in gemspec</li>
+  <li>Added lib/symengine to $LOAD_PATH</li>
+  <li>Added lib to $LOAD_PATH in spec_helper and removed gem install symengine</li>
+  <li>Added rest of the tests with pending statuses</li>
+  <li>[ci skip] untabified gemspec (converted tabs to spaces)</li>
+  <li>Installing the gem while testing Ideally this should not be done. This is just t</li>
+  <li>Changed the version from 0.0.0.pre to 0.0.0</li>
+  <li>Test push to debug travis failures</li>
+  <li>Added sudo: true to .travis.yml to support new container-based infrastructure in</li>
+  <li>Fixed errors in ruby_basic.c</li>
+  <li>Experimental fix with FindRuby.cmake</li>
+  <li>Kept duplicate LICENSE as temporary fix for installation errors</li>
+  <li>Added functions for binary, unary op</li>
+  <li>Changed symengine_BINARY_DIR to symengine_SOURCE_DIR</li>
+  <li>Added FindPackageHandleStandardArgs.cmake</li>
+  <li>Removed installation of new Bundler</li>
+  <li>Added new FindRuby.cmake</li>
+  <li>Moved dependencies from Gemfile to gemspec And rectified error in CMakelists.txt</li>
+  <li>Experimental fix for build errors removed the empty `if[[ “${WITH_RUBY}” != “” ]</li>
+  <li>Attempt at travis integration for building and testing the extensions</li>
+  <li>Updated configuration for rspec</li>
+  <li>Rectified error in CMakeLists and updated README</li>
+  <li>Added test file that makes an object of Basic test passes</li>
+  <li>Used symengine license in gem and updated Manifest</li>
+  <li>Removed rake and rake-compiler from dependencies</li>
+  <li>Removed unnecessary files as discussed LICENSE, Rakefile and extconf.rb</li>
+  <li>Added display messages in CMakeLists.txt for Ruby</li>
+  <li>Updated the docs</li>
+  <li>Added src/ruby/pkg to gitignore</li>
+  <li>Removed bin folder</li>
+  <li>Fix typo</li>
+  <li>Build ruby wrappers with CMake</li>
+  <li>Tried to use <code>g++</code> compiler</li>
+  <li>Updated compile instructions in README</li>
+  <li>Added the option to config dirs</li>
+</ul>
+
+
+  <a href="http://abinashmeher999.github.io/2015/06/19/Reconfiguring-building-and-Travis-Setup/">...<small>Read more</small></a>
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="http://abinashmeher999.github.io/2015/06/12/The-Load-Error/">
+        The Load Error
+      </a>
+    </h1>
+
+    <span class="post-date">12 Jun 2015
+      -
+      <span><span class="reading-time" title="Estimated read time">
+  
+  
+    2 mins
+  
+</span>
+</span>
+    </span>
+    <small><span class="post-tag">
+      
+        
+          <a href="http://abinashmeher999.github.io/tag/GSoC-2015">
+            GSoC-2015
+          </a>
+          &middot;
+        
+      
+        
+          <a href="http://abinashmeher999.github.io/tag/SymEngine">
             SymEngine
           </a>
 
@@ -186,12 +271,12 @@
   <p>I hope you remember the <code>LoadError</code> that I shared with you last week. The one which I was stuck for many days, and well frankly I couldn’t devote much time too, at the beginning of this week as there was the competition and the travel back home. It was only these one or two days at the end when I could search for the error.</p>
 
 
-  <a href="/2015/06/12/The-Load-Error/">...<small>Read more</small></a>
+  <a href="http://abinashmeher999.github.io/2015/06/12/The-Load-Error/">...<small>Read more</small></a>
   </div>
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/2015/06/05/Week-3/">
+      <a href="http://abinashmeher999.github.io/2015/06/05/Week-3/">
         Week 3
       </a>
     </h1>
@@ -209,14 +294,14 @@
     <small><span class="post-tag">
       
         
-          <a href="/tag/GSoC-2015">
+          <a href="http://abinashmeher999.github.io/tag/GSoC-2015">
             GSoC-2015
           </a>
           &middot;
         
       
         
-          <a href="/tag/SymEngine">
+          <a href="http://abinashmeher999.github.io/tag/SymEngine">
             SymEngine
           </a>
 
@@ -227,12 +312,12 @@
   <p>Sorry Guys. I don’t have much to say with this blog post. I am at a competition called <em>Intelligent Ground Vehicle Competition</em> and didn’t get any time to work on the project. I wish I had time to solve the error.</p>
 
 
-  <a href="/2015/06/05/Week-3/">...<small>Read more</small></a>
+  <a href="http://abinashmeher999.github.io/2015/06/05/Week-3/">...<small>Read more</small></a>
   </div>
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/2015/05/29/Building-the-wrappers/">
+      <a href="http://abinashmeher999.github.io/2015/05/29/Building-the-wrappers/">
         Building the wrappers
       </a>
     </h1>
@@ -250,14 +335,14 @@
     <small><span class="post-tag">
       
         
-          <a href="/tag/GSoC-2015">
+          <a href="http://abinashmeher999.github.io/tag/GSoC-2015">
             GSoC-2015
           </a>
           &middot;
         
       
         
-          <a href="/tag/SymEngine">
+          <a href="http://abinashmeher999.github.io/tag/SymEngine">
             SymEngine
           </a>
 
@@ -268,12 +353,12 @@
   <p>This week was very engaging and a little hectic at the end for me. I had to rethink many things during the week, like these wrappers. I had to rewrite them, because of a logical error in the allocation of the pointers that pointed to the data. And spent a whole lot of time trying to understand a hack of passing a variable by reference in <code>c</code> only to conclude that it can’t be used!</p>
 
 
-  <a href="/2015/05/29/Building-the-wrappers/">...<small>Read more</small></a>
+  <a href="http://abinashmeher999.github.io/2015/05/29/Building-the-wrappers/">...<small>Read more</small></a>
   </div>
   
   <div class="post">
     <h1 class="post-title">
-      <a href="/2015/05/22/Writing-wrappers-for-Basic-class/">
+      <a href="http://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class/">
         Writing wrappers for Basic class
       </a>
     </h1>
@@ -291,14 +376,14 @@
     <small><span class="post-tag">
       
         
-          <a href="/tag/GSoC-2015">
+          <a href="http://abinashmeher999.github.io/tag/GSoC-2015">
             GSoC-2015
           </a>
           &middot;
         
       
         
-          <a href="/tag/SymEngine">
+          <a href="http://abinashmeher999.github.io/tag/SymEngine">
             SymEngine
           </a>
 
@@ -311,71 +396,14 @@
 <p>I had already setup a minimal gem and automated building of extensions. I read the docs</p>
 
 
-  <a href="/2015/05/22/Writing-wrappers-for-Basic-class/">...<small>Read more</small></a>
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="/2015/05/06/Google-Summer-of-Code-2015/">
-        Google Summer of Code 2015
-      </a>
-    </h1>
-
-    <span class="post-date">06 May 2015
-      -
-      <span><span class="reading-time" title="Estimated read time">
-  
-  
-    1 min
-  
-</span>
-</span>
-    </span>
-    <small><span class="post-tag">
-      
-        
-          <a href="/tag/GSoC-2015">
-            GSoC-2015
-          </a>
-          &middot;
-        
-      
-        
-          <a href="/tag/SymPy">
-            SymPy
-          </a>
-          &middot;
-        
-      
-        
-          <a href="/tag/SymEngine">
-            SymEngine
-          </a>
-          &middot;
-        
-      
-        
-          <a href="/tag/SciRuby">
-            SciRuby
-          </a>
-
-        
-      
-  </span></small>
-
-  <p><img src="/assets/gsoc/gsoc-2015.png" alt="GSoC-2015" /></p>
-
-<p>Hi there! Yeah, you guessed it. I got selected into Google Summer of Code 2015! I am very excited for the summers. The results have been out and My project <strong>Ruby Bindings for SymEngine C++ symbolic manipulation library</strong> has been selected.</p>
-
-
-  <a href="/2015/05/06/Google-Summer-of-Code-2015/">...<small>Read more</small></a>
+  <a href="http://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class/">...<small>Read more</small></a>
   </div>
   
 </div>
 
 <div class="pagination">
   
-    <a class="pagination-item older" href="/page2">Older</a>
+    <a class="pagination-item older" href="http://abinashmeher999.github.io/page2">Older</a>
   
   
     <span class="pagination-item newer">Newer</span>
