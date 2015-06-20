@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 <title>Mind Ramblings - Algorithms</title>
-<link href="http://abinashmeher999.github.io/tag/Algorithms/index.xml" rel="self"/>
-<link href="http://abinashmeher999.github.io/tag/Algorithms/index.html"/>
- <updated>2015-06-07T23:31:20+05:30</updated>
- <id>http://abinashmeher999.github.io/tag/Algorithms.html</id>
+<link href="/tag/Algorithms/index.xml" rel="self"/>
+<link href="/tag/Algorithms/index.html"/>
+ <updated>2015-06-20T10:41:45+05:30</updated>
+ <id>/tag/Algorithms.html</id>
  <author>
  <name>Abinash Meher</name>
  </author>
  
  <entry>
    <title>An Easy Linear Time Longest Palindromic Substring finding Algorithm</title>
-   <link href="http://abinashmeher999.github.io/2014/12/06/linear-time-longest-palindromic-substring/"/>
+   <link href="/2014/12/06/linear-time-longest-palindromic-substring/"/>
    <updated>2014-12-06T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2014/12/06/linear-time-longest-palindromic-substring</id>
+   <id>/2014/12/06/linear-time-longest-palindromic-substring</id>
    <content type="html">&lt;p&gt;I would like to discuss a simple and easy to understand algorithm for finding longest palindromic substring in linear time. I stumbled upon this during the Algorithms Lab Test. This is very similar to other algorithms but yet different.&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* &lt;/span&gt;

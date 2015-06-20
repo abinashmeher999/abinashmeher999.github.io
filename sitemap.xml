@@ -1,149 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/06/05/Week-3/</loc>
+    <loc>http://abinashmeher999.github.io/2015/06/12/The-Load-Error/</loc>
+    <lastmod>2015-06-12T00:00:00+05:30</lastmod>
+  </url>
+  <url>
+    <loc>http://abinashmeher999.github.io/2015/06/05/Week-3/</loc>
     <lastmod>2015-06-05T00:00:00+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/05/29/Building-the-wrappers/</loc>
+    <loc>http://abinashmeher999.github.io/2015/05/29/Building-the-wrappers/</loc>
     <lastmod>2015-05-29T00:00:00+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class/</loc>
+    <loc>http://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class/</loc>
     <lastmod>2015-05-22T00:00:00+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015/</loc>
+    <loc>http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015/</loc>
     <lastmod>2015-05-06T00:00:00+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/04/20/special-semantics-for-arrow-and-dot-operator-in-cpp/</loc>
+    <loc>http://abinashmeher999.github.io/2015/04/20/special-semantics-for-arrow-and-dot-operator-in-cpp/</loc>
     <lastmod>2015-04-20T00:00:00+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/02/01/docker/</loc>
+    <loc>http://abinashmeher999.github.io/2015/02/01/docker/</loc>
     <lastmod>2015-02-01T00:00:00+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2014/12/06/linear-time-longest-palindromic-substring/</loc>
+    <loc>http://abinashmeher999.github.io/2014/12/06/linear-time-longest-palindromic-substring/</loc>
     <lastmod>2014-12-06T00:00:00+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2014/12/05/laws-yet-to-be-known/</loc>
+    <loc>http://abinashmeher999.github.io/2014/12/05/laws-yet-to-be-known/</loc>
     <lastmod>2014-12-05T00:00:00+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/404.html</loc>
+    <loc>http://abinashmeher999.github.io/404.html</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/about/</loc>
+    <loc>http://abinashmeher999.github.io/about/</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/archive/</loc>
+    <loc>http://abinashmeher999.github.io/archive/</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/</loc>
+    <loc>http://abinashmeher999.github.io/</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/tag/</loc>
+    <loc>http://abinashmeher999.github.io/tag/</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/tag/Food-for-Thought/</loc>
+    <loc>http://abinashmeher999.github.io/tag/Food-for-Thought/</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/tag/Algorithms/</loc>
+    <loc>http://abinashmeher999.github.io/tag/Algorithms/</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/tag/C++/</loc>
+    <loc>http://abinashmeher999.github.io/tag/C++/</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/tag/Cloud/</loc>
+    <loc>http://abinashmeher999.github.io/tag/Cloud/</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/tag/Web-Development/</loc>
+    <loc>http://abinashmeher999.github.io/tag/Web-Development/</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/tag/GSoC-2015/</loc>
+    <loc>http://abinashmeher999.github.io/tag/GSoC-2015/</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/tag/SymPy/</loc>
+    <loc>http://abinashmeher999.github.io/tag/SymPy/</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/tag/SymEngine/</loc>
+    <loc>http://abinashmeher999.github.io/tag/SymEngine/</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/tag/SciRuby/</loc>
+    <loc>http://abinashmeher999.github.io/tag/SciRuby/</loc>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/build/2015/05/06/Hi-everyone/index.html</loc>
+    <loc>http://abinashmeher999.github.io/build/2015/05/06/Hi-everyone/index.html</loc>
     <lastmod>2015-05-22T07:57:15+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/build/tag/GSoC-2015/index.html</loc>
+    <loc>http://abinashmeher999.github.io/build/tag/GSoC-2015/index.html</loc>
     <lastmod>2015-05-22T07:57:15+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/build/tag/jekyll/index.html</loc>
+    <loc>http://abinashmeher999.github.io/build/tag/jekyll/index.html</loc>
     <lastmod>2015-05-22T07:57:15+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/build/about/index.html</loc>
+    <loc>http://abinashmeher999.github.io/build/about/index.html</loc>
     <lastmod>2015-05-22T07:57:15+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/build/404.html</loc>
+    <loc>http://abinashmeher999.github.io/build/404.html</loc>
     <lastmod>2015-05-22T07:57:15+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/build/index.html</loc>
+    <loc>http://abinashmeher999.github.io/build/index.html</loc>
     <lastmod>2015-05-22T07:57:15+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/serve/2015/05/06/Hi-everyone/index.html</loc>
+    <loc>http://abinashmeher999.github.io/serve/2015/05/06/Hi-everyone/index.html</loc>
     <lastmod>2015-05-22T07:57:49+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/serve/build/2015/05/06/Hi-everyone/index.html</loc>
+    <loc>http://abinashmeher999.github.io/serve/build/2015/05/06/Hi-everyone/index.html</loc>
     <lastmod>2015-05-22T07:57:49+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/serve/build/tag/GSoC-2015/index.html</loc>
+    <loc>http://abinashmeher999.github.io/serve/build/tag/GSoC-2015/index.html</loc>
     <lastmod>2015-05-22T07:57:49+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/serve/build/tag/jekyll/index.html</loc>
+    <loc>http://abinashmeher999.github.io/serve/build/tag/jekyll/index.html</loc>
     <lastmod>2015-05-22T07:57:49+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/serve/build/about/index.html</loc>
+    <loc>http://abinashmeher999.github.io/serve/build/about/index.html</loc>
     <lastmod>2015-05-22T07:57:49+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/serve/build/404.html</loc>
+    <loc>http://abinashmeher999.github.io/serve/build/404.html</loc>
     <lastmod>2015-05-22T07:57:49+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/serve/build/index.html</loc>
+    <loc>http://abinashmeher999.github.io/serve/build/index.html</loc>
     <lastmod>2015-05-22T07:57:49+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/serve/tag/GSoC-2015/index.html</loc>
+    <loc>http://abinashmeher999.github.io/serve/tag/GSoC-2015/index.html</loc>
     <lastmod>2015-05-22T07:57:49+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/serve/tag/jekyll/index.html</loc>
+    <loc>http://abinashmeher999.github.io/serve/tag/jekyll/index.html</loc>
     <lastmod>2015-05-22T07:57:49+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/serve/about/index.html</loc>
+    <loc>http://abinashmeher999.github.io/serve/about/index.html</loc>
     <lastmod>2015-05-22T07:57:49+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/serve/404.html</loc>
+    <loc>http://abinashmeher999.github.io/serve/404.html</loc>
     <lastmod>2015-05-22T07:57:49+05:30</lastmod>
   </url>
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/serve/index.html</loc>
+    <loc>http://abinashmeher999.github.io/serve/index.html</loc>
     <lastmod>2015-05-22T07:57:49+05:30</lastmod>
   </url>
 </urlset>

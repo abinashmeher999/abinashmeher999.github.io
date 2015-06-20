@@ -11,7 +11,7 @@
 
   <title>
     
-      Google Summer of Code 2015 &middot; Mind Ramblings
+      The Load Error &middot; Mind Ramblings
     
   </title>
 
@@ -147,8 +147,8 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">Google Summer of Code 2015</h1>
-  <span class="post-date">06 May 2015
+  <h1 class="post-title">The Load Error</h1>
+  <span class="post-date">12 Jun 2015
   </span>
   <small><span class="post-tag">
       
@@ -160,40 +160,29 @@
         
       
         
-          <a href="/tag/SymPy">
-            SymPy
-          </a>
-          &middot;
-        
-      
-        
           <a href="/tag/SymEngine">
             SymEngine
-          </a>
-          &middot;
-        
-      
-        
-          <a href="/tag/SciRuby">
-            SciRuby
           </a>
 
         
       
 </span></small>
-<p><img src="/assets/gsoc/gsoc-2015.png" alt="GSoC-2015" /></p>
+<p>I hope you remember the <code>LoadError</code> that I shared with you last week. The one which I was stuck for many days, and well frankly I couldn’t devote much time too, at the beginning of this week as there was the competition and the travel back home. It was only these one or two days at the end when I could search for the error.<!--more--><br />
+For convenience, I am adding the gist again<br />
+<script src="https://gist.github.com/abinashmeher999/2544b4961f547bf286e7.js"> </script><br />
+I was very close to finding out the error. I was certain that the directory, or atleast the file was missing from the <code>$LOAD_PATH</code>. Which becomes obvious, once you go through a few results after you have searched for the same error on the internet. But I had followed the tutorials from RubyGems.org on writing, file structure and naming of the extensions. So, there wasn’t any doubt that the extension might be building at a wrong location, that was not added to the <code>$LOAD_PATH</code>.</p>
 
-<p>Hi there! Yeah, you guessed it. I got selected into Google Summer of Code 2015! I am very excited for the summers. The results have been out and My project <strong>Ruby Bindings for SymEngine C++ symbolic manipulation library</strong> has been selected.<!--more--> I was selected by The Ruby Science Foundation but luckily I get to work with both SciRuby and SymPy! Isn’t that exciting?</p>
+<p>Even upon checking, the file <code>symengine.so</code> was right there in <code>lib/symengine</code> dir, after the extension was properly built. The only thing that I followed a little different from the tutorials was the <code>gemspec</code> file. So, I narrowed it down to <code>gemspec</code> file where the error might have been caused. Or some missing parameter that we need to set in order to include that to the <code>$LOAD_PATH</code> upon installation of the gem.</p>
 
-<p>My mentor is Mr. Ondřej Čertík himslef, who is the founder of SymPy and I am lucky to be mentored by him. I would like to thank him and the Ruby Science Foundation and all the folks there to give me such an opportunity. John Woods and Carlos Agarie helped me a lot during the application period. I would also like to thank Harsh Gupta and Shivam Vats for introducing me to the community.</p>
+<p>Then <a href="https://github.com/isuruf">Isuru</a>, one of my fellow GSoC students from SymPy, came to the rescue and pointed out that I had failed to include the library file <code>symegine.so</code> in the files list of the gem. What I was doing was</p>
 
-<h2 id="the-project">The Project</h2>
-<p><strong><em>Ruby Bindings for SymEngine a symbolic manipulation library in C++</em></strong><br />
-My project is to write the Ruby extensions for the C++ SymEngine library that provides functions for symbolic manipulation. This would also involve making the interface more rubyish than C++.</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span><span class="o">.</span><span class="n">files</span> <span class="o">=</span> <span class="no">Dir</span><span class="o">[</span><span class="s2">&quot;lib/**/*.rb&quot;</span><span class="p">,</span> <span class="s2">&quot;bin/*&quot;</span><span class="p">,</span> <span class="s2">&quot;LICENSE&quot;</span><span class="p">,</span> <span class="s2">&quot;*.md&quot;</span><span class="o">]</span></code></pre></div>
 
-<p>This <a href="https://github.com/abinashmeher999/sciruby/wiki/GSoC-2015-Abinash-Meher:-Ruby-bindings-for-CSymPy">project</a> will set up a strong foundation for any symbolic manipulation library or “SymRuby” for that matter, to be built for Ruby in the future. SymEngine is fast and is very apt to start the work with. I have also come across GlucSym, which is an unpublished Ruby-to-GiNaC bridge from 2008.</p>
+<p>With <code>lib/**/*.rb</code> I was clearly missing out the <code>lib/symegine/symegine.so</code> file, which was the one <code>require 'symengine'</code> wasn’t able to load. Upon doing</p>
 
-<p>But this interface(my project) might be the impulse the Ruby community needed to have a fully functional symbolic manipulation library. After all Ruby is a Very High Level Language! It will soon be needing such libraries. For me, I would be glad if someone uses the library for her/his project!</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span><span class="o">.</span><span class="n">files</span> <span class="o">=</span> <span class="no">Dir</span><span class="o">[</span><span class="s2">&quot;lib/**/*&quot;</span><span class="p">,</span> <span class="s2">&quot;bin/*&quot;</span><span class="p">,</span> <span class="s2">&quot;LICENSE&quot;</span><span class="p">,</span> <span class="s2">&quot;*.md&quot;</span><span class="o">]</span></code></pre></div>
+
+<p>I could finally resolve the load error.</p>
 
   <hr class="hr1">
   <!-- AddToAny BEGIN -->
@@ -231,15 +220,6 @@ My project is to write the Ruby extensions for the C++ SymEngine library that pr
     
       <li>
         <h3>
-          <a href="/2015/06/12/The-Load-Error/">
-            The Load Error
-            <small>12 Jun 2015</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="/2015/06/05/Week-3/">
             Week 3
             <small>05 Jun 2015</small>
@@ -252,6 +232,15 @@ My project is to write the Ruby extensions for the C++ SymEngine library that pr
           <a href="/2015/05/29/Building-the-wrappers/">
             Building the wrappers
             <small>29 May 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2015/05/22/Writing-wrappers-for-Basic-class/">
+            Writing wrappers for Basic class
+            <small>22 May 2015</small>
           </a>
         </h3>
       </li>

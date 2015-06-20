@@ -1,19 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 <title>Mind Ramblings - SymEngine</title>
-<link href="http://abinashmeher999.github.io/tag/SymEngine/index.xml" rel="self"/>
-<link href="http://abinashmeher999.github.io/tag/SymEngine/index.html"/>
- <updated>2015-06-07T23:31:20+05:30</updated>
- <id>http://abinashmeher999.github.io/tag/SymEngine.html</id>
+<link href="/tag/SymEngine/index.xml" rel="self"/>
+<link href="/tag/SymEngine/index.html"/>
+ <updated>2015-06-20T10:41:45+05:30</updated>
+ <id>/tag/SymEngine.html</id>
  <author>
  <name>Abinash Meher</name>
  </author>
  
  <entry>
+   <title>The Load Error</title>
+   <link href="/2015/06/12/The-Load-Error/"/>
+   <updated>2015-06-12T00:00:00+05:30</updated>
+   <id>/2015/06/12/The-Load-Error</id>
+   <content type="html">&lt;p&gt;I hope you remember the &lt;code&gt;LoadError&lt;/code&gt; that I shared with you last week. The one which I was stuck for many days, and well frankly I couldn’t devote much time too, at the beginning of this week as there was the competition and the travel back home. It was only these one or two days at the end when I could search for the error.&lt;!--more--&gt;&lt;br /&gt;
+For convenience, I am adding the gist again&lt;br /&gt;
+&lt;script src=&quot;https://gist.github.com/abinashmeher999/2544b4961f547bf286e7.js&quot;&gt; &lt;/script&gt;&lt;br /&gt;
+I was very close to finding out the error. I was certain that the directory, or atleast the file was missing from the &lt;code&gt;$LOAD_PATH&lt;/code&gt;. Which becomes obvious, once you go through a few results after you have searched for the same error on the internet. But I had followed the tutorials from RubyGems.org on writing, file structure and naming of the extensions. So, there wasn’t any doubt that the extension might be building at a wrong location, that was not added to the &lt;code&gt;$LOAD_PATH&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Even upon checking, the file &lt;code&gt;symengine.so&lt;/code&gt; was right there in &lt;code&gt;lib/symengine&lt;/code&gt; dir, after the extension was properly built. The only thing that I followed a little different from the tutorials was the &lt;code&gt;gemspec&lt;/code&gt; file. So, I narrowed it down to &lt;code&gt;gemspec&lt;/code&gt; file where the error might have been caused. Or some missing parameter that we need to set in order to include that to the &lt;code&gt;$LOAD_PATH&lt;/code&gt; upon installation of the gem.&lt;/p&gt;
+
+&lt;p&gt;Then &lt;a href=&quot;https://github.com/isuruf&quot;&gt;Isuru&lt;/a&gt;, one of my fellow GSoC students from SymPy, came to the rescue and pointed out that I had failed to include the library file &lt;code&gt;symegine.so&lt;/code&gt; in the files list of the gem. What I was doing was&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;lib/**/*.rb&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;bin/*&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;LICENSE&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;*.md&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;With &lt;code&gt;lib/**/*.rb&lt;/code&gt; I was clearly missing out the &lt;code&gt;lib/symegine/symegine.so&lt;/code&gt; file, which was the one &lt;code&gt;require &#39;symengine&#39;&lt;/code&gt; wasn’t able to load. Upon doing&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;files&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Dir&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;lib/**/*&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;bin/*&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;LICENSE&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;*.md&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I could finally resolve the load error.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>Week 3</title>
-   <link href="http://abinashmeher999.github.io/2015/06/05/Week-3/"/>
+   <link href="/2015/06/05/Week-3/"/>
    <updated>2015-06-05T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2015/06/05/Week-3</id>
+   <id>/2015/06/05/Week-3</id>
    <content type="html">&lt;p&gt;Sorry Guys. I don’t have much to say with this blog post. I am at a competition called &lt;em&gt;Intelligent Ground Vehicle Competition&lt;/em&gt; and didn’t get any time to work on the project. I wish I had time to solve the error.&lt;!--more--&gt; Unresolved errors really bother me. Even now, at the very time I am writing this post, my team-mates are struggling with a really sneaky bug. Arghhh!!&lt;/p&gt;
 
 &lt;p&gt;Soon I will be back to resume my project. And try to figure out more about the error.&lt;br /&gt;
@@ -25,9 +49,9 @@ I will appreciate it if you can share any hint about fixing this error. Looking 
  
  <entry>
    <title>Building the wrappers</title>
-   <link href="http://abinashmeher999.github.io/2015/05/29/Building-the-wrappers/"/>
+   <link href="/2015/05/29/Building-the-wrappers/"/>
    <updated>2015-05-29T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2015/05/29/Building-the-wrappers</id>
+   <id>/2015/05/29/Building-the-wrappers</id>
    <content type="html">&lt;p&gt;This week was very engaging and a little hectic at the end for me. I had to rethink many things during the week, like these wrappers. I had to rewrite them, because of a logical error in the allocation of the pointers that pointed to the data. And spent a whole lot of time trying to understand a hack of passing a variable by reference in &lt;code&gt;c&lt;/code&gt; only to conclude that it can’t be used!&lt;!--more--&gt; Anyways, I learnt a new &lt;code&gt;c&lt;/code&gt; hack! You can refer to &lt;a href=&quot;http://stackoverflow.com/questions/30479106/possible-side-effects-of-doing-a-typedef-of-a-struct-to-an-array-of-one-element&quot;&gt;this question&lt;/a&gt; that I asked on stack overflow.&lt;/p&gt;
 
 &lt;p&gt;So, the wrappers for Basic were written. But they didn’t compile because of a missing &lt;code&gt;-fPIC&lt;/code&gt; flag that evidently &lt;code&gt;cmake&lt;/code&gt; puts it on its own and &lt;code&gt;rake&lt;/code&gt; doesn’t. The flag, I guess, was required to enable building of shared libs. The error message was something like this&lt;br /&gt;
@@ -64,9 +88,9 @@ Which was basically because of the &lt;code&gt;static&lt;/code&gt; qualifier. Ap
  
  <entry>
    <title>Writing wrappers for Basic class</title>
-   <link href="http://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class/"/>
+   <link href="/2015/05/22/Writing-wrappers-for-Basic-class/"/>
    <updated>2015-05-22T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2015/05/22/Writing-wrappers-for-Basic-class</id>
+   <id>/2015/05/22/Writing-wrappers-for-Basic-class</id>
    <content type="html">&lt;p&gt;So, it’s been already a week! The coding period (for me) has started. I am starting early to make up for my absence for a few days.&lt;/p&gt;
 
 &lt;p&gt;I had already setup a minimal gem and automated building of extensions. I read the docs&lt;!--more--&gt; for c wrappers that have already been written in &lt;a href=&quot;https://github.com/sympy/symengine/blob/master/src/cwrapper.h&quot;&gt;&lt;code&gt;cwrapper.h&lt;/code&gt;&lt;/a&gt;. It mostly contains the c wrappers for &lt;code&gt;Basic&lt;/code&gt; class and a few of &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes. At one time I was confident that I could write all the wrappers for &lt;code&gt;Basic&lt;/code&gt; class at one go. How hard could it be? The thing I learnt is you can never be sure of anything, unless you implement it. I had to keep a copy of the documentation for writing extensions &lt;a href=&quot;https://github.com/ruby/ruby/blob/trunk/doc/extension.rdoc&quot;&gt;&lt;code&gt;README.EXT&lt;/code&gt;&lt;/a&gt; open at all times, double checking everything. Still, I got confused.&lt;/p&gt;
@@ -79,9 +103,9 @@ Which was basically because of the &lt;code&gt;static&lt;/code&gt; qualifier. Ap
  
  <entry>
    <title>Google Summer of Code 2015</title>
-   <link href="http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015/"/>
+   <link href="/2015/05/06/Google-Summer-of-Code-2015/"/>
    <updated>2015-05-06T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2015/05/06/Google-Summer-of-Code-2015</id>
+   <id>/2015/05/06/Google-Summer-of-Code-2015</id>
    <content type="html">&lt;p&gt;&lt;img src=&quot;/assets/gsoc/gsoc-2015.png&quot; alt=&quot;GSoC-2015&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Hi there! Yeah, you guessed it. I got selected into Google Summer of Code 2015! I am very excited for the summers. The results have been out and My project &lt;strong&gt;Ruby Bindings for SymEngine C++ symbolic manipulation library&lt;/strong&gt; has been selected.&lt;!--more--&gt; I was selected by The Ruby Science Foundation but luckily I get to work with both SciRuby and SymPy! Isn’t that exciting?&lt;/p&gt;
