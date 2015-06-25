@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/06/25/Instantiating-a-single-Basic-object/</loc>
+    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/06/25/Instantiating-a-Basic-object/</loc>
     <lastmod>2015-06-25T00:00:00+05:30</lastmod>
   </url>
   <url>
@@ -85,12 +85,6 @@
   </url>
   <url>
     <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/tag/SciRuby/</loc>
-  </url>
-  <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/page2/</loc>
-  </url>
-  <url>
-    <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/page3/</loc>
   </url>
   <url>
     <loc>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/build/2015/05/06/Hi-everyone/index.html</loc>

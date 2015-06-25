@@ -3,7 +3,7 @@
 <title>Mind Ramblings - SymEngine</title>
 <link href="http://abinashmeher999.github.io/tag/SymEngine/index.xml" rel="self"/>
 <link href="http://abinashmeher999.github.io/tag/SymEngine/index.html"/>
- <updated>2015-06-26T01:15:23+05:30</updated>
+ <updated>2015-06-26T01:17:20+05:30</updated>
  <id>http://abinashmeher999.github.io/tag/SymEngine.html</id>
  <author>
  <name>Abinash Meher</name>
@@ -11,9 +11,9 @@
  
  <entry>
    <title>Instantiating a Basic object</title>
-   <link href="http://abinashmeher999.github.io/2015/06/25/Instantiating-a-single-Basic-object/"/>
+   <link href="http://abinashmeher999.github.io/2015/06/25/Instantiating-a-Basic-object/"/>
    <updated>2015-06-25T00:00:00+05:30</updated>
-   <id>http://abinashmeher999.github.io/2015/06/25/Instantiating-a-single-Basic-object</id>
+   <id>http://abinashmeher999.github.io/2015/06/25/Instantiating-a-Basic-object</id>
    <content type="html">&lt;p&gt;Hi there! If you are following the blog, you would know how many errors I faced to setup and start writing the Ruby extensions. I don’t even remember half of the errors that I faced 2 weeks before. Well, that is why we have blog posts :P. We don’t want to miss a single takeaway from this experience.&lt;/p&gt;
 
 &lt;p&gt;My PR in the symengine repo, &lt;a href=&quot;https://github.com/sympy/symengine/pull/414&quot;&gt;#414 Ruby file structure and Basic class&lt;/a&gt;, finally got merged!&lt;!--more--&gt; It was the most significant PR that I had got merged till now. &lt;a href=&quot;https://github.com/certik&quot;&gt;Ondrej&lt;/a&gt;, &lt;a href=&quot;https://github.com/isuruf&quot;&gt;Isuru&lt;/a&gt; and &lt;a href=&quot;https://github.com/dilcom&quot;&gt;Ivan&lt;/a&gt; were the ones who helped me to solve them. If it weren’t for them, it would have taken me 2 more weeks to figure it out for myself. I can’t thank them enough. I would like to keep this post concise, so if you are curious about the errors you would like my previous posts under the tag &lt;a href=&quot;http://abinashmeher999.github.io/tag/GSoC-2015/&quot;&gt;GSoC-2015&lt;/a&gt;.&lt;/p&gt;
