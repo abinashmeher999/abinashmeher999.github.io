@@ -4,13 +4,99 @@
  <title>Mind Ramblings</title>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/atom.xml" rel="self"/>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/"/>
- <updated>2015-06-26T01:31:17+05:30</updated>
+ <updated>2015-06-26T19:54:39+05:30</updated>
  <id>http://abinashmeher999.github.io</id>
  <author>
    <name>Abinash Meher</name>
    <email>abinashdakshana999@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>The Symbol Class</title>
+   <link href="http://abinashmeher999.github.io/2015/06/26/the-symbol-class/"/>
+   <updated>2015-06-26T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/06/26/the-symbol-class</id>
+   <content type="html">&lt;p&gt;Hi everyone! The midterm evaluations for GSoC-2015 have arrived. These will last for about a week, in which we will be evaluated on the basis of our performance.&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;p&gt;Beginning of this week, I got my PR merged. I had 49 randomly ordered commits that I managed to squeeze into only 13! I can say I have got a very good hold of &lt;code&gt;git rebase -i&lt;/code&gt; by now.&lt;/p&gt;
+
+&lt;p&gt;This week was spent more towards developing the wrappers for &lt;code&gt;Symbol&lt;/code&gt; class, adding methods, writing tests and trying to find memory leaks. The obvious choice to detect memory leaks is Valgrind, but after using RSpec, I am looking for a more Rubyish way to detect memory leaks. I am still going through some guides on how to detect memory leaks, be it Valgrind or something else. Any suggestions will be really appreciated. You can review the work in my PR &lt;a href=&quot;https://github.com/sympy/symengine/pull/480&quot;&gt;#480 Support for Symbols in Ruby wrappers&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;One of the things I felt like worth writing in a blog post is as follows&lt;/p&gt;
+
+&lt;h2 id=&quot;inheritance-in-ruby-c-api&quot;&gt;Inheritance in Ruby C API&lt;/h2&gt;
+
+&lt;p&gt;We know how inheritance works in C++, if we have a class, say &lt;code&gt;SubC&lt;/code&gt;, that is the subclass of a particular class, say &lt;code&gt;C&lt;/code&gt;. When we make an object of the class &lt;code&gt;SubC&lt;/code&gt;, the constructor for the class &lt;code&gt;C&lt;/code&gt; is called first and then the constructor for &lt;code&gt;SubC&lt;/code&gt; along with the initialization that it might need to do. In Ruby, this happens in two steps. One is a method call to &lt;code&gt;.allocate&lt;/code&gt;, which is most of the time done internally, and then the method &lt;code&gt;.initialize&lt;/code&gt; to initialize the content of the object. So, when I was writing the wrappers for &lt;code&gt;Symbol&lt;/code&gt;, Isuru, one of my team-mates, raised this question. &lt;code&gt;Symbol&lt;/code&gt; is a subclass of &lt;code&gt;Basic&lt;/code&gt; and I have the code in&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Init_symengine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;m_symengine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rb_define_module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;SymEngine&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;sr&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Basic&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;c_basic&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rb_define_class_under&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m_symengine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Basic&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rb_cObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rb_define_alloc_func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c_basic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cbasic_alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;sr&quot;&gt;//&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Symbol&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;c_symbol&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rb_define_class_under&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m_symengine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Symbol&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c_basic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;rb_define_alloc_func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c_symbol&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;csymbol_alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now overloading the &lt;code&gt;allocate&lt;/code&gt; method through the C API to set the custom allocate function has been deprecated and it is advised to use the &lt;code&gt;rb_define_alloc_func&lt;/code&gt; now. In the method, &lt;code&gt;rb_define_class_under&lt;/code&gt;, the third argument is the name of the base class. So the doubt was, will the function &lt;code&gt;cbasic_alloc&lt;/code&gt; be called along with &lt;code&gt;csymbol_alloc&lt;/code&gt;, since &lt;code&gt;Basic&lt;/code&gt; is the base class for &lt;code&gt;Symbol&lt;/code&gt;? And also &lt;code&gt;csymbol_alloc&lt;/code&gt; did nothing but called the &lt;code&gt;cbasic_alloc&lt;/code&gt; function inside it. So, will the function be called twice.&lt;/p&gt;
+
+&lt;p&gt;To get the answer, I tried searching on the internet and tried reading the source code, but couldn’t make much sense out of it. Neither anyone had made such classes and wrote about how they behave.&lt;/p&gt;
+
+&lt;p&gt;So, I got the function &lt;code&gt;cbasic_alloc&lt;/code&gt; to print ‘basic object allocated’ everytime it got called.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;n&quot;&gt;VALUE&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;cbasic_alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;VALUE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;klass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;VALUE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;basic_struct&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;struct_ptr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Data_Make_Struct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;klass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;basic_struct&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cbasic_free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;struct_ptr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;struct_ptr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;basic object allocated&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;obj&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now normally, expecting the same behaviour as C++ in C API, one would expect to see the message printed twice when a &lt;code&gt;Symbol&lt;/code&gt; object was created, but that’s not what I got.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;//&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rspec spec --format documentation
+SymEngine
+  SymEngine::Basic
+    .new
+      with no arguments
+basic object allocated
+        returns a Basic object
+
+SymEngine
+  SymEngine::Symbol
+    .new
+      with an integer as an argument
+basic object allocated
+        returns a Symbol object
+    binary operations&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Only &lt;code&gt;csymbol_alloc&lt;/code&gt; was called when &lt;code&gt;Symbol&lt;/code&gt; was instantiated. Maybe the sole responsibility to create an object is given to the function passed. The parameter passed as the base class might only be for identification in Ruby that what is a subclass of whom.&lt;/p&gt;
+
+&lt;p&gt;Soon, I will be adding support for &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes after which you will be able to form expressions using integers like &lt;code&gt;(x+y)**2&lt;/code&gt; instead of &lt;code&gt;(x+y)*(x+y)&lt;/code&gt;. You can follow the work in the PR &lt;a href=&quot;https://github.com/sympy/symengine/pull/487&quot;&gt;#487 Support for Integer and Rational classes in Ruby wrappers&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;next-week&quot;&gt;Next Week&lt;/h3&gt;
+&lt;p&gt;The plan for next week is to completely support &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes along with automation of testing for memory leaks. I don’t even know, if it would be feasible to integrate testing of memory leaks to &lt;em&gt;Continuous-Integration&lt;/em&gt;, but it’s a worth a shot. It will be very convenient to have an alert system that warns you about memory leaks everytime you push the code.&lt;/p&gt;
+
+&lt;h2 id=&quot;commits&quot;&gt;Commits&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Added source files for symbol&lt;/li&gt;
+  &lt;li&gt;Added expand method to Basic&lt;/li&gt;
+  &lt;li&gt;Added the to_s method that returns the string rep returns the string representation&lt;/li&gt;
+  &lt;li&gt;Added the tests for symbol from basic&lt;/li&gt;
+  &lt;li&gt;Moved the symbol related files to symengine/ruby&lt;/li&gt;
+  &lt;li&gt;Rearranged the tests betn Symbol and Basic, Corrected the descriptions&lt;/li&gt;
+  &lt;li&gt;Added the &lt;code&gt;==&lt;/code&gt; operator for Basic class Added test for &lt;code&gt;==&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Added method &lt;code&gt;!=&lt;/code&gt; in Basic&lt;/li&gt;
+  &lt;li&gt;Added &lt;code&gt;alloc_func&lt;/code&gt; and removed repetitive headers&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Instantiating a Basic object</title>
