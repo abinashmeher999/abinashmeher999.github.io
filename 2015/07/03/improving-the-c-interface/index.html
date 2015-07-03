@@ -173,7 +173,10 @@
 </span></small>
 <p>Hello! I am halfway through my project. I can’t say that I achieved what I aimed to, but all the things that pushed this further weren’t delays, they needed to be done. The few things that were delays taught me a lot. They were worth the effort to lay a strong foundation. It has been an amazing learning experience, and makes me even more excited for what’s to come.</p>
 
-<p>Anyways, I will summarize what I did this week.<!--more--> While the plan was to develop and add the feature for <code>Integer</code> and <code>Rational</code> and automating memory leak checks, it took a turn towards improving the current <code>C</code> interface. While writing the c wrapper code for the function <code>SymEngine::free_symbols</code>, the task was to transfer the information that was in C++ datatype to something in C so that is accessible in C. The return type of the C++ functions were a <code>std::vector</code> in one case and <code>std::set</code> in other. The obvious idea that came to my mind was to map them to an array of pointers that pointed to these data. This idea was also a result of us using <code>reinterpret_cast</code> to change the pointer type to another while transfering from <code>C++</code> to <code>C</code> and back to <code>C++</code>. This was obviously not a good approach as there were too many pointers and they created very hard to correct errors in the code.</p>
+<p>Anyways, I will summarize what I did this week.<!--more--></p>
+
+<h2 id="improved-c-interface">Improved C Interface</h2>
+<p>While the plan was to develop and add the feature for <code>Integer</code> and <code>Rational</code> and automating memory leak checks, it took a turn towards improving the current <code>C</code> interface. While writing the c wrapper code for the function <code>SymEngine::free_symbols</code>, the task was to transfer the information that was in C++ datatype to something in C so that is accessible in C. The return type of the C++ functions were a <code>std::vector</code> in one case and <code>std::set</code> in other. The obvious idea that came to my mind was to map them to an array of pointers that pointed to these data. This idea was also a result of us using <code>reinterpret_cast</code> to change the pointer type to another while transfering from <code>C++</code> to <code>C</code> and back to <code>C++</code>. This was obviously not a good approach as there were too many pointers and they created very hard to correct errors in the code.</p>
 
 <p>Ondrej came across this <a href="http://yosefk.com/c++fqa/fqa.html#fqa-32.8">link</a>. And suggested we adopt this method, as it was a really elegant solution for this.</p>
 
@@ -200,14 +203,18 @@
 
 <p>You can find the details of our implementation by my mentor, Ondrej Certik  <a href="https://github.com/sympy/symengine/pull/495">here</a>.</p>
 
+<h3 id="iruby-notebook">IRuby notebook</h3>
 <p>I have also prepared an IRuby notebook that will serve as a beginner notebook to get familiar with the gem. You can find it <a href="https://github.com/sympy/symengine/pull/489">here</a>. It contains only what the gem supports right now. I will add more notebooks as I add more features.</p>
 
+<h3 id="checking-for-memory-leaks">Checking for memory leaks</h3>
 <p>As I had mentioned in my plan for the last week, I did search for ways to automate checking for memory leaks. I have come across many tools for checking for memory leaks in Ruby, but for testing the <code>C</code> extensions, <code>Valgrind</code> and <code>gdb</code> are the ones that almost all of the blogs suggest. I have explained how I plan to proceed in the issue <a href="https://github.com/sympy/symengine/issues/501">Checking Ruby C Extensions for memory leaks. #501</a>.</p>
 
 <p>It is really difficult to check for memory leaks even by ourselves, after seeing the output. I came to the conclusion that it will be very difficult to write a script that can check for memory leaks during the Continuous-Integration using Travis-CI, which was part of the initial plan. So, I have decided to automate checking of memory leaks by <code>Valgrind</code> and <code>gdb</code> from <code>rake</code>, and this will only ease the plan of launching the debugging session. This way developer will have to launch the tasks and manually go through the report to debug it, before pushing the code to be assured that it is free of memory leaks.</p>
 
+<h3 id="integration-of-other-ruby-gems">Integration of other ruby gems</h3>
 <p>I also have plans to integrate the ruby bindings for <code>gmp</code>, <code>mpfr</code> and <code>mpc</code> libraries, that are already available as gems, with ruby bindings for our library. I have created an issue <a href="https://github.com/sympy/symengine/issues/490">here</a>. Feel free to drop any suggestions.</p>
 
+<h2 id="next-week">Next week</h2>
 <p>The plan for the next week includes complete refactoring of the Ruby C API according to the new improved interface, setting up of rake tasks to detect memory leaks and add support for <code>Integer</code> and <code>Rational</code> classes.</p>
 
 <h2 id="commits">Commits</h2>

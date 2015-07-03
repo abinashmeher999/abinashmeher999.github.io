@@ -3,7 +3,7 @@
 <title>Mind Ramblings - GSoC-2015</title>
 <link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.xml" rel="self"/>
 <link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.html"/>
- <updated>2015-07-04T02:45:48+05:30</updated>
+ <updated>2015-07-04T02:52:03+05:30</updated>
  <id>http://abinashmeher999.github.io/tag/GSoC-2015.html</id>
  <author>
  <name>Abinash Meher</name>
@@ -16,7 +16,10 @@
    <id>http://abinashmeher999.github.io/2015/07/03/improving-the-c-interface</id>
    <content type="html">&lt;p&gt;Hello! I am halfway through my project. I can’t say that I achieved what I aimed to, but all the things that pushed this further weren’t delays, they needed to be done. The few things that were delays taught me a lot. They were worth the effort to lay a strong foundation. It has been an amazing learning experience, and makes me even more excited for what’s to come.&lt;/p&gt;
 
-&lt;p&gt;Anyways, I will summarize what I did this week.&lt;!--more--&gt; While the plan was to develop and add the feature for &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; and automating memory leak checks, it took a turn towards improving the current &lt;code&gt;C&lt;/code&gt; interface. While writing the c wrapper code for the function &lt;code&gt;SymEngine::free_symbols&lt;/code&gt;, the task was to transfer the information that was in C++ datatype to something in C so that is accessible in C. The return type of the C++ functions were a &lt;code&gt;std::vector&lt;/code&gt; in one case and &lt;code&gt;std::set&lt;/code&gt; in other. The obvious idea that came to my mind was to map them to an array of pointers that pointed to these data. This idea was also a result of us using &lt;code&gt;reinterpret_cast&lt;/code&gt; to change the pointer type to another while transfering from &lt;code&gt;C++&lt;/code&gt; to &lt;code&gt;C&lt;/code&gt; and back to &lt;code&gt;C++&lt;/code&gt;. This was obviously not a good approach as there were too many pointers and they created very hard to correct errors in the code.&lt;/p&gt;
+&lt;p&gt;Anyways, I will summarize what I did this week.&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;improved-c-interface&quot;&gt;Improved C Interface&lt;/h2&gt;
+&lt;p&gt;While the plan was to develop and add the feature for &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; and automating memory leak checks, it took a turn towards improving the current &lt;code&gt;C&lt;/code&gt; interface. While writing the c wrapper code for the function &lt;code&gt;SymEngine::free_symbols&lt;/code&gt;, the task was to transfer the information that was in C++ datatype to something in C so that is accessible in C. The return type of the C++ functions were a &lt;code&gt;std::vector&lt;/code&gt; in one case and &lt;code&gt;std::set&lt;/code&gt; in other. The obvious idea that came to my mind was to map them to an array of pointers that pointed to these data. This idea was also a result of us using &lt;code&gt;reinterpret_cast&lt;/code&gt; to change the pointer type to another while transfering from &lt;code&gt;C++&lt;/code&gt; to &lt;code&gt;C&lt;/code&gt; and back to &lt;code&gt;C++&lt;/code&gt;. This was obviously not a good approach as there were too many pointers and they created very hard to correct errors in the code.&lt;/p&gt;
 
 &lt;p&gt;Ondrej came across this &lt;a href=&quot;http://yosefk.com/c++fqa/fqa.html#fqa-32.8&quot;&gt;link&lt;/a&gt;. And suggested we adopt this method, as it was a really elegant solution for this.&lt;/p&gt;
 
@@ -43,14 +46,18 @@
 
 &lt;p&gt;You can find the details of our implementation by my mentor, Ondrej Certik  &lt;a href=&quot;https://github.com/sympy/symengine/pull/495&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
+&lt;h3 id=&quot;iruby-notebook&quot;&gt;IRuby notebook&lt;/h3&gt;
 &lt;p&gt;I have also prepared an IRuby notebook that will serve as a beginner notebook to get familiar with the gem. You can find it &lt;a href=&quot;https://github.com/sympy/symengine/pull/489&quot;&gt;here&lt;/a&gt;. It contains only what the gem supports right now. I will add more notebooks as I add more features.&lt;/p&gt;
 
+&lt;h3 id=&quot;checking-for-memory-leaks&quot;&gt;Checking for memory leaks&lt;/h3&gt;
 &lt;p&gt;As I had mentioned in my plan for the last week, I did search for ways to automate checking for memory leaks. I have come across many tools for checking for memory leaks in Ruby, but for testing the &lt;code&gt;C&lt;/code&gt; extensions, &lt;code&gt;Valgrind&lt;/code&gt; and &lt;code&gt;gdb&lt;/code&gt; are the ones that almost all of the blogs suggest. I have explained how I plan to proceed in the issue &lt;a href=&quot;https://github.com/sympy/symengine/issues/501&quot;&gt;Checking Ruby C Extensions for memory leaks. #501&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;It is really difficult to check for memory leaks even by ourselves, after seeing the output. I came to the conclusion that it will be very difficult to write a script that can check for memory leaks during the Continuous-Integration using Travis-CI, which was part of the initial plan. So, I have decided to automate checking of memory leaks by &lt;code&gt;Valgrind&lt;/code&gt; and &lt;code&gt;gdb&lt;/code&gt; from &lt;code&gt;rake&lt;/code&gt;, and this will only ease the plan of launching the debugging session. This way developer will have to launch the tasks and manually go through the report to debug it, before pushing the code to be assured that it is free of memory leaks.&lt;/p&gt;
 
+&lt;h3 id=&quot;integration-of-other-ruby-gems&quot;&gt;Integration of other ruby gems&lt;/h3&gt;
 &lt;p&gt;I also have plans to integrate the ruby bindings for &lt;code&gt;gmp&lt;/code&gt;, &lt;code&gt;mpfr&lt;/code&gt; and &lt;code&gt;mpc&lt;/code&gt; libraries, that are already available as gems, with ruby bindings for our library. I have created an issue &lt;a href=&quot;https://github.com/sympy/symengine/issues/490&quot;&gt;here&lt;/a&gt;. Feel free to drop any suggestions.&lt;/p&gt;
 
+&lt;h2 id=&quot;next-week&quot;&gt;Next week&lt;/h2&gt;
 &lt;p&gt;The plan for the next week includes complete refactoring of the Ruby C API according to the new improved interface, setting up of rake tasks to detect memory leaks and add support for &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes.&lt;/p&gt;
 
 &lt;h2 id=&quot;commits&quot;&gt;Commits&lt;/h2&gt;
