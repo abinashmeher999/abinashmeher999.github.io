@@ -3,11 +3,40 @@
 <title>Mind Ramblings - GSoC-2015</title>
 <link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.xml" rel="self"/>
 <link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.html"/>
- <updated>2015-07-04T02:52:03+05:30</updated>
+ <updated>2015-07-11T03:34:45+05:30</updated>
  <id>http://abinashmeher999.github.io/tag/GSoC-2015.html</id>
  <author>
  <name>Abinash Meher</name>
  </author>
+ 
+ <entry>
+   <title>Integer and Rational classes</title>
+   <link href="http://abinashmeher999.github.io/2015/07/10/integer-and-rational-classes/"/>
+   <updated>2015-07-10T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.io/2015/07/10/integer-and-rational-classes</id>
+   <content type="html">&lt;p&gt;Hola! The refactoring of the C Interface has been done, and I did figure out how to test the Ruby bindings with the help of &lt;code&gt;Valgrind&lt;/code&gt; and without the &lt;code&gt;rake-tester&lt;/code&gt; gem.&lt;!--more--&gt; It needs a bunch a flags to tell the tool that it’s ok the way ruby accesses memory, and that the warnings can be &lt;em&gt;suppressed&lt;/em&gt;. Still, to be sure that the memory leaks that we see in the report/output are all good memory leaks we need to execute the tests in a loop. Which is pending. I have a &lt;code&gt;arit_spec.rb&lt;/code&gt; that reproduces the test cases from &lt;code&gt;test_arit.py&lt;/code&gt;, the python test file for testing the python wrappers.&lt;/p&gt;
+
+&lt;p&gt;I am still debugging the errors in the wrappers for &lt;code&gt;get_args&lt;/code&gt; and &lt;code&gt;free_symbols&lt;/code&gt;. The test &lt;code&gt;arit_spec.rb&lt;/code&gt; depends on it. Only then I can maybe run them in a loop. I am still not yet sure how to run rspec tests in a loop. Shouldn’t be that complex. My closest guess is that, it might be because of a premature GC collection. We do have &lt;code&gt;RB_GC_GUARD&lt;/code&gt; for that in the Ruby C API. I came to this conclusion, since it wasn’t solved even after we implemented the functions to allocate &lt;code&gt;basic&lt;/code&gt; in a heap and rectified the possible errors in the C API code.&lt;/p&gt;
+
+&lt;p&gt;I decided to come back to the error after I made some progress with the &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes. I think I made the wrong decision, I should have resolved that earlier error first. But good thing is, I have figured out the way I can use polymorphism(mixins, and overloading) and function overloading(decide inside a single function definition by switch) in them. I need the method &lt;code&gt;get_type_code&lt;/code&gt; for that so that in the function I can call the method to know the type of the VALUE that has been passed to the function inside the C API code(objects made with &lt;code&gt;Data_Wrap_Struct&lt;/code&gt; have the data type as &lt;code&gt;T_DATA&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h2 id=&quot;next-week&quot;&gt;Next Week&lt;/h2&gt;
+&lt;p&gt;I will make the script that will run the tests in the loop to check for memory leaks. And get my other unmerged PRs merged, they have been there for a long time now. Then, implement the ways that I mentioned above in the &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes. These will also require modifying the existing tested code for arithmetic operations. This is why, I would get the other PRs get merged first. Things have turned a little bit dependent on each other.&lt;/p&gt;
+
+&lt;h2 id=&quot;commits&quot;&gt;Commits&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Moved TypeIDs to a common header for both C &amp;amp; C++&lt;/li&gt;
+  &lt;li&gt;Attempt to use TypeID in cwrapper files&lt;/li&gt;
+  &lt;li&gt;[ci skip] rectified indentation in Ruby files&lt;/li&gt;
+  &lt;li&gt;Removed old defs: free_symbols &amp;amp; get_args in Cwrp&lt;/li&gt;
+  &lt;li&gt;Added setbasic_get in cwrappers&lt;/li&gt;
+  &lt;li&gt;Added &lt;code&gt;#free_symbols&lt;/code&gt; to Basic class, tests fail&lt;/li&gt;
+  &lt;li&gt;Added method &lt;code&gt;#args&lt;/code&gt; to Basic, tests don’t pass&lt;/li&gt;
+  &lt;li&gt;args &amp;amp; free_symbols return basic allocated on heap&lt;/li&gt;
+  &lt;li&gt;Fixed Typo in &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; headers&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Improving the C Interface</title>

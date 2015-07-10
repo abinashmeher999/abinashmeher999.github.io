@@ -11,7 +11,7 @@
 
   <title>
     
-      Improving the C Interface &middot; Mind Ramblings
+      Integer and Rational classes &middot; Mind Ramblings
     
   </title>
 
@@ -151,8 +151,8 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">Improving the C Interface</h1>
-  <span class="post-date">03 Jul 2015
+  <h1 class="post-title">Integer and Rational classes</h1>
+  <span class="post-date">10 Jul 2015
   </span>
   <small><span class="post-tag">
       
@@ -171,61 +171,26 @@
         
       
 </span></small>
-<p>Hello! I am halfway through my project. I can’t say that I achieved what I aimed to, but all the things that pushed this further weren’t delays, they needed to be done. The few things that were delays taught me a lot. They were worth the effort to lay a strong foundation. It has been an amazing learning experience, and makes me even more excited for what’s to come.</p>
+<p>Hola! The refactoring of the C Interface has been done, and I did figure out how to test the Ruby bindings with the help of <code>Valgrind</code> and without the <code>rake-tester</code> gem.<!--more--> It needs a bunch a flags to tell the tool that it’s ok the way ruby accesses memory, and that the warnings can be <em>suppressed</em>. Still, to be sure that the memory leaks that we see in the report/output are all good memory leaks we need to execute the tests in a loop. Which is pending. I have a <code>arit_spec.rb</code> that reproduces the test cases from <code>test_arit.py</code>, the python test file for testing the python wrappers.</p>
 
-<p>Anyways, I will summarize what I did this week.<!--more--></p>
+<p>I am still debugging the errors in the wrappers for <code>get_args</code> and <code>free_symbols</code>. The test <code>arit_spec.rb</code> depends on it. Only then I can maybe run them in a loop. I am still not yet sure how to run rspec tests in a loop. Shouldn’t be that complex. My closest guess is that, it might be because of a premature GC collection. We do have <code>RB_GC_GUARD</code> for that in the Ruby C API. I came to this conclusion, since it wasn’t solved even after we implemented the functions to allocate <code>basic</code> in a heap and rectified the possible errors in the C API code.</p>
 
-<h2 id="improved-c-interface">Improved C Interface</h2>
-<p>While the plan was to develop and add the feature for <code>Integer</code> and <code>Rational</code> and automating memory leak checks, it took a turn towards improving the current <code>C</code> interface. While writing the c wrapper code for the function <code>SymEngine::free_symbols</code>, the task was to transfer the information that was in C++ datatype to something in C so that is accessible in C. The return type of the C++ functions were a <code>std::vector</code> in one case and <code>std::set</code> in other. The obvious idea that came to my mind was to map them to an array of pointers that pointed to these data. This idea was also a result of us using <code>reinterpret_cast</code> to change the pointer type to another while transfering from <code>C++</code> to <code>C</code> and back to <code>C++</code>. This was obviously not a good approach as there were too many pointers and they created very hard to correct errors in the code.</p>
+<p>I decided to come back to the error after I made some progress with the <code>Integer</code> and <code>Rational</code> classes. I think I made the wrong decision, I should have resolved that earlier error first. But good thing is, I have figured out the way I can use polymorphism(mixins, and overloading) and function overloading(decide inside a single function definition by switch) in them. I need the method <code>get_type_code</code> for that so that in the function I can call the method to know the type of the VALUE that has been passed to the function inside the C API code(objects made with <code>Data_Wrap_Struct</code> have the data type as <code>T_DATA</code>).</p>
 
-<p>Ondrej came across this <a href="http://yosefk.com/c++fqa/fqa.html#fqa-32.8">link</a>. And suggested we adopt this method, as it was a really elegant solution for this.</p>
-
-<p>The C interface now is lot more simplified. We declare the struct in the header file whereas the definition is done in the source file. The source file can indeed use <code>C++</code>. The header file is like this</p>
-
-<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">//File: cwrapper.h</span>
-<span class="k">typedef</span> <span class="k">struct</span> <span class="n">Ctypename</span> <span class="n">Ctypename</span><span class="p">;</span>
-<span class="kt">void</span> <span class="nf">typename_func</span><span class="p">(</span><span class="n">Ctypename</span> <span class="o">*</span><span class="n">self</span><span class="p">);</span></code></pre></div>
-
-<p>And the source file is like this</p>
-
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="c1">//File: cwrapper.cpp</span>
-<span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="p">{</span>
-
-<span class="k">struct</span> <span class="n">Ctypename</span> <span class="p">{</span>
-    <span class="n">Cpptype</span> <span class="n">data</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">typename_func</span><span class="p">(</span><span class="n">Ctypename</span> <span class="o">*</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">self</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">.</span><span class="n">func_call</span><span class="p">();</span>
-<span class="p">}</span></code></pre></div>
-
-<p>Elegant! Isn’t it?</p>
-
-<p>You can find the details of our implementation by my mentor, Ondrej Certik  <a href="https://github.com/sympy/symengine/pull/495">here</a>.</p>
-
-<h3 id="iruby-notebook">IRuby notebook</h3>
-<p>I have also prepared an IRuby notebook that will serve as a beginner notebook to get familiar with the gem. You can find it <a href="https://github.com/sympy/symengine/pull/489">here</a>. It contains only what the gem supports right now. I will add more notebooks as I add more features.</p>
-
-<h3 id="checking-for-memory-leaks">Checking for memory leaks</h3>
-<p>As I had mentioned in my plan for the last week, I did search for ways to automate checking for memory leaks. I have come across many tools for checking for memory leaks in Ruby, but for testing the <code>C</code> extensions, <code>Valgrind</code> and <code>gdb</code> are the ones that almost all of the blogs suggest. I have explained how I plan to proceed in the issue <a href="https://github.com/sympy/symengine/issues/501">Checking Ruby C Extensions for memory leaks. #501</a>.</p>
-
-<p>It is really difficult to check for memory leaks even by ourselves, after seeing the output. I came to the conclusion that it will be very difficult to write a script that can check for memory leaks during the Continuous-Integration using Travis-CI, which was part of the initial plan. So, I have decided to automate checking of memory leaks by <code>Valgrind</code> and <code>gdb</code> from <code>rake</code>, and this will only ease the plan of launching the debugging session. This way developer will have to launch the tasks and manually go through the report to debug it, before pushing the code to be assured that it is free of memory leaks.</p>
-
-<h3 id="integration-of-other-ruby-gems">Integration of other ruby gems</h3>
-<p>I also have plans to integrate the ruby bindings for <code>gmp</code>, <code>mpfr</code> and <code>mpc</code> libraries, that are already available as gems, with ruby bindings for our library. I have created an issue <a href="https://github.com/sympy/symengine/issues/490">here</a>. Feel free to drop any suggestions.</p>
-
-<h2 id="next-week">Next week</h2>
-<p>The plan for the next week includes complete refactoring of the Ruby C API according to the new improved interface, setting up of rake tasks to detect memory leaks and add support for <code>Integer</code> and <code>Rational</code> classes.</p>
+<h2 id="next-week">Next Week</h2>
+<p>I will make the script that will run the tests in the loop to check for memory leaks. And get my other unmerged PRs merged, they have been there for a long time now. Then, implement the ways that I mentioned above in the <code>Integer</code> and <code>Rational</code> classes. These will also require modifying the existing tested code for arithmetic operations. This is why, I would get the other PRs get merged first. Things have turned a little bit dependent on each other.</p>
 
 <h2 id="commits">Commits</h2>
 <ul>
-  <li>Added a beginner IRuby notebook</li>
-  <li>Removed IRuby dependency from gemspec</li>
-  <li>Added the <code>#to_iruby</code> method</li>
-  <li>Added C wrapper for free_symbols</li>
-  <li>Added Ruby wrapper for <code>#free_symbols</code></li>
-  <li>Added C wrapper for Basic::get_args</li>
-  <li>Refactored CRCPBasic in C wrappers and tests</li>
+  <li>Moved TypeIDs to a common header for both C &amp; C++</li>
+  <li>Attempt to use TypeID in cwrapper files</li>
+  <li>[ci skip] rectified indentation in Ruby files</li>
+  <li>Removed old defs: free_symbols &amp; get_args in Cwrp</li>
+  <li>Added setbasic_get in cwrappers</li>
+  <li>Added <code>#free_symbols</code> to Basic class, tests fail</li>
+  <li>Added method <code>#args</code> to Basic, tests don’t pass</li>
+  <li>args &amp; free_symbols return basic allocated on heap</li>
+  <li>Fixed Typo in <code>Integer</code> and <code>Rational</code> headers</li>
 </ul>
 
   <hr class="hr1">
@@ -264,9 +229,9 @@
     
       <li>
         <h3>
-          <a href="http://abinashmeher999.github.io/2015/07/10/integer-and-rational-classes/">
-            Integer and Rational classes
-            <small>10 Jul 2015</small>
+          <a href="http://abinashmeher999.github.io/2015/07/03/improving-the-c-interface/">
+            Improving the C Interface
+            <small>03 Jul 2015</small>
           </a>
         </h3>
       </li>
