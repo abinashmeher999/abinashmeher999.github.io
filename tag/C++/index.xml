@@ -3,11 +3,83 @@
 <title>Mind Ramblings - C++</title>
 <link href="http://abinashmeher999.github.io/tag/C++/index.xml" rel="self"/>
 <link href="http://abinashmeher999.github.io/tag/C++/index.html"/>
- <updated>2015-07-11T03:34:45+05:30</updated>
+ <updated>2015-07-18T09:54:13+05:30</updated>
  <id>http://abinashmeher999.github.io/tag/C++.html</id>
  <author>
  <name>Abinash Meher</name>
  </author>
+ 
+ <entry>
+   <title>Common Enumeration in C and C++</title>
+   <link href="http://abinashmeher999.github.io/2015/07/17/common-enumeration-in-c-and-c++/"/>
+   <updated>2015-07-17T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.io/2015/07/17/common-enumeration-in-c-and-c++</id>
+   <content type="html">&lt;p&gt;Welcome back! Well, I did most of my pending PRs merged last week, but I won’t go as far to say I was at my full efficiency. I indeed got entangled in some work and it distracted a lot. Good news is &lt;code&gt;Symbol&lt;/code&gt; is now officially supported in SymEngine ruby bindings and can be played with from the latest master&lt;/p&gt;
+
+&lt;p&gt;In this post, I would like to concentrate more on a hack that we used to use &lt;code&gt;enum&lt;/code&gt;s in both &lt;code&gt;C&lt;/code&gt; and &lt;code&gt;C++&lt;/code&gt;,&lt;!--more--&gt; that too within namespaces(within C you say? kinda.), so that they don’t possibly conflict with anything. We automated the whole thing .We instantly saw the benefit. We used the same approach for writing the same repetitive method for all classes and we came to know that we had somehow missed a method from a class.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-file-that-has-the-list&quot;&gt;The File that has the list&lt;/h1&gt;
+&lt;p&gt;There has to be a file enlisting all the classes,&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//File: type_codes.inc&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;SYMENGINE_ENUM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BASIC&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;SYMENGINE_ENUM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;INTEGER&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;SYMENGINE_ENUM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RATIONAL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//more 47 lines...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;in-the-c-implementation-file&quot;&gt;In the C implementation file&lt;/h1&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//File: cwrapper.h&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;#define SYMENGINE_ENUM(type) SYMENGINE_##type&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;#include &amp;quot;symengine/type_codes.inc&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;#undef SYMENGINE_ENUM&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;SYMENGINE_TypeID_Count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TypeID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;in-the-c-implementation-file-1&quot;&gt;In the C++ implementation file&lt;/h1&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//File: basic.h&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;TypeID&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;#define SYMENGINE_ENUM(type) type&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;#include &amp;quot;symengine/type_codes.inc&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;cp&quot;&gt;#undef SYMENGINE_ENUM&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// The &amp;#39;TypeID_Count&amp;#39; returns the number of elements in &amp;#39;TypeID&amp;#39;. For this&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// to work, do not assign numbers to the elements above (or if you do, you&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// must assign the correct count below).&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;TypeID_Count&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is really an elegant solution. This can also be extended to all the other situations where you want to define or do the same thing for all the classes. You just need to enlist them at a certain place and use macros to generate/automate the process of writing the methods. You add a class and those methods get define for the class.&lt;/p&gt;
+
+&lt;p&gt;I would highly suggest you to have a look at &lt;a href=&quot;https://github.com/sympy/symengine/issues/520&quot;&gt;Issue#520&lt;/a&gt; and &lt;a href=&quot;https://github.com/sympy/symengine/pull/540&quot;&gt;PR#540&lt;/a&gt; to have a look at how we extended this approach to automate the long and WET code in &lt;code&gt;Visitor&lt;/code&gt; and &lt;code&gt;BaseVisitor&lt;/code&gt; classes.&lt;/p&gt;
+
+&lt;h2 id=&quot;next-week&quot;&gt;Next Week&lt;/h2&gt;
+&lt;p&gt;I will try my best to get &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; to get merged during the weekend and during the week I can focus on the &lt;code&gt;Complex&lt;/code&gt; class. Also, next week I will focus on unwrapping the data from &lt;code&gt;gmp&lt;/code&gt; gem. We use it with SymEngine then why not with its Ruby bindings.&lt;/p&gt;
+
+&lt;h2 id=&quot;commits&quot;&gt;Commits&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Refactored ruby/ext src files to use basic_new_heap&lt;/li&gt;
+  &lt;li&gt;eq() and neq() use the new func sign after PR#508&lt;/li&gt;
+  &lt;li&gt;Overrid &lt;code&gt;#eql?&lt;/code&gt;, &lt;code&gt;#hash&lt;/code&gt; in Basic to compare sets&lt;/li&gt;
+  &lt;li&gt;Used basic_new_heap &amp;amp; Data_Wrap_Struct in alloc_func&lt;/li&gt;
+  &lt;li&gt;Removed csymbol_alloc and alloc_func&lt;/li&gt;
+  &lt;li&gt;Removed cbasic_init, uses default new now&lt;/li&gt;
+  &lt;li&gt;Fixed typo in cwrapper&lt;/li&gt;
+  &lt;li&gt;Added the C wrapper &amp;amp; its tests for Basic hash&lt;/li&gt;
+  &lt;li&gt;Added the Ruby wrappers for hash&lt;/li&gt;
+  &lt;li&gt;Changed implementation of basic_hash in cwrapper&lt;/li&gt;
+  &lt;li&gt;Enum-Class mapping, selective exclude in type_codes.inc&lt;/li&gt;
+  &lt;li&gt;Refactored for new SYMENGINE_ENUM macro signature&lt;/li&gt;
+  &lt;li&gt;Used type_codes.inc to simplify code in visitor.h&lt;/li&gt;
+  &lt;li&gt;Configured spec_helper to work with test_unit&lt;/li&gt;
+  &lt;li&gt;Added test-unit as development dependency&lt;/li&gt;
+  &lt;li&gt;Added script to test with valgrind&lt;/li&gt;
+  &lt;li&gt;Added script to test with callgrind tool&lt;/li&gt;
+  &lt;li&gt;Updated .gitignore&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Special semantics for arrow`->` operator and dot`.` operator in C++</title>

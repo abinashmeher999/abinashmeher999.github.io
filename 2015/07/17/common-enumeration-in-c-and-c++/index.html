@@ -11,7 +11,7 @@
 
   <title>
     
-      Special semantics for arrow`->` operator and dot`.` operator in C++ &middot; Mind Ramblings
+      Common Enumeration in C and C++ &middot; Mind Ramblings
     
   </title>
 
@@ -155,10 +155,31 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">Special semantics for arrow`->` operator and dot`.` operator in C++</h1>
-  <span class="post-date">20 Apr 2015
+  <h1 class="post-title">Common Enumeration in C and C++</h1>
+  <span class="post-date">17 Jul 2015
   </span>
   <small><span class="post-tag">
+      
+        
+          <a href="http://abinashmeher999.github.io/tag/GSoC-2015">
+            GSoC-2015
+          </a>
+          &middot;
+        
+      
+        
+          <a href="http://abinashmeher999.github.io/tag/SymEngine">
+            SymEngine
+          </a>
+          &middot;
+        
+      
+        
+          <a href="http://abinashmeher999.github.io/tag/C">
+            C
+          </a>
+          &middot;
+        
       
         
           <a href="http://abinashmeher999.github.io/tag/C++">
@@ -168,45 +189,70 @@
         
       
 </span></small>
-<p>Ever tried to overload <code>operator-&gt;</code>? If you haven’t, let me tell you this doesn’t work like other overloaded operators.<!--more--></p>
+<p>Welcome back! Well, I did most of my pending PRs merged last week, but I won’t go as far to say I was at my full efficiency. I indeed got entangled in some work and it distracted a lot. Good news is <code>Symbol</code> is now officially supported in SymEngine ruby bindings and can be played with from the latest master</p>
 
-<p>For example let us take an operator like <code>operator*</code>. What do you expect this to return? Lets say we have a pointer to <code>class A</code>, <code>ptr_a</code>. The <code>operator*</code> is already overloaded in <code>class A</code>. What would <code>(*ptr_a).foo();</code> return?</p>
+<p>In this post, I would like to concentrate more on a hack that we used to use <code>enum</code>s in both <code>C</code> and <code>C++</code>,<!--more--> that too within namespaces(within C you say? kinda.), so that they don’t possibly conflict with anything. We automated the whole thing .We instantly saw the benefit. We used the same approach for writing the same repetitive method for all classes and we came to know that we had somehow missed a method from a class.</p>
 
-<p>By simple logic, <code>*ptr_a</code> will return the reference to the object <code>ptr_a</code> points to(say <code>obj_a</code>). And as expected the statement will execute as <code>(obj_a).foo()</code>.</p>
+<h1 id="the-file-that-has-the-list">The File that has the list</h1>
+<p>There has to be a file enlisting all the classes,</p>
 
-<p>However, this logic doesn’t apply to the <code>operator-&gt;()</code>. As quoted from stack overflow,</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">//File: type_codes.inc</span>
+<span class="n">SYMENGINE_ENUM</span><span class="p">(</span><span class="n">BASIC</span><span class="p">),</span>
+<span class="n">SYMENGINE_ENUM</span><span class="p">(</span><span class="n">INTEGER</span><span class="p">),</span>
+<span class="n">SYMENGINE_ENUM</span><span class="p">(</span><span class="n">RATIONAL</span><span class="p">),</span>
+<span class="c1">//more 47 lines...</span></code></pre></div>
 
-<blockquote>
-The <code>operator-&gt;</code> has special semantics in the language in that, when overloaded, it reapplies itself to the result. While the rest of the operators are applied only once, <code>operator-&gt;</code> will be applied by the compiler as many times as needed to get to a raw pointer and once more to access the memory referred by that pointer.
+<h1 id="in-the-c-implementation-file">In the C implementation file</h1>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="n">A</span> <span class="p">{</span> <span class="kt">void</span> <span class="n">foo</span><span class="p">();</span> <span class="p">};</span>
-<span class="k">struct</span> <span class="n">B</span> <span class="p">{</span> <span class="n">A</span><span class="o">*</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">();</span> <span class="p">};</span>
-<span class="k">struct</span> <span class="n">C</span> <span class="p">{</span> <span class="n">B</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">();</span> <span class="p">};</span>
-<span class="k">struct</span> <span class="n">D</span> <span class="p">{</span> <span class="n">C</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">();</span> <span class="p">};</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-<span class="n">D</span> <span class="n">d</span><span class="p">;</span>
-<span class="n">d</span><span class="o">-&gt;</span><span class="n">foo</span><span class="p">();</span>
-<span class="p">}</span></code></pre></div>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="c1">//File: cwrapper.h</span>
+<span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
+    <span class="cp">#define SYMENGINE_ENUM(type) SYMENGINE_##type</span>
+    <span class="cp">#include &quot;symengine/type_codes.inc&quot;</span>
+    <span class="cp">#undef SYMENGINE_ENUM</span>
+    <span class="n">SYMENGINE_TypeID_Count</span><span class="p">,</span>
+<span class="p">}</span> <span class="n">TypeID</span><span class="p">;</span></code></pre></div>
 
-In the previous example, in the expression <code>d-&gt;foo()</code> the compiler will take the object <code>d</code> and apply <code>operator-&gt;</code> to it, which yields an object of type <code>C</code>, it will then reapply the operator to get an instance of <code>B</code>, reapply and get to <code>A*</code>, after which it will dereference the object and get to the pointed data.
+<h1 id="in-the-c-implementation-file-1">In the C++ implementation file</h1>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="n">d</span><span class="o">-&gt;</span><span class="n">foo</span><span class="p">();</span>
-<span class="c1">// expands to:</span>
-<span class="c1">// (*d.operator-&gt;().operator-&gt;().operator-&gt;()).foo();</span>
-<span class="c1">//   D            C            B           A*</span></code></pre></div>
+<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="c1">//File: basic.h</span>
+<span class="k">enum</span> <span class="n">TypeID</span> <span class="p">{</span>
+    <span class="cp">#define SYMENGINE_ENUM(type) type</span>
+    <span class="cp">#include &quot;symengine/type_codes.inc&quot;</span>
+    <span class="cp">#undef SYMENGINE_ENUM</span>
+    <span class="c1">// The &#39;TypeID_Count&#39; returns the number of elements in &#39;TypeID&#39;. For this</span>
+    <span class="c1">// to work, do not assign numbers to the elements above (or if you do, you</span>
+    <span class="c1">// must assign the correct count below).</span>
+    <span class="n">TypeID_Count</span>
+<span class="p">};</span></code></pre></div>
 
-</blockquote>
+<p>This is really an elegant solution. This can also be extended to all the other situations where you want to define or do the same thing for all the classes. You just need to enlist them at a certain place and use macros to generate/automate the process of writing the methods. You add a class and those methods get define for the class.</p>
 
-<p>And guess what? You can’t overload operator.(). I would like to quote Bjarne Stroustrup here from <a href="http://www.google.com/search?q=The+Design+and+Evolution+of+C%2B%2B">The Design and Evolution of C++</a>, page 242, section 11.5.2 Smart References.</p>
-<blockquote><em>
-<p>When I decided to allow overloading of operator -&gt;, I naturally considered whether operator . could be similarly overloaded.</p>
+<p>I would highly suggest you to have a look at <a href="https://github.com/sympy/symengine/issues/520">Issue#520</a> and <a href="https://github.com/sympy/symengine/pull/540">PR#540</a> to have a look at how we extended this approach to automate the long and WET code in <code>Visitor</code> and <code>BaseVisitor</code> classes.</p>
 
-<p>At the time, I considered the following arguments conclusive: If obj is a class object then obj.m has a meaning for every member m of that object’s class. We try not to make the language mutable by redefining built-in operations (though that rule is violated for = out of dire need, and for unary &amp;).</p>
+<h2 id="next-week">Next Week</h2>
+<p>I will try my best to get <code>Integer</code> and <code>Rational</code> to get merged during the weekend and during the week I can focus on the <code>Complex</code> class. Also, next week I will focus on unwrapping the data from <code>gmp</code> gem. We use it with SymEngine then why not with its Ruby bindings.</p>
 
-<p>If we allowed overloading of . for a class X, we would be unable to access members of X by normal means; we would have to use a pointer and -&gt;, but -&gt; and &amp; might also have been re-defined. I wanted an extensible language, not a mutable one.</p>
-
-<p>These arguments are weighty, but not conclusive. In particular, in 1990 Jim Adcock proposed to allow overloading of operator . exactly the way operator -&gt; is.</p>
-</em></blockquote>
+<h2 id="commits">Commits</h2>
+<ul>
+  <li>Refactored ruby/ext src files to use basic_new_heap</li>
+  <li>eq() and neq() use the new func sign after PR#508</li>
+  <li>Overrid <code>#eql?</code>, <code>#hash</code> in Basic to compare sets</li>
+  <li>Used basic_new_heap &amp; Data_Wrap_Struct in alloc_func</li>
+  <li>Removed csymbol_alloc and alloc_func</li>
+  <li>Removed cbasic_init, uses default new now</li>
+  <li>Fixed typo in cwrapper</li>
+  <li>Added the C wrapper &amp; its tests for Basic hash</li>
+  <li>Added the Ruby wrappers for hash</li>
+  <li>Changed implementation of basic_hash in cwrapper</li>
+  <li>Enum-Class mapping, selective exclude in type_codes.inc</li>
+  <li>Refactored for new SYMENGINE_ENUM macro signature</li>
+  <li>Used type_codes.inc to simplify code in visitor.h</li>
+  <li>Configured spec_helper to work with test_unit</li>
+  <li>Added test-unit as development dependency</li>
+  <li>Added script to test with valgrind</li>
+  <li>Added script to test with callgrind tool</li>
+  <li>Updated .gitignore</li>
+</ul>
 
   <hr class="hr1">
   <!-- AddToAny BEGIN -->
@@ -244,15 +290,6 @@ In the previous example, in the expression <code>d-&gt;foo()</code> the compiler
     
       <li>
         <h3>
-          <a href="http://abinashmeher999.github.io/2015/07/17/common-enumeration-in-c-and-c++/">
-            Common Enumeration in C and C++
-            <small>17 Jul 2015</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="http://abinashmeher999.github.io/2015/07/10/integer-and-rational-classes/">
             Integer and Rational classes
             <small>10 Jul 2015</small>
@@ -265,6 +302,15 @@ In the previous example, in the expression <code>d-&gt;foo()</code> the compiler
           <a href="http://abinashmeher999.github.io/2015/07/03/improving-the-c-interface/">
             Improving the C Interface
             <small>03 Jul 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="http://abinashmeher999.github.io/2015/06/26/the-symbol-class/">
+            The Symbol Class
+            <small>26 Jun 2015</small>
           </a>
         </h3>
       </li>
