@@ -3,7 +3,7 @@
 <title>Mind Ramblings - C</title>
 <link href="http://abinashmeher999.github.io/tag/C/index.xml" rel="self"/>
 <link href="http://abinashmeher999.github.io/tag/C/index.html"/>
- <updated>2015-07-18T09:54:13+05:30</updated>
+ <updated>2015-07-18T10:00:00+05:30</updated>
  <id>http://abinashmeher999.github.io/tag/C.html</id>
  <author>
  <name>Abinash Meher</name>
@@ -14,9 +14,9 @@
    <link href="http://abinashmeher999.github.io/2015/07/17/common-enumeration-in-c-and-c++/"/>
    <updated>2015-07-17T00:00:00+05:30</updated>
    <id>http://abinashmeher999.github.io/2015/07/17/common-enumeration-in-c-and-c++</id>
-   <content type="html">&lt;p&gt;Welcome back! Well, I did most of my pending PRs merged last week, but I won’t go as far to say I was at my full efficiency. I indeed got entangled in some work and it distracted a lot. Good news is &lt;code&gt;Symbol&lt;/code&gt; is now officially supported in SymEngine ruby bindings and can be played with from the latest master&lt;/p&gt;
+   <content type="html">&lt;p&gt;Welcome back! Well, I did get most of my pending PRs merged last week, but I won’t go as far to say that I was at my full efficiency. I indeed got entangled in some work and it got me distracted. Good news is &lt;code&gt;Symbol&lt;/code&gt; is now officially supported in SymEngine ruby bindings and can be played with from the latest master&lt;/p&gt;
 
-&lt;p&gt;In this post, I would like to concentrate more on a hack that we used to use &lt;code&gt;enum&lt;/code&gt;s in both &lt;code&gt;C&lt;/code&gt; and &lt;code&gt;C++&lt;/code&gt;,&lt;!--more--&gt; that too within namespaces(within C you say? kinda.), so that they don’t possibly conflict with anything. We automated the whole thing .We instantly saw the benefit. We used the same approach for writing the same repetitive method for all classes and we came to know that we had somehow missed a method from a class.&lt;/p&gt;
+&lt;p&gt;In this post, I would like to concentrate more on a hack that we used to use &lt;code&gt;enum&lt;/code&gt;s in both &lt;code&gt;C&lt;/code&gt; and &lt;code&gt;C++&lt;/code&gt;,&lt;!--more--&gt; that too within namespaces (within C you say? kinda.), so that they don’t possibly conflict with anything. We automated the whole thing and instantly saw the benefit. We used the same approach for writing the same repetitive method for all classes and came to know that we had somehow missed a method from a class.&lt;/p&gt;
 
 &lt;h1 id=&quot;the-file-that-has-the-list&quot;&gt;The File that has the list&lt;/h1&gt;
 &lt;p&gt;There has to be a file enlisting all the classes,&lt;/p&gt;
