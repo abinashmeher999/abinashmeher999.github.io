@@ -4,13 +4,101 @@
  <title>Mind Ramblings</title>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/atom.xml" rel="self"/>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/"/>
- <updated>2015-07-18T10:00:00+05:30</updated>
+ <updated>2015-07-26T11:47:57+05:30</updated>
  <id>http://abinashmeher999.github.io</id>
  <author>
    <name>Abinash Meher</name>
    <email>abinashdakshana999@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Class Coercion in Ruby C extensions</title>
+   <link href="http://abinashmeher999.github.io/2015/07/25/class-coercion-in-ruby-c-extensions/"/>
+   <updated>2015-07-25T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/07/25/class-coercion-in-ruby-c-extensions</id>
+   <content type="html">&lt;p&gt;Hola Everyone! Our classes started this week, and there was less time during the week than I had expected. Anyways, I am at the completion of the Ruby wrappers for the &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes.&lt;!--more--&gt; It would have been complete last week itself if it weren’t for the deadlines I had for registration. Mostly because of the companies that will be coming to the campus this week to select interns. This time I really am going to complete it this weekend for sure.&lt;/p&gt;
+
+&lt;h2 id=&quot;class-coercion&quot;&gt;Class Coercion&lt;/h2&gt;
+&lt;p&gt;I didn’t know of this technique until &lt;a href=&quot;www.github.com/isuruf&quot;&gt;Isuru&lt;/a&gt; suggested me not to modify the existing Ruby classes, and rather have a look at &lt;em&gt;Class Coercion in Ruby&lt;/em&gt;. This is an elegant concept to get seamless inter-operation between existing classes and new classes without having to modify the default library code.&lt;/p&gt;
+
+&lt;p&gt;My aim was to support operation of SymEngine classes like &lt;code&gt;Integer&lt;/code&gt;, &lt;code&gt;Rational&lt;/code&gt; and &lt;code&gt;Complex&lt;/code&gt; with the existing classes &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes from the Ruby kernel. For that I had supported the operations in the C wrappers. Like, if the other parameter object passed to the method is not of a SymEngine type but a Ruby object, I would first convert it into the corresponding SymEngine object, and then use it for operation.&lt;/p&gt;
+
+&lt;p&gt;This supported all the operations of the kind &lt;code&gt;a * 2&lt;/code&gt;, where &lt;code&gt;a&lt;/code&gt; is an object of the type &lt;code&gt;SymEngine::Integer&lt;/code&gt;. But I had to support &lt;code&gt;2 * a&lt;/code&gt; too. That meant (for me) changing the existing class. Overriding all the existing binary operations for it to support &lt;code&gt;SymEngine&lt;/code&gt; types, violating the &lt;a href=&quot;https://en.wikipedia.org/wiki/Open/closed_principle&quot;&gt;open/closed principle&lt;/a&gt;. It was like this&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Fixnum&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;alias_method&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:old_add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:+&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is_a?&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Basic&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;old_add&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;alias_method&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:old_sub&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:-&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is_a?&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Basic&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;old_sub&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;alias_method&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:old_mul&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:*&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is_a?&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Basic&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;old_mul&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;alias_method&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:old_div&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:/&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is_a?&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Basic&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;old_div&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;alias_method&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:old_pow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:**&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is_a?&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Basic&lt;/span&gt;
+      &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;old_pow&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;other&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And to make it more WET, I had to do the same for the &lt;code&gt;Bignum&lt;/code&gt; class.&lt;/p&gt;
+
+&lt;p&gt;I had to use aliases to avoid getting in a endless recursive loop, that eventually lead to stack overflow.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://www.mutuallyhuman.com/blog/2011/01/25/class-coercion-in-ruby/&quot;&gt;blog post&lt;/a&gt; explains the procedure of using &lt;em&gt;Class Coercion&lt;/em&gt; in detail. Please give it a read. I would also have updated this post to include my implementation in the &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; classes.&lt;/p&gt;
+
+&lt;h2 id=&quot;next-week&quot;&gt;Next Week&lt;/h2&gt;
+&lt;p&gt;By this time next week, I would have fully supported the &lt;code&gt;Complex&lt;/code&gt; class and it’s methods. The &lt;em&gt;RSpec&lt;/em&gt; counter-part of the &lt;code&gt;test_arit.py&lt;/code&gt; would have been done too.&lt;/p&gt;
+
+&lt;h2 id=&quot;commits&quot;&gt;Commits&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Configured spec_helper to work with test_unit&lt;/li&gt;
+  &lt;li&gt;Added test-unit as development dependency&lt;/li&gt;
+  &lt;li&gt;Added script to test with valgrind&lt;/li&gt;
+  &lt;li&gt;Added script to test with callgrind tool&lt;/li&gt;
+  &lt;li&gt;Updated .gitignore Added notebooks/Gemfile.lock and callgrind generated files&lt;/li&gt;
+  &lt;li&gt;Added source for &lt;code&gt;#new&lt;/code&gt; in Integer&lt;/li&gt;
+  &lt;li&gt;Added tests for &lt;code&gt;#new&lt;/code&gt; in Integer&lt;/li&gt;
+  &lt;li&gt;Made a macro to get Integer from T_INTEGER VALUE&lt;/li&gt;
+  &lt;li&gt;Added source for &lt;code&gt;.new&lt;/code&gt; method in Rational&lt;/li&gt;
+  &lt;li&gt;Added tests for instantiation of Rational&lt;/li&gt;
+  &lt;li&gt;[ci skip] Added script to debug tests in gdb&lt;/li&gt;
+  &lt;li&gt;Integer class now supports &lt;code&gt;2*a&lt;/code&gt; &amp;amp; &lt;code&gt;a*2&lt;/code&gt; assignments&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Common Enumeration in C and C++</title>
