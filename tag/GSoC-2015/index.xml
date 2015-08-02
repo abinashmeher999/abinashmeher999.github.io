@@ -3,11 +3,70 @@
 <title>Mind Ramblings - GSoC-2015</title>
 <link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.xml" rel="self"/>
 <link href="http://abinashmeher999.github.io/tag/GSoC-2015/index.html"/>
- <updated>2015-07-26T11:47:57+05:30</updated>
+ <updated>2015-08-02T18:14:47+05:30</updated>
  <id>http://abinashmeher999.github.io/tag/GSoC-2015.html</id>
  <author>
  <name>Abinash Meher</name>
  </author>
+ 
+ <entry>
+   <title>Arithmetic Test Cases</title>
+   <link href="http://abinashmeher999.github.io/2015/08/01/arithmetic-test-cases/"/>
+   <updated>2015-08-01T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.io/2015/08/01/arithmetic-test-cases</id>
+   <content type="html">&lt;p&gt;Hey there! This week I implemented the suggestions given after the first round of review for &lt;a href=&quot;https://github.com/sympy/symengine/pull/487&quot;&gt;PR#487&lt;/a&gt; and I tried to port the test cases in &lt;code&gt;test_arit.py&lt;/code&gt; to &lt;code&gt;arit_spec.rb&lt;/code&gt;. It was worth it! The unit tests that I had written for the individual classes were not enough and didn’t cover every situation where an error might occur.&lt;!--more--&gt; Many test cases failed, indicating I had failed to include a corner case. After finding and fixing them, most of the cases passed except a few. They are&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;......FF..............................
+
+Failures:
+
+  1) Arithmetic test cases test_arit7
+     Failure/Error: assert 2 * x - x == x
+     TypeError:
+       wrong argument type Fixnum (expected Class)
+     # ./spec/arit_spec.rb:80:in `-&amp;#39;
+     # ./spec/arit_spec.rb:80:in `block (2 levels) in &amp;lt;top (required)&amp;gt;&amp;#39;
+
+  2) Arithmetic test cases test_arit8
+     Failure/Error: assert x**2 / x == x
+     TypeError:
+       wrong argument type Fixnum (expected Class)
+     # ./spec/arit_spec.rb:94:in `/&amp;#39;
+     # ./spec/arit_spec.rb:94:in `block (2 levels) in &amp;lt;top (required)&amp;gt;&amp;#39;
+
+Finished in 0.01956 seconds (files took 0.10097 seconds to load)
+38 examples, 2 failures
+
+Failed examples:
+
+rspec ./spec/arit_spec.rb:75 # Arithmetic test cases test_arit7
+rspec ./spec/arit_spec.rb:86 # Arithmetic test cases test_arit8&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The error messages show that the argument type to &lt;code&gt;-&lt;/code&gt; and &lt;code&gt;/&lt;/code&gt; are &lt;code&gt;Fixnum&lt;/code&gt;. And the error messages don’t even make sense. It can be clearly seen that the operand to &lt;code&gt;-&lt;/code&gt; and &lt;code&gt;/&lt;/code&gt; are &lt;code&gt;SymEngine::Symbol&lt;/code&gt;s. I had even tried printing them out, just to be double sure. I am not able to figure out what might be the reason. Any help will be really appreciated.&lt;/p&gt;
+
+&lt;p&gt;And there are still a few bugs in &lt;code&gt;sympify&lt;/code&gt;, the function that takes a ruby object and returns the corresponding C structure for the type.&lt;/p&gt;
+
+&lt;h2 id=&quot;next-week&quot;&gt;Next Week&lt;/h2&gt;
+&lt;p&gt;I know I again failed my this weeks target. There are just too many tests these companies(there are in our university to hire interns) are taking and there are assignments on top of that. I did what I could.&lt;/p&gt;
+
+&lt;p&gt;My next week’s target is to document everything I have done so far, including the beginner contributor guide. I know the pain of going through undocumented code, and I don’t want to turn away someone interested who has come to read my code.&lt;/p&gt;
+
+&lt;p&gt;And it is obvious that the problems faced in getting the &lt;a href=&quot;https://github.com/sympy/symengine/pull/487&quot;&gt;PR#487&lt;/a&gt;, will be resolved by then, and sent for feedback. I am yet to confirm if we will be hosting the gem on RubyGems.org by then.&lt;/p&gt;
+
+&lt;h2 id=&quot;commits&quot;&gt;Commits&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Moved module and class declarations to &lt;code&gt;symengine.h&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Removed modifications of &lt;code&gt;Fixnum&lt;/code&gt; and &lt;code&gt;Bignum&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Added method &lt;code&gt;sympify&lt;/code&gt; &amp;amp; modified &lt;code&gt;GET_SYMINTFROMVAL&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Implemented class coercion. &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt; can now be coerced into SymEngine classes&lt;/li&gt;
+  &lt;li&gt;Updated test for large number&lt;/li&gt;
+  &lt;li&gt;Added coercion tests for &lt;code&gt;Integer&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Added coercion tests for &lt;code&gt;Rational&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Used sympify in &lt;code&gt;==&lt;/code&gt; and &lt;code&gt;!=&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Added &lt;code&gt;arit_spec.rb&lt;/code&gt;, rspec equivalent of &lt;code&gt;test_arit.py&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Class Coercion in Ruby C extensions</title>
