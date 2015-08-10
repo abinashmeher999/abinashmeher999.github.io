@@ -11,7 +11,7 @@
 
   <title>
     
-      Special semantics for arrow`->` operator and dot`.` operator in C++ &middot; Mind Ramblings
+      Wrapping up the Integer and Rational PR &middot; Mind Ramblings
     
   </title>
 
@@ -163,58 +163,46 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">Special semantics for arrow`->` operator and dot`.` operator in C++</h1>
-  <span class="post-date">20 Apr 2015
+  <h1 class="post-title">Wrapping up the Integer and Rational PR</h1>
+  <span class="post-date">10 Aug 2015
   </span>
   <small><span class="post-tag">
       
         
-          <a href="http://abinashmeher999.github.io/tag/C++">
-            C++
+          <a href="http://abinashmeher999.github.io/tag/GSoC-2015">
+            GSoC-2015
+          </a>
+          &middot;
+        
+      
+        
+          <a href="http://abinashmeher999.github.io/tag/SymEngine">
+            SymEngine
           </a>
 
         
       
 </span></small>
-<p>Ever tried to overload <code>operator-&gt;</code>? If you haven’t, let me tell you this doesn’t work like other overloaded operators.<!--more--></p>
+<p>Hey folks! Sorry for the delay. This week on 6th, I got free from the internship selections. Good News is that I got selected at Intuit for Summer 2016! Anyways I did wrap up the <a href="https://github.com/sympy/symengine/pull/487">PR#487</a><!--more--> in the remaining time. There were a few memory errors that after some discussion, I was able to solve. I also changed the function signature for <code>sympify</code>. Now it needs an already allocated <code>basic</code> and it is the responsibility of the caller to free it.</p>
 
-<p>For example let us take an operator like <code>operator*</code>. What do you expect this to return? Lets say we have a pointer to <code>class A</code>, <code>ptr_a</code>. The <code>operator*</code> is already overloaded in <code>class A</code>. What would <code>(*ptr_a).foo();</code> return?</p>
+<p>Only thing that is yet incomplete is that the SymEngine classes Add, Mul and Pow are converted by default to <code>Basic</code>. This doesn’t cause any bugs but will be clean to have. This is not a big priority now.</p>
 
-<p>By simple logic, <code>*ptr_a</code> will return the reference to the object <code>ptr_a</code> points to(say <code>obj_a</code>). And as expected the statement will execute as <code>(obj_a).foo()</code>.</p>
+<p>I did document the scripts for debugging/development which are <code>valgrind_test.sh</code>, <code>callgrind_test.sh</code> and <code>gdb.sh</code>. But the work flow that is followed for detection of memory leaks/errors is yet unclear. I did not find posts that explained this properly. Only a few posts explained the first part, i.e. suppressing the spurious errors that are caused by the funky way the MRI accesses memory. Nothing beyond that. If you happen to know how this is done(like telling apart the actual memory leaks from the ones that say ‘definitely lost’) please let me know. Everyone can benefit from such a post.</p>
 
-<p>However, this logic doesn’t apply to the <code>operator-&gt;()</code>. As quoted from stack overflow,</p>
+<h2 id="next-week">Next Week</h2>
+<p>The GSoC 2015 is upon completion and I have only 11 days remaining. Within that time, I will port the feature of <code>subs</code> to ruby. First a simple one that will take a symbol and replace that one with the other in an expression. The last few days I will devote to documentation of the wrappers. I will also make a beginner contributing guide for the Ruby extensions.</p>
 
-<blockquote>
-The <code>operator-&gt;</code> has special semantics in the language in that, when overloaded, it reapplies itself to the result. While the rest of the operators are applied only once, <code>operator-&gt;</code> will be applied by the compiler as many times as needed to get to a raw pointer and once more to access the memory referred by that pointer.
+<h2 id="commits">Commits</h2>
+<ul>
+  <li>Used sympify in <code>#coerce</code> method</li>
+  <li>Changed <code>sympify</code> and <code>Klass_of_Basic</code></li>
+  <li>Refactored for new sympify</li>
+  <li>ADD, MUL &amp; POW now become Basic objs in rbwrappers</li>
+  <li>[ci skip] Documented callgrind_test script</li>
+  <li>[ci skip] Documented valgrind_test script</li>
+  <li>[ci skip] Relocated the debugging scripts to bin/</li>
+</ul>
 
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">struct</span> <span class="n">A</span> <span class="p">{</span> <span class="kt">void</span> <span class="n">foo</span><span class="p">();</span> <span class="p">};</span>
-<span class="k">struct</span> <span class="n">B</span> <span class="p">{</span> <span class="n">A</span><span class="o">*</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">();</span> <span class="p">};</span>
-<span class="k">struct</span> <span class="n">C</span> <span class="p">{</span> <span class="n">B</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">();</span> <span class="p">};</span>
-<span class="k">struct</span> <span class="n">D</span> <span class="p">{</span> <span class="n">C</span> <span class="k">operator</span><span class="o">-&gt;</span><span class="p">();</span> <span class="p">};</span>
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-<span class="n">D</span> <span class="n">d</span><span class="p">;</span>
-<span class="n">d</span><span class="o">-&gt;</span><span class="n">foo</span><span class="p">();</span>
-<span class="p">}</span></code></pre></div>
-
-In the previous example, in the expression <code>d-&gt;foo()</code> the compiler will take the object <code>d</code> and apply <code>operator-&gt;</code> to it, which yields an object of type <code>C</code>, it will then reapply the operator to get an instance of <code>B</code>, reapply and get to <code>A*</code>, after which it will dereference the object and get to the pointed data.
-
-<div class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="n">d</span><span class="o">-&gt;</span><span class="n">foo</span><span class="p">();</span>
-<span class="c1">// expands to:</span>
-<span class="c1">// (*d.operator-&gt;().operator-&gt;().operator-&gt;()).foo();</span>
-<span class="c1">//   D            C            B           A*</span></code></pre></div>
-
-</blockquote>
-
-<p>And guess what? You can’t overload operator.(). I would like to quote Bjarne Stroustrup here from <a href="http://www.google.com/search?q=The+Design+and+Evolution+of+C%2B%2B">The Design and Evolution of C++</a>, page 242, section 11.5.2 Smart References.</p>
-<blockquote><em>
-<p>When I decided to allow overloading of operator -&gt;, I naturally considered whether operator . could be similarly overloaded.</p>
-
-<p>At the time, I considered the following arguments conclusive: If obj is a class object then obj.m has a meaning for every member m of that object’s class. We try not to make the language mutable by redefining built-in operations (though that rule is violated for = out of dire need, and for unary &amp;).</p>
-
-<p>If we allowed overloading of . for a class X, we would be unable to access members of X by normal means; we would have to use a pointer and -&gt;, but -&gt; and &amp; might also have been re-defined. I wanted an extensible language, not a mutable one.</p>
-
-<p>These arguments are weighty, but not conclusive. In particular, in 1990 Jim Adcock proposed to allow overloading of operator . exactly the way operator -&gt; is.</p>
-</em></blockquote>
 
   <hr class="hr1">
   <!-- AddToAny BEGIN -->
@@ -252,15 +240,6 @@ In the previous example, in the expression <code>d-&gt;foo()</code> the compiler
     
       <li>
         <h3>
-          <a href="http://abinashmeher999.github.io/2015/08/10/wrapping-up-of-integer-and-rational/">
-            Wrapping up the Integer and Rational PR
-            <small>10 Aug 2015</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="http://abinashmeher999.github.io/2015/08/01/arithmetic-test-cases/">
             Arithmetic Test Cases
             <small>01 Aug 2015</small>
@@ -273,6 +252,15 @@ In the previous example, in the expression <code>d-&gt;foo()</code> the compiler
           <a href="http://abinashmeher999.github.io/2015/07/25/class-coercion-in-ruby-c-extensions/">
             Class Coercion in Ruby C extensions
             <small>25 Jul 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="http://abinashmeher999.github.io/2015/07/17/common-enumeration-in-c-and-c++/">
+            Common Enumeration in C and C++
+            <small>17 Jul 2015</small>
           </a>
         </h3>
       </li>

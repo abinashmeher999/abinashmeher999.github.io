@@ -3,11 +3,39 @@
 <title>Mind Ramblings - SymEngine</title>
 <link href="http://abinashmeher999.github.io/tag/SymEngine/index.xml" rel="self"/>
 <link href="http://abinashmeher999.github.io/tag/SymEngine/index.html"/>
- <updated>2015-08-02T18:17:03+05:30</updated>
+ <updated>2015-08-11T01:39:25+05:30</updated>
  <id>http://abinashmeher999.github.io/tag/SymEngine.html</id>
  <author>
  <name>Abinash Meher</name>
  </author>
+ 
+ <entry>
+   <title>Wrapping up the Integer and Rational PR</title>
+   <link href="http://abinashmeher999.github.io/2015/08/10/wrapping-up-of-integer-and-rational/"/>
+   <updated>2015-08-10T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.io/2015/08/10/wrapping-up-of-integer-and-rational</id>
+   <content type="html">&lt;p&gt;Hey folks! Sorry for the delay. This week on 6th, I got free from the internship selections. Good News is that I got selected at Intuit for Summer 2016! Anyways I did wrap up the &lt;a href=&quot;https://github.com/sympy/symengine/pull/487&quot;&gt;PR#487&lt;/a&gt;&lt;!--more--&gt; in the remaining time. There were a few memory errors that after some discussion, I was able to solve. I also changed the function signature for &lt;code&gt;sympify&lt;/code&gt;. Now it needs an already allocated &lt;code&gt;basic&lt;/code&gt; and it is the responsibility of the caller to free it.&lt;/p&gt;
+
+&lt;p&gt;Only thing that is yet incomplete is that the SymEngine classes Add, Mul and Pow are converted by default to &lt;code&gt;Basic&lt;/code&gt;. This doesn’t cause any bugs but will be clean to have. This is not a big priority now.&lt;/p&gt;
+
+&lt;p&gt;I did document the scripts for debugging/development which are &lt;code&gt;valgrind_test.sh&lt;/code&gt;, &lt;code&gt;callgrind_test.sh&lt;/code&gt; and &lt;code&gt;gdb.sh&lt;/code&gt;. But the work flow that is followed for detection of memory leaks/errors is yet unclear. I did not find posts that explained this properly. Only a few posts explained the first part, i.e. suppressing the spurious errors that are caused by the funky way the MRI accesses memory. Nothing beyond that. If you happen to know how this is done(like telling apart the actual memory leaks from the ones that say ‘definitely lost’) please let me know. Everyone can benefit from such a post.&lt;/p&gt;
+
+&lt;h2 id=&quot;next-week&quot;&gt;Next Week&lt;/h2&gt;
+&lt;p&gt;The GSoC 2015 is upon completion and I have only 11 days remaining. Within that time, I will port the feature of &lt;code&gt;subs&lt;/code&gt; to ruby. First a simple one that will take a symbol and replace that one with the other in an expression. The last few days I will devote to documentation of the wrappers. I will also make a beginner contributing guide for the Ruby extensions.&lt;/p&gt;
+
+&lt;h2 id=&quot;commits&quot;&gt;Commits&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Used sympify in &lt;code&gt;#coerce&lt;/code&gt; method&lt;/li&gt;
+  &lt;li&gt;Changed &lt;code&gt;sympify&lt;/code&gt; and &lt;code&gt;Klass_of_Basic&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Refactored for new sympify&lt;/li&gt;
+  &lt;li&gt;ADD, MUL &amp;amp; POW now become Basic objs in rbwrappers&lt;/li&gt;
+  &lt;li&gt;[ci skip] Documented callgrind_test script&lt;/li&gt;
+  &lt;li&gt;[ci skip] Documented valgrind_test script&lt;/li&gt;
+  &lt;li&gt;[ci skip] Relocated the debugging scripts to bin/&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Arithmetic Test Cases</title>
