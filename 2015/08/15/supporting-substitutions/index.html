@@ -11,7 +11,7 @@
 
   <title>
     
-      Building the wrappers &middot; Mind Ramblings
+      Supporting substitutions &middot; Mind Ramblings
     
   </title>
 
@@ -163,8 +163,8 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">Building the wrappers</h1>
-  <span class="post-date">29 May 2015
+  <h1 class="post-title">Supporting substitutions</h1>
+  <span class="post-date">15 Aug 2015
   </span>
   <small><span class="post-tag">
       
@@ -183,37 +183,50 @@
         
       
 </span></small>
-<p>This week was very engaging and a little hectic at the end for me. I had to rethink many things during the week, like these wrappers. I had to rewrite them, because of a logical error in the allocation of the pointers that pointed to the data. And spent a whole lot of time trying to understand a hack of passing a variable by reference in <code>c</code> only to conclude that it can’t be used!<!--more--> Anyways, I learnt a new <code>c</code> hack! You can refer to <a href="http://stackoverflow.com/questions/30479106/possible-side-effects-of-doing-a-typedef-of-a-struct-to-an-array-of-one-element">this question</a> that I asked on stack overflow.</p>
+<p>Hello All! I can say this week was quite productive. Ondrej, my mentor, had suggested me to make a new timeline for the rest of the time, and now I know how useful that turned out to be!<!--more--></p>
 
-<p>So, the wrappers for Basic were written. But they didn’t compile because of a missing <code>-fPIC</code> flag that evidently <code>cmake</code> puts it on its own and <code>rake</code> doesn’t. The flag, I guess, was required to enable building of shared libs. The error message was something like this<br />
-<script src="https://gist.github.com/abinashmeher999/3997cd256a91ff08edce.js"> </script></p>
+<h2 id="iruby-notebooks">IRuby Notebooks</h2>
+<p>So, the <a href="https://github.com/sympy/symengine/blob/master/symengine/ruby/notebooks/beginner.ipynb">beginner notebook</a> is now upto date and contains everything that you need to know to get started. Also, I have prepared another notebook, that takes an actual question on differentiation from math.stackoverflow.com and solves it using SymEngine. It can be found <a href="https://github.com/sympy/symengine/blob/master/symengine/ruby/notebooks/differentiation_example.ipynb">here</a>. It really shows, how convenient can using SymEngine be.</p>
 
-<p>After hours and hours of googling and reading code on github, I figured out a way to add it. It needs to be added to the variable <code>$CFLAGS</code> which is in <code>extconf.rb</code>.</p>
+<h2 id="substitutions-module-smallsubssmall">Substitutions module <small>(<code>#subs</code>)</small></h2>
+<p>Now, you can mention what to substitute with what by storing the information in a Hash and then passing it to the <code>subs</code> method on any expression. It will return the same expression where keys would have been substituted by their corresponding mapped values.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1">#File: extconf.rb</span>
-<span class="vg">$CFLAGS</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39; -Wall&#39;</span> <span class="k">unless</span> <span class="vg">$CFLAGS</span><span class="o">.</span><span class="n">split</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s1">&#39;-Wall&#39;</span><span class="p">)</span>
-<span class="vg">$CFLAGS</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39; -Werror&#39;</span> <span class="k">unless</span> <span class="vg">$CFLAGS</span><span class="o">.</span><span class="n">split</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s1">&#39;-Werror&#39;</span><span class="p">)</span>
-<span class="vg">$CFLAGS</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39; -fPIC&#39;</span> <span class="k">unless</span> <span class="vg">$CFLAGS</span><span class="o">.</span><span class="n">split</span><span class="o">.</span><span class="n">include?</span><span class="p">(</span><span class="s1">&#39;-fpic&#39;</span><span class="p">)</span></code></pre></div>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">x</span> <span class="o">=</span> <span class="no">SymEngine</span><span class="o">::</span><span class="no">Symbol</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="no">SymEngine</span><span class="o">::</span><span class="no">Symbol</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="no">SymEngine</span><span class="o">::</span><span class="no">Symbol</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">)</span>
+<span class="n">k</span> <span class="o">=</span> <span class="no">SymEngine</span><span class="o">::</span><span class="no">Symbol</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span> <span class="o">=&gt;</span> <span class="n">k</span> <span class="p">,</span> <span class="n">y</span> <span class="o">=&gt;</span> <span class="n">k</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="o">=&gt;</span> <span class="n">z</span> <span class="o">=&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">k</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">f</span><span class="o">.</span><span class="n">to_s</span>
+<span class="c1"># (7/2)*k</span></code></pre></div>
 
-<p>And again there was another error<br />
-<script src="https://gist.github.com/abinashmeher999/a6964329f4b18948a61d.js"> </script>
-Which was basically because of the <code>static</code> qualifier. Apparently it was local only to that file. Removing the static qualifier got rid of the errors. Thanks to <a href="https://github.com/certik">Ondrej</a>, who was there to help with any problem I faced during the whole week.</p>
+<p>Making a Hash is not necessary, if you want to substitute just one variable</p>
 
-<p>And finally… the extension built.</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">e</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_s</span>
+<span class="c1"># 2+y+z</span></code></pre></div>
 
-<p>I built the gem and installed it. But I am not yet able to load the extension. There might be some issue with the library path. I will fix that and update it. That will be fixed hopefully in a day or two. And then I will build on the minimal test that I wrote.</p>
+<h2 id="next-week">Next Week</h2>
+<p>I will be working on porting the trigonometric functions, and documentation/cleanup work mostly. If time permits, maybe we can move to Matrices and that can go with my code sample for GSoC endterm evaluation.</p>
 
-<p>The next week I will be a little busy with the competition but I can at least fix the errors in loading the extension properly in <code>irb</code> and add the remaning methods. The plan now for the next coding week is to add wrappers for the <code>Symbol</code> class and <code>Integer</code>.</p>
-
-<p>Commits:<br />
-1. <a href="https://github.com/abinashmeher999/symengine/commit/9d9e9b5370aeaf2a3b2c933433ac5c8eddb8c849">Rewrote Ruby C wrappers w/o typedefed array basic</a><br />
-2. <a href="https://github.com/abinashmeher999/symengine/commit/fb73879ef488f7e536b03b2d526f90052a5652ca">Added bare test file for <code>Basic</code> class</a><br />
-3. <a href="https://github.com/abinashmeher999/symengine/commit/4ccf13f496f8f8c0845d8791dcaf3194d762158d">Fixed an error in <code>Gemfile</code> and added <code>README</code></a><br />
-4. <a href="https://github.com/abinashmeher999/symengine/commit/0f41bd84d139f885eb260957cccdc338f79929bf">Added WITH_RUBY flags to CMakeLists.txt</a><br />
-5. <a href="https://github.com/abinashmeher999/symengine/commit/2c1eb36f86291c30044f635f6c0c068cb4d0864f">Added flag <code>-fPIC</code>. Still doesn’t compile</a><br />
-6. <a href="https://github.com/abinashmeher999/symengine/commit/fb6861ba3795c2c2d0d9a57954da107257e93b1a">Changes to build the ruby extensions</a><br />
-7. <a href="https://github.com/abinashmeher999/symengine/commit/d6eabe7e258e5260ea1e3b48853c57e851e13800">Change in <code>require_path</code> of gemspec</a><br />
-8. <a href="https://github.com/abinashmeher999/symengine/commit/6792df9a9cbc3bfd82640fb2580fc8046888e2a1">Removed the <code>static</code> qualifier in wrappers</a></p>
+<h2 id="commits">Commits</h2>
+<ul>
+  <li>Updated the beginner notebook</li>
+  <li>Added the Ruby wrappers for <code>#diff</code></li>
+  <li>Added rspec tests for <code>#diff</code></li>
+  <li>Example notebook demonstrating differentiation with an actual problem</li>
+  <li>Added the source for basic_subs2</li>
+  <li>Added c tests for basic_subs2</li>
+  <li>Modified implementation of basic_subs2</li>
+  <li>Added C wrapper source for map_basic_basic</li>
+  <li>Added tests for CMapBasicBasic</li>
+  <li>Added pending tests for <code>#subs</code></li>
+  <li>supported 2 param <code>#subs</code> with tests passing</li>
+  <li>Added c wrapper source for basic_subs</li>
+  <li>Added c tests for basic_subs</li>
+  <li>supported <code>#subs</code> with Hash, tests pass</li>
+  <li>Added test cases for error checking</li>
+  <li>Added 3-element Hash test case for subs</li>
+</ul>
 
   <hr class="hr1">
   <!-- AddToAny BEGIN -->
@@ -251,15 +264,6 @@ Which was basically because of the <code>static</code> qualifier. Apparently it 
     
       <li>
         <h3>
-          <a href="http://abinashmeher999.github.io/2015/08/15/supporting-substitutions/">
-            Supporting substitutions
-            <small>15 Aug 2015</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="http://abinashmeher999.github.io/2015/08/10/wrapping-up-of-integer-and-rational/">
             Wrapping up the Integer and Rational PR
             <small>10 Aug 2015</small>
@@ -272,6 +276,15 @@ Which was basically because of the <code>static</code> qualifier. Apparently it 
           <a href="http://abinashmeher999.github.io/2015/08/01/arithmetic-test-cases/">
             Arithmetic Test Cases
             <small>01 Aug 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="http://abinashmeher999.github.io/2015/07/25/class-coercion-in-ruby-c-extensions/">
+            Class Coercion in Ruby C extensions
+            <small>25 Jul 2015</small>
           </a>
         </h3>
       </li>

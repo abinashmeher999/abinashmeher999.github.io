@@ -3,11 +3,63 @@
 <title>Mind Ramblings - SymEngine</title>
 <link href="http://abinashmeher999.github.io/tag/SymEngine/index.xml" rel="self"/>
 <link href="http://abinashmeher999.github.io/tag/SymEngine/index.html"/>
- <updated>2015-08-11T01:39:25+05:30</updated>
+ <updated>2015-08-15T08:25:28+05:30</updated>
  <id>http://abinashmeher999.github.io/tag/SymEngine.html</id>
  <author>
  <name>Abinash Meher</name>
  </author>
+ 
+ <entry>
+   <title>Supporting substitutions</title>
+   <link href="http://abinashmeher999.github.io/2015/08/15/supporting-substitutions/"/>
+   <updated>2015-08-15T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.io/2015/08/15/supporting-substitutions</id>
+   <content type="html">&lt;p&gt;Hello All! I can say this week was quite productive. Ondrej, my mentor, had suggested me to make a new timeline for the rest of the time, and now I know how useful that turned out to be!&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;iruby-notebooks&quot;&gt;IRuby Notebooks&lt;/h2&gt;
+&lt;p&gt;So, the &lt;a href=&quot;https://github.com/sympy/symengine/blob/master/symengine/ruby/notebooks/beginner.ipynb&quot;&gt;beginner notebook&lt;/a&gt; is now upto date and contains everything that you need to know to get started. Also, I have prepared another notebook, that takes an actual question on differentiation from math.stackoverflow.com and solves it using SymEngine. It can be found &lt;a href=&quot;https://github.com/sympy/symengine/blob/master/symengine/ruby/notebooks/differentiation_example.ipynb&quot;&gt;here&lt;/a&gt;. It really shows, how convenient can using SymEngine be.&lt;/p&gt;
+
+&lt;h2 id=&quot;substitutions-module-smallsubssmall&quot;&gt;Substitutions module &lt;small&gt;(&lt;code&gt;#subs&lt;/code&gt;)&lt;/small&gt;&lt;/h2&gt;
+&lt;p&gt;Now, you can mention what to substitute with what by storing the information in a Hash and then passing it to the &lt;code&gt;subs&lt;/code&gt; method on any expression. It will return the same expression where keys would have been substituted by their corresponding mapped values.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Symbol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;x&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Symbol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;y&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Symbol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;z&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;SymEngine&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Symbol&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;k&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;z&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_s&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# (7/2)*k&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Making a Hash is not necessary, if you want to substitute just one variable&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_s&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;# 2+y+z&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;next-week&quot;&gt;Next Week&lt;/h2&gt;
+&lt;p&gt;I will be working on porting the trigonometric functions, and documentation/cleanup work mostly. If time permits, maybe we can move to Matrices and that can go with my code sample for GSoC endterm evaluation.&lt;/p&gt;
+
+&lt;h2 id=&quot;commits&quot;&gt;Commits&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Updated the beginner notebook&lt;/li&gt;
+  &lt;li&gt;Added the Ruby wrappers for &lt;code&gt;#diff&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Added rspec tests for &lt;code&gt;#diff&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Example notebook demonstrating differentiation with an actual problem&lt;/li&gt;
+  &lt;li&gt;Added the source for basic_subs2&lt;/li&gt;
+  &lt;li&gt;Added c tests for basic_subs2&lt;/li&gt;
+  &lt;li&gt;Modified implementation of basic_subs2&lt;/li&gt;
+  &lt;li&gt;Added C wrapper source for map_basic_basic&lt;/li&gt;
+  &lt;li&gt;Added tests for CMapBasicBasic&lt;/li&gt;
+  &lt;li&gt;Added pending tests for &lt;code&gt;#subs&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;supported 2 param &lt;code&gt;#subs&lt;/code&gt; with tests passing&lt;/li&gt;
+  &lt;li&gt;Added c wrapper source for basic_subs&lt;/li&gt;
+  &lt;li&gt;Added c tests for basic_subs&lt;/li&gt;
+  &lt;li&gt;supported &lt;code&gt;#subs&lt;/code&gt; with Hash, tests pass&lt;/li&gt;
+  &lt;li&gt;Added test cases for error checking&lt;/li&gt;
+  &lt;li&gt;Added 3-element Hash test case for subs&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Wrapping up the Integer and Rational PR</title>
