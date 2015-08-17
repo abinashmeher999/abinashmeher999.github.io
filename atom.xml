@@ -4,13 +4,80 @@
  <title>Mind Ramblings</title>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/atom.xml" rel="self"/>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/"/>
- <updated>2015-08-15T08:25:28+05:30</updated>
+ <updated>2015-08-18T03:56:42+05:30</updated>
  <id>http://abinashmeher999.github.io</id>
  <author>
    <name>Abinash Meher</name>
    <email>abinashdakshana999@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Summary of GSoC-2015</title>
+   <link href="http://abinashmeher999.github.io/2015/08/18/summary-of-gsoc-2015/"/>
+   <updated>2015-08-18T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/08/18/summary-of-gsoc-2015</id>
+   <content type="html">&lt;p&gt;A symbolic manipulation library is indispensable for scientists and students. Ruby is gaining huge popularity over the years, and a symbolic manipulation library gem  like this project in Ruby might prove to be the foundation for a computer algebra system in Ruby. With many efforts like these, Ruby might become the first choice for academicians given how easy it is to code your logic in Ruby.&lt;/p&gt;
+
+&lt;p&gt;The motivation for &lt;a href=&quot;https://github.com/sympy/symengine&quot;&gt;SymEngine&lt;/a&gt; itself was to develop it once and then extend it to other languages rather than doing the same thing all over again for a language that it is required in.&lt;/p&gt;
+
+&lt;p&gt;I have developed a &lt;a href=&quot;https://github.com/sympy/symengine&quot;&gt;few notebooks&lt;/a&gt; that demonstrate the use of the new SymEngine module in ruby. In the rest of the post, I would like to summarise what I did in the summer as part of &lt;a href=&quot;https://www.google-melange.com/gsoc/homepage/google/gsoc2015&quot;&gt;Google Summer of Code 2015&lt;/a&gt;.&lt;!--more--&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;pre-midterm-evaluations&quot;&gt;Pre-midterm Evaluations&lt;/h2&gt;
+
+&lt;p&gt;I am a newbie when it comes to ruby, and it took me a while to setup the gem and, configure files for the building of extensions. I followed the naming conventions for the project structure and the extensions, as best as I could.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-struggle-between-shared-static-and-dynamic-libraries&quot;&gt;The struggle between shared, static and dynamic libraries&lt;/h3&gt;
+&lt;p&gt;I faced a lot of problem in the early stages, when I was trying to build the extensions. &lt;a href=&quot;https://github.com/certik&quot;&gt;Ondrej&lt;/a&gt;, my mentor, and &lt;a href=&quot;https://github.com/isuruf&quot;&gt;Isuru&lt;/a&gt;, a fellow GSoC student, helped me a lot. There were many c flags that were being reported as missing. Some flags &lt;code&gt;cmake&lt;/code&gt; added by default but &lt;code&gt;extconf.rb&lt;/code&gt; didn’t, the same one that was required to be added to build it as a shared library. I am still confused about the details, more details are &lt;a href=&quot;http://abinashmeher999.github.io/2015/05/29/Building-the-wrappers/&quot;&gt;here&lt;/a&gt;. Finally, the library had to be built as a dynamic one. It was resolved later by hooking the process to &lt;code&gt;cmake&lt;/code&gt; rather than &lt;code&gt;mkmf&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;load-errors-and-problems-in-linking&quot;&gt;Load Errors and problems in linking&lt;/h3&gt;
+&lt;p&gt;Many &lt;a href=&quot;http://abinashmeher999.github.io/2015/06/12/The-Load-Error/&quot;&gt;&lt;code&gt;LoadError&lt;/code&gt;s&lt;/a&gt; popped up, but were eventually solved. &lt;a href=&quot;https://github.com/dilcom/&quot;&gt;Ivan&lt;/a&gt; helped a lot in debugging the errors. In the end, it turned out to be a simple file missing in the gemspec, that was not being installed.&lt;/p&gt;
+
+&lt;h3 id=&quot;reconfiguring-building&quot;&gt;Reconfiguring building&lt;/h3&gt;
+&lt;p&gt;One of our aims during developing this was to get rid of unessential dependencies. The ones we already had the tools for. Like later the file &lt;code&gt;extconf.rb&lt;/code&gt;, that is used to generate Makefile for the extension was removed, because that could also be done by &lt;code&gt;cmake&lt;/code&gt;. Flags were added to &lt;code&gt;cmake&lt;/code&gt; for building the Ruby extensions, like the flag &lt;code&gt;-DWITH_RUBY=yes&lt;/code&gt;. The &lt;code&gt;Makefile&lt;/code&gt; then generates the library &lt;code&gt;symengine.so&lt;/code&gt; in the directory &lt;code&gt;lib/symengine&lt;/code&gt;.Along with &lt;code&gt;extconf.rb&lt;/code&gt;, the file &lt;code&gt;extconf.h&lt;/code&gt; was also gone. Along these lines, the dependency on &lt;code&gt;rake&lt;/code&gt; was also removed, and with that the &lt;code&gt;Rakefile&lt;/code&gt;. Any task automation will most probably be done in python. So, the &lt;code&gt;Rake::ExtensionTask&lt;/code&gt; was done by &lt;code&gt;cmake&lt;/code&gt; and the &lt;code&gt;Rake::GemPackageTask&lt;/code&gt; was replaced by the manual method of &lt;code&gt;gem build symengine.gemspec&lt;/code&gt; and &lt;code&gt;gem install symengine-0.0.0.gem&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;travis-setup&quot;&gt;Travis setup&lt;/h3&gt;
+&lt;p&gt;Not many projects have travis-ci setup for multiple languages. Not even the tutorials had clearly mentioned about setting up for multiple languages. But I did know about one of them, which is Shogun, the machine-learning toolbox. I referred to their &lt;code&gt;.travis.yml&lt;/code&gt; and setup it up. If something like this wouldn’t have worked the plan was to manually install the required version of ruby and then execute the shell commands.&lt;/p&gt;
+
+&lt;h3 id=&quot;making-a-basic-object&quot;&gt;Making a basic object&lt;/h3&gt;
+&lt;p&gt;Finally, I was able to successfully build the extensions, link the extensions with the SymEngine library, load the ruby-extension library in the interpreter and successfully instantiate an object of type &lt;code&gt;Basic&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;inheritance-and-symbols&quot;&gt;Inheritance and Symbols&lt;/h3&gt;
+&lt;p&gt;At this time, the way inheritance works(like the sequence of formation and destruction of objects of a class that had a superclass) with the Ruby C API, was confusing for all of us. I designed an &lt;a href=&quot;http://abinashmeher999.github.io/2015/06/26/the-symbol-class/#inheritance-in-ruby-c-api&quot;&gt;experiment&lt;/a&gt;
+to check what was actually happening. That cleared things out, and made the it easier to wrap things from now on. I also wrapped the &lt;code&gt;Symbol&lt;/code&gt; class during the course.&lt;/p&gt;
+
+&lt;h2 id=&quot;post-midterm-evaluations&quot;&gt;Post-midterm Evaluations&lt;/h2&gt;
+
+&lt;h3 id=&quot;redesign-of-the-c-interface&quot;&gt;Redesign of the C interface&lt;/h3&gt;
+&lt;p&gt;We had to design an ugly function to wrap vector in C. That led us to redesign the C interface. This approach had no reinterpret casting that was being done earlier. Each data structure had a type that was determined at compile time. For C, it was an opaque structure, while for C++ the opaque structure declared in the shared header file was implemented in the source file that had C++ data types. This &lt;a href=&quot;http://abinashmeher999.github.io/2015/07/03/improving-the-c-interface/&quot;&gt;blog post&lt;/a&gt; explains it further.&lt;/p&gt;
+
+&lt;h3 id=&quot;integer-and-rational&quot;&gt;Integer and Rational&lt;/h3&gt;
+&lt;p&gt;While trying to port the SymEngine classes, &lt;code&gt;Integer&lt;/code&gt; and &lt;code&gt;Rational&lt;/code&gt;, I had to port many methods in &lt;code&gt;Basic&lt;/code&gt; before that. I also replicated the &lt;code&gt;rake&lt;/code&gt; tasks in NMatrix, for detection of memory leaks, in form of bash scripts.&lt;/p&gt;
+
+&lt;h3 id=&quot;common-enumeration&quot;&gt;Common enumeration&lt;/h3&gt;
+&lt;p&gt;Since all objects in the Ruby C API are of the type &lt;code&gt;CBasic&lt;/code&gt;, we needed a function that would give us the typename during the runtime for the corresponding objects to be wrapped in ruby, as an object of the correct &lt;code&gt;Class&lt;/code&gt; in ruby. Since, this was achieved with &lt;code&gt;enum&lt;/code&gt; in C++, the same thing could be done in C too, with all the classes written manually again. But there was no guarantee for this to be consistent, if ever the features required to be wrapped for a new language, and also manually adding the class in all the enum list everytime a new class is added was prone to errors. So, to make this DRY, we automated this by sharing the list of enums. More details for the implementation can be found &lt;a href=&quot;http://abinashmeher999.github.io/2015/07/17/common-enumeration-in-c-and-c++/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;class-coercion-and-interoperability&quot;&gt;Class coercion and interoperability&lt;/h3&gt;
+&lt;p&gt;To support interoperability with the builtin ruby types, I had to overload the methods in builtin classes earlier(this was not continued). Overriding all the existing binary operations for a ruby class to support SymEngine types, violated the open/closed principle. There was indeed another way, which is &lt;em&gt;‘Class Coercion’&lt;/em&gt;. It was suggested by &lt;a href=&quot;https://github.com/dilcom/&quot;&gt;Isuru&lt;/a&gt;. After that, SymEngine types could seamlessly interoperate between the ruby types.&lt;/p&gt;
+
+&lt;h3 id=&quot;arithmetic-operations&quot;&gt;Arithmetic operations&lt;/h3&gt;
+&lt;p&gt;After this, all the arithmetic operations had been successfully ported. Each &lt;code&gt;Basic&lt;/code&gt; object can now perform arithmetic operations with other &lt;code&gt;Basic&lt;/code&gt; object(sometimes even ruby objects like &lt;code&gt;Integer&lt;/code&gt;). The test file in python, that had all the corresponding test cases was ported to its RSpec counterpart.&lt;/p&gt;
+
+&lt;h3 id=&quot;substitutions&quot;&gt;Substitutions&lt;/h3&gt;
+&lt;p&gt;Recently I completed porting the substitutions module to the extensions(&lt;code&gt;#subs&lt;/code&gt;). This feature has added a lot of convenience as now you can substitute a &lt;code&gt;SymEngine::Symbol&lt;/code&gt; with some other value in an expression and then &lt;code&gt;#expand&lt;/code&gt; to get the result.&lt;/p&gt;
+
+&lt;h3 id=&quot;trigonometric-functions&quot;&gt;Trigonometric functions&lt;/h3&gt;
+&lt;p&gt;Currently, I am working on porting the trigonometric functions in SymEngine to the extensions. This would first require to wrap the &lt;code&gt;Function&lt;/code&gt; class and then the &lt;code&gt;TrigFunction&lt;/code&gt; class in SymEngine.&lt;/p&gt;
+
+&lt;h3 id=&quot;integration-of-other-ruby-gems&quot;&gt;Integration of other Ruby gems&lt;/h3&gt;
+&lt;p&gt;I also have plans to integrate the ruby bindings for &lt;code&gt;gmp&lt;/code&gt;, &lt;code&gt;mpfr&lt;/code&gt; and &lt;code&gt;mpc&lt;/code&gt; libraries, that are already available as gems, with ruby bindings for our library. I have created an issue &lt;a href=&quot;https://github.com/sympy/symengine/issues/490&quot;&gt;here&lt;/a&gt;. Feel free to drop any suggestions.&lt;/p&gt;
+
+&lt;p&gt;There is much scope for improvement in both the projects. For SymEngine, to support more features like polynomials and series-expansion in the near future, and improving the user interface and the exception handling for the extensions. In short, making the extensions more ruby-ish.&lt;/p&gt;
+
+&lt;p&gt;I hope more people will contribute to the project and we will give a nice symbolic manipulation gem to the Ruby community.&lt;/p&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Supporting substitutions</title>
