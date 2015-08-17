@@ -187,7 +187,7 @@
 
 <p>The motivation for <a href="https://github.com/sympy/symengine">SymEngine</a> itself was to develop it once and then extend it to other languages rather than doing the same thing all over again for a language that it is required in.</p>
 
-<p>I have developed a <a href="https://github.com/sympy/symengine">few notebooks</a> that demonstrate the use of the new SymEngine module in ruby. In the rest of the post, I would like to summarise what I did in the summer as part of <a href="https://www.google-melange.com/gsoc/homepage/google/gsoc2015">Google Summer of Code 2015</a>.<!--more--></p>
+<p>I have developed a <a href="https://github.com/sympy/symengine/tree/master/symengine/ruby/notebooks">few notebooks</a> that demonstrate the use of the new SymEngine module in ruby. In the rest of the post, I would like to summarise what I did in the summer as part of <a href="https://www.google-melange.com/gsoc/homepage/google/gsoc2015">Google Summer of Code 2015</a>.<!--more--></p>
 
 <h2 id="pre-midterm-evaluations">Pre-midterm Evaluations</h2>
 
@@ -224,7 +224,7 @@ to check what was actually happening. That cleared things out, and made the it e
 <p>Since all objects in the Ruby C API are of the type <code>CBasic</code>, we needed a function that would give us the typename during the runtime for the corresponding objects to be wrapped in ruby, as an object of the correct <code>Class</code> in ruby. Since, this was achieved with <code>enum</code> in C++, the same thing could be done in C too, with all the classes written manually again. But there was no guarantee for this to be consistent, if ever the features required to be wrapped for a new language, and also manually adding the class in all the enum list everytime a new class is added was prone to errors. So, to make this DRY, we automated this by sharing the list of enums. More details for the implementation can be found <a href="http://abinashmeher999.github.io/2015/07/17/common-enumeration-in-c-and-c++/">here</a>.</p>
 
 <h3 id="class-coercion-and-interoperability">Class coercion and interoperability</h3>
-<p>To support interoperability with the builtin ruby types, I had to overload the methods in builtin classes earlier(this was not continued). Overriding all the existing binary operations for a ruby class to support SymEngine types, violated the open/closed principle. There was indeed another way, which is <em>‘Class Coercion’</em>. It was suggested by <a href="https://github.com/dilcom/">Isuru</a>. After that, SymEngine types could seamlessly interoperate between the ruby types.</p>
+<p>To support interoperability with the builtin ruby types, I had to overload the methods in builtin classes earlier(this was not continued). Overriding all the existing binary operations for a ruby class to support SymEngine types, violated the open/closed principle. There was indeed another way, which is <em>‘Class Coercion’</em>. It was suggested by <a href="https://github.com/isuruf/">Isuru</a>. After that, SymEngine types could seamlessly interoperate between the ruby types.</p>
 
 <h3 id="arithmetic-operations">Arithmetic operations</h3>
 <p>After this, all the arithmetic operations had been successfully ported. Each <code>Basic</code> object can now perform arithmetic operations with other <code>Basic</code> object(sometimes even ruby objects like <code>Integer</code>). The test file in python, that had all the corresponding test cases was ported to its RSpec counterpart.</p>

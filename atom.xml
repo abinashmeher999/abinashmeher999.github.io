@@ -4,7 +4,7 @@
  <title>Mind Ramblings</title>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/atom.xml" rel="self"/>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/"/>
- <updated>2015-08-18T03:56:42+05:30</updated>
+ <updated>2015-08-18T04:14:08+05:30</updated>
  <id>http://abinashmeher999.github.io</id>
  <author>
    <name>Abinash Meher</name>
@@ -21,7 +21,7 @@
 
 &lt;p&gt;The motivation for &lt;a href=&quot;https://github.com/sympy/symengine&quot;&gt;SymEngine&lt;/a&gt; itself was to develop it once and then extend it to other languages rather than doing the same thing all over again for a language that it is required in.&lt;/p&gt;
 
-&lt;p&gt;I have developed a &lt;a href=&quot;https://github.com/sympy/symengine&quot;&gt;few notebooks&lt;/a&gt; that demonstrate the use of the new SymEngine module in ruby. In the rest of the post, I would like to summarise what I did in the summer as part of &lt;a href=&quot;https://www.google-melange.com/gsoc/homepage/google/gsoc2015&quot;&gt;Google Summer of Code 2015&lt;/a&gt;.&lt;!--more--&gt;&lt;/p&gt;
+&lt;p&gt;I have developed a &lt;a href=&quot;https://github.com/sympy/symengine/tree/master/symengine/ruby/notebooks&quot;&gt;few notebooks&lt;/a&gt; that demonstrate the use of the new SymEngine module in ruby. In the rest of the post, I would like to summarise what I did in the summer as part of &lt;a href=&quot;https://www.google-melange.com/gsoc/homepage/google/gsoc2015&quot;&gt;Google Summer of Code 2015&lt;/a&gt;.&lt;!--more--&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;pre-midterm-evaluations&quot;&gt;Pre-midterm Evaluations&lt;/h2&gt;
 
@@ -58,7 +58,7 @@ to check what was actually happening. That cleared things out, and made the it e
 &lt;p&gt;Since all objects in the Ruby C API are of the type &lt;code&gt;CBasic&lt;/code&gt;, we needed a function that would give us the typename during the runtime for the corresponding objects to be wrapped in ruby, as an object of the correct &lt;code&gt;Class&lt;/code&gt; in ruby. Since, this was achieved with &lt;code&gt;enum&lt;/code&gt; in C++, the same thing could be done in C too, with all the classes written manually again. But there was no guarantee for this to be consistent, if ever the features required to be wrapped for a new language, and also manually adding the class in all the enum list everytime a new class is added was prone to errors. So, to make this DRY, we automated this by sharing the list of enums. More details for the implementation can be found &lt;a href=&quot;http://abinashmeher999.github.io/2015/07/17/common-enumeration-in-c-and-c++/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3 id=&quot;class-coercion-and-interoperability&quot;&gt;Class coercion and interoperability&lt;/h3&gt;
-&lt;p&gt;To support interoperability with the builtin ruby types, I had to overload the methods in builtin classes earlier(this was not continued). Overriding all the existing binary operations for a ruby class to support SymEngine types, violated the open/closed principle. There was indeed another way, which is &lt;em&gt;‘Class Coercion’&lt;/em&gt;. It was suggested by &lt;a href=&quot;https://github.com/dilcom/&quot;&gt;Isuru&lt;/a&gt;. After that, SymEngine types could seamlessly interoperate between the ruby types.&lt;/p&gt;
+&lt;p&gt;To support interoperability with the builtin ruby types, I had to overload the methods in builtin classes earlier(this was not continued). Overriding all the existing binary operations for a ruby class to support SymEngine types, violated the open/closed principle. There was indeed another way, which is &lt;em&gt;‘Class Coercion’&lt;/em&gt;. It was suggested by &lt;a href=&quot;https://github.com/isuruf/&quot;&gt;Isuru&lt;/a&gt;. After that, SymEngine types could seamlessly interoperate between the ruby types.&lt;/p&gt;
 
 &lt;h3 id=&quot;arithmetic-operations&quot;&gt;Arithmetic operations&lt;/h3&gt;
 &lt;p&gt;After this, all the arithmetic operations had been successfully ported. Each &lt;code&gt;Basic&lt;/code&gt; object can now perform arithmetic operations with other &lt;code&gt;Basic&lt;/code&gt; object(sometimes even ruby objects like &lt;code&gt;Integer&lt;/code&gt;). The test file in python, that had all the corresponding test cases was ported to its RSpec counterpart.&lt;/p&gt;
