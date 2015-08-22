@@ -11,7 +11,7 @@
 
   <title>
     
-      Google Summer of Code 2015 &middot; Mind Ramblings
+      Documentation and Clean up &middot; Mind Ramblings
     
   </title>
 
@@ -167,8 +167,8 @@
 
       <div class="container content">
         <div class="post">
-  <h1 class="post-title">Google Summer of Code 2015</h1>
-  <span class="post-date">06 May 2015
+  <h1 class="post-title">Documentation and Clean up</h1>
+  <span class="post-date">21 Aug 2015
   </span>
   <small><span class="post-tag">
       
@@ -180,40 +180,47 @@
         
       
         
-          <a href="http://abinashmeher999.github.io/tag/SymPy">
-            SymPy
-          </a>
-          &middot;
-        
-      
-        
           <a href="http://abinashmeher999.github.io/tag/SymEngine">
             SymEngine
-          </a>
-          &middot;
-        
-      
-        
-          <a href="http://abinashmeher999.github.io/tag/SciRuby">
-            SciRuby
           </a>
 
         
       
 </span></small>
-<p><img src="/assets/gsoc/gsoc-2015.png" alt="GSoC-2015" /></p>
+<p>Hey folks! Today my GSoC period has officially ended. It was one of the best experiences I have had in my life. The level of exposure that you get with Google Summer of Code is unmatched. The things I learnt, will always be with me. The people I met will never cease to inspire me. This is the best thing a sophomore can do in his/her summers.<!--more--> I could go on and on about this, and it will never be enough. I would suggest you to have a shot at it. Even if you don’t get it, you get to learn a lot in the process.</p>
 
-<p>Hi there! Yeah, you guessed it. I got selected into Google Summer of Code 2015! I am very excited for the summers. The results have been out and My project <strong>Ruby Bindings for SymEngine C++ symbolic manipulation library</strong> has been selected.<!--more--> I was selected by The Ruby Science Foundation but luckily I get to work with both SciRuby and SymPy! Isn’t that exciting?</p>
+<h2 id="documentation">Documentation</h2>
+<p>I have prepared some nice Beginner Contributor Guides both for C Wrappers and Ruby Wrappers. If you were wondering where to look to begin contributingto SymEngine, these are the ones you need.</p>
 
-<p>My mentor is Mr. Ondřej Čertík himslef, who is the founder of SymPy and I am lucky to be mentored by him. I would like to thank him and the Ruby Science Foundation and all the folks there to give me such an opportunity. John Woods and Carlos Agarie helped me a lot during the application period. I would also like to thank Harsh Gupta and Shivam Vats for introducing me to the community.</p>
+<ul>
+  <li><a href="https://github.com/sympy/symengine/wiki/Beginner-Contributor-Guide---C-Wrappers">Beginner Contributor Guide - C Wrappers</a></li>
+  <li><a href="https://github.com/sympy/symengine/wiki/Beginner-Contributor-Guide---Ruby-Extensions">Beginner Contributor Guide - Ruby Extensions</a></li>
+</ul>
 
-<h2 id="the-project">The Project</h2>
-<p><strong><em>Ruby Bindings for SymEngine a symbolic manipulation library in C++</em></strong><br />
-My project is to write the Ruby extensions for the C++ SymEngine library that provides functions for symbolic manipulation. This would also involve making the interface more rubyish than C++.</p>
+<p>Though I have pushed the symengine gem to <a href="https://rubygems.org/">RubyGems.org</a>, the version available there still doesn’t work. I will have to add a few more scripts before it works.</p>
 
-<p>This <a href="https://github.com/abinashmeher999/sciruby/wiki/GSoC-2015-Abinash-Meher:-Ruby-bindings-for-CSymPy">project</a> will set up a strong foundation for any symbolic manipulation library or “SymRuby” for that matter, to be built for Ruby in the future. SymEngine is fast and is very apt to start the work with. I have also come across GlucSym, which is an unpublished Ruby-to-GiNaC bridge from 2008.</p>
+<p>I have also sent PR to sciruby-notebooks to include the SymEngine notebooks.</p>
 
-<p>But this interface(my project) might be the impulse the Ruby community needed to have a fully functional symbolic manipulation library. After all Ruby is a Very High Level Language! It will soon be needing such libraries. For me, I would be glad if someone uses the library for her/his project!</p>
+<p>And I did send the post for SciRuby.com. I am glad John and Ondrej took time to read it again and again, and refined it. After a few days, my post will be up there at SciRuby.com! =D</p>
+
+<h2 id="cleanup">Cleanup</h2>
+<p>I fixed a TODO in the cwrapper tests and replaced all the heap allocated temporary instances of <code>basic_struct</code> by stack allocated instances in the source files for Ruby wrappers.</p>
+
+<h2 id="next-week">Next Week</h2>
+<p>I will miss writing this part of the post :). I am indeed going to continue contributing to SymEngine! Not only the Ruby Wrappers but also the core SymEngine. I am eager to write a LaTeX printer (a function that outputs the string representation of objects in TeX format). Anyone interested can join me. Imagine the ruby wrappers giving a beautiful, well formatted output in the IRuby notebooks, the kind that you see in textbooks, made possible because of a function that you wrote!! If that doesn’t excite you, I don’t know what will.</p>
+
+<h2 id="commits">Commits</h2>
+<ul>
+  <li>Initial commit &amp; class hierarchy, trig functions</li>
+  <li>[GSoC-2015] Post summarising work on symengine gem</li>
+  <li>Added more information about symengine</li>
+  <li>Added notebooks for symengine</li>
+  <li>Prepared the Beginner Contributor Guide - C Wrappers</li>
+  <li>Prepared the Beginner Contributor Guide - Ruby Wrappers</li>
+  <li>Uncommented basic_eq in the TODO</li>
+  <li>basic on stack wherever possible in ruby_basic.c</li>
+  <li>basic on stack wherever possible in ext/*.c</li>
+</ul>
 
   <hr class="hr1">
   <!-- AddToAny BEGIN -->
@@ -251,15 +258,6 @@ My project is to write the Ruby extensions for the C++ SymEngine library that pr
     
       <li>
         <h3>
-          <a href="http://abinashmeher999.github.io/2015/08/21/documentation/">
-            Documentation and Clean up
-            <small>21 Aug 2015</small>
-          </a>
-        </h3>
-      </li>
-    
-      <li>
-        <h3>
           <a href="http://abinashmeher999.github.io/2015/08/18/summary-of-gsoc-2015/">
             Summary of GSoC-2015
             <small>18 Aug 2015</small>
@@ -272,6 +270,15 @@ My project is to write the Ruby extensions for the C++ SymEngine library that pr
           <a href="http://abinashmeher999.github.io/2015/08/15/supporting-substitutions/">
             Supporting substitutions
             <small>15 Aug 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="http://abinashmeher999.github.io/2015/08/10/wrapping-up-of-integer-and-rational/">
+            Wrapping up the Integer and Rational PR
+            <small>10 Aug 2015</small>
           </a>
         </h3>
       </li>

@@ -4,13 +4,55 @@
  <title>Mind Ramblings</title>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/atom.xml" rel="self"/>
  <link href="http://abinashmeher999.github.iohttp://abinashmeher999.github.io/"/>
- <updated>2015-08-18T04:14:08+05:30</updated>
+ <updated>2015-08-22T06:40:11+05:30</updated>
  <id>http://abinashmeher999.github.io</id>
  <author>
    <name>Abinash Meher</name>
    <email>abinashdakshana999@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Documentation and Clean up</title>
+   <link href="http://abinashmeher999.github.io/2015/08/21/documentation/"/>
+   <updated>2015-08-21T00:00:00+05:30</updated>
+   <id>http://abinashmeher999.github.iohttp://abinashmeher999.github.io/2015/08/21/documentation</id>
+   <content type="html">&lt;p&gt;Hey folks! Today my GSoC period has officially ended. It was one of the best experiences I have had in my life. The level of exposure that you get with Google Summer of Code is unmatched. The things I learnt, will always be with me. The people I met will never cease to inspire me. This is the best thing a sophomore can do in his/her summers.&lt;!--more--&gt; I could go on and on about this, and it will never be enough. I would suggest you to have a shot at it. Even if you don’t get it, you get to learn a lot in the process.&lt;/p&gt;
+
+&lt;h2 id=&quot;documentation&quot;&gt;Documentation&lt;/h2&gt;
+&lt;p&gt;I have prepared some nice Beginner Contributor Guides both for C Wrappers and Ruby Wrappers. If you were wondering where to look to begin contributingto SymEngine, these are the ones you need.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/sympy/symengine/wiki/Beginner-Contributor-Guide---C-Wrappers&quot;&gt;Beginner Contributor Guide - C Wrappers&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/sympy/symengine/wiki/Beginner-Contributor-Guide---Ruby-Extensions&quot;&gt;Beginner Contributor Guide - Ruby Extensions&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Though I have pushed the symengine gem to &lt;a href=&quot;https://rubygems.org/&quot;&gt;RubyGems.org&lt;/a&gt;, the version available there still doesn’t work. I will have to add a few more scripts before it works.&lt;/p&gt;
+
+&lt;p&gt;I have also sent PR to sciruby-notebooks to include the SymEngine notebooks.&lt;/p&gt;
+
+&lt;p&gt;And I did send the post for SciRuby.com. I am glad John and Ondrej took time to read it again and again, and refined it. After a few days, my post will be up there at SciRuby.com! =D&lt;/p&gt;
+
+&lt;h2 id=&quot;cleanup&quot;&gt;Cleanup&lt;/h2&gt;
+&lt;p&gt;I fixed a TODO in the cwrapper tests and replaced all the heap allocated temporary instances of &lt;code&gt;basic_struct&lt;/code&gt; by stack allocated instances in the source files for Ruby wrappers.&lt;/p&gt;
+
+&lt;h2 id=&quot;next-week&quot;&gt;Next Week&lt;/h2&gt;
+&lt;p&gt;I will miss writing this part of the post :). I am indeed going to continue contributing to SymEngine! Not only the Ruby Wrappers but also the core SymEngine. I am eager to write a LaTeX printer (a function that outputs the string representation of objects in TeX format). Anyone interested can join me. Imagine the ruby wrappers giving a beautiful, well formatted output in the IRuby notebooks, the kind that you see in textbooks, made possible because of a function that you wrote!! If that doesn’t excite you, I don’t know what will.&lt;/p&gt;
+
+&lt;h2 id=&quot;commits&quot;&gt;Commits&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Initial commit &amp;amp; class hierarchy, trig functions&lt;/li&gt;
+  &lt;li&gt;[GSoC-2015] Post summarising work on symengine gem&lt;/li&gt;
+  &lt;li&gt;Added more information about symengine&lt;/li&gt;
+  &lt;li&gt;Added notebooks for symengine&lt;/li&gt;
+  &lt;li&gt;Prepared the Beginner Contributor Guide - C Wrappers&lt;/li&gt;
+  &lt;li&gt;Prepared the Beginner Contributor Guide - Ruby Wrappers&lt;/li&gt;
+  &lt;li&gt;Uncommented basic_eq in the TODO&lt;/li&gt;
+  &lt;li&gt;basic on stack wherever possible in ruby_basic.c&lt;/li&gt;
+  &lt;li&gt;basic on stack wherever possible in ext/*.c&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Summary of GSoC-2015</title>
